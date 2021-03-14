@@ -1,14 +1,81 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<title>Charity</title>
+	<meta charset="utf-8">
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+	<style>
+		/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+		.row.content {height: 1500px}
+
+		/* Set gray background color and 100% height */
+		.sidenav {
+		  background-color: #f1f1f1;
+		  height: 100%;
+		}
+
+		/* On small screens, set height to 'auto' for sidenav and grid */
+		@media screen and (max-width: 767px) {
+		  .sidenav {
+		    height: auto;
+		    padding: 15px;
+		  }
+		  .row.content {height: auto;} 
+		}
+	</style>
 </head>
 <body>
-	<h1>HOMEPAGE</h1>
-	<ul>
-		<li>Charity 1</li>
-		<li>Charity 2</li>
-		<li>Charity 3</li>
-	</ul>
+<div class="container">
+
+	<!-- header -->
+	<div class="jumbotron">
+		<h1>Donation Site Name</h1>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary" id="info">More Information</button>
+			<button type="button" class="btn btn-primary" id="profile">Profile</button>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="row content">
+	  	<!-- sidebar -->
+	    <div class="col-sm-3 sidenav">
+	      <h4>Pending Requests</h4>
+	      <ul>
+	        <li>Charity A</li>
+	        <li>Charity B</li>
+	        <li>Charity C</li>
+	        <li>Charity D</li>
+	      </ul><br>
+		  <h4><small>History</small></h4>
+			  <ul>
+		        <li>Charity E <span class="label label-danger">Rejected</span></li>
+		        <li>Charity F <span class="label label-danger">Rejected</span></li>
+		        <li>Charity G <span class="label label-success">Accepted</span></li>
+		        <li>Charity H <span class="label label-success">Accepted</span></li>
+		      </ul><br>
+	    </div>
+
+	    <!-- charity list -->
+	    <div class="col-sm-9">
+	      <h1><small>Local Donation Sites</small></h1>
+	      <hr>
+	      <h3>Charity A</h3>
+	      <p>Collapsable donation 1</p>	      
+	      <hr>
+	      <h2>Charity B</h2>
+	      <p>Collapsable donation 2</p>
+	      <hr>
+	    </div>
+	  </div>
+	</div>
+
+</div>
 </body>
 </html>
