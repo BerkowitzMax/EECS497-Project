@@ -42,7 +42,6 @@
 		<h1>Donation Site Name</h1>
 		<div class="btn-group">
 			<button type="button" class="btn btn-primary" id="info">More Information</button>
-			<button type="button" class="btn btn-primary" id="profile">Profile</button>
 		</div>
 	</div>
 
@@ -50,40 +49,45 @@
 	  <div class="row content">
 	  	<!-- sidebar -->
 	    <div class="col-sm-3 sidenav">
-	      <h4>Pending Requests</h4>
+	      <h4>Account Information</h4>
 	      <ul>
-	        <li>Charity A</li>
-	        <li>Charity B</li>
-	        <li>Charity C</li>
-	        <li>Charity D</li>
+	        <li><img src="" alt="Profile Picture"></li>
+	        <li>Name</li>
+	        <li>Email</li>
 	      </ul><br>
-		  <h4><small>History</small></h4>
-			  <ul>
-		        <li>Charity E <span class="label label-danger">Rejected</span></li>
-		        <li>Charity F <span class="label label-danger">Rejected</span></li>
-		        <li>Charity G <span class="label label-success">Accepted</span></li>
-		        <li>Charity H <span class="label label-success">Accepted</span></li>
-		      </ul><br>
+		  <h4>Charity Information</h4>
+	      <ul>
+	        <li>Primary Contact</li>
+	        <li>Link to Website</li>
+	        <li>Charity Description</li>
+	      </ul><br>
+          <h4>Preferences</h4>
+	      <ul>
+	        <li>Accepting Donations Toggle</li>
+	        <li>Location Preferences</li>
+	        <li>Food restrictions</li>
+	      </ul><br>
 	    </div>
+
 
 	    <!-- charity list -->
 	    <div class="col-sm-9">
-			<h1><small>Local Donation Sites</small></h1>
-			<hr>
-			<div>
-				<div class="t1"><img style="width: 100px; height: 75px;" src="profile-image-placeholder.png" alt="Picture of charity A"> Charity A</div>
-				<a>View Profile</a> <br>
-				<a>Donate</a> <br>
-				<a>Contact</a> <br>
-				<hr>
-			</div>
-			<div>
-				<div class="t1"><img style="width: 100px; height: 75px;" src="profile-image-placeholder.png"src="" alt="Picture of charity B"> Charity B</div>
-				<a>View Profile</a> <br>
-				<a>Donate</a> <br>
-				<a>Contact</a> <br>
-				<hr>
-			</div>
+	      <h1><small>Pending Requests</small></h1>
+	      <hr>
+	      <div>
+			<img src="" alt="Donor profile picture"> 
+			<h5>Donor Name</h5>
+		  </div>
+			<br>
+			<ul>
+				<li>Donor contact</li>
+				<li>Category</li>
+				<li>Time of Donation</li>
+			</ul>
+			<a>View Request</a>	
+			<button type="button" class="btn btn-success">Accept</button>
+			<button type="button" class="btn btn-danger">Reject</button>
+		  <br>
 	    </div>
 	  </div>
 	</div>
