@@ -16,7 +16,7 @@
     .row.content {height: auto;} 
 }
 
-.t1 > * {
+.clist > * {
     float: left;
 }
 
