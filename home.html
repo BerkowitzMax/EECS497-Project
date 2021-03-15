@@ -23,11 +23,11 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		  <div class="navbar-nav">
 			<a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-			<a class="nav-link" href="#">Profile</a>
+			<a class="nav-link" href="./donor_profile.html">Profile</a>
 		  </div>
 		</div>
 		<div>
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">More Information</button>
+            <button onclick="window.location.href='./info.html'" class="btn btn-primary my-2 my-sm-0">More Information</button>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign Out</button>
         </div>
 	  </nav>
@@ -35,14 +35,55 @@
 	<div class="container-fluid">
 	  <div class="row content">
 	  	<!-- sidebar -->
-	    <div class="col-sm-3 sidenav">
-	      <h4>Pending Requests</h4>
-	      <ul>
-	        <li>Charity A</li>
-	        <li>Charity B</li>
-	        <li>Charity C</li>
-	        <li>Charity D</li>
-	      </ul><br>
+	    <div class="col-sm-4 sidenav">
+			<h4>Pending Requests</h4>
+			<div class="list-group">
+				<div class="donation-request">
+					<a href="#" class="list-group-item list-group-item-action">
+						<div class="d-flex w-100 justify-content-between">
+							<h7>Donation Label</h7>
+							<small>3 days ago</small>
+						</div>
+						<div class="d-flex w-100 justify-content-between align-items-center">
+							<div class="d-flex flex-row align-items-center">
+								<img class="charity_picture" src="./static/profile-image-placeholder.png" alt="Profile Picture" style="width: 30px; height: 30px;">
+								<h6>Charity</h6>
+							</div>
+							<label>[ Charity Contact ]</label>
+						</div>
+					</a>
+				</div>
+				<div class="donation-request">
+					<a href="#" class="list-group-item list-group-item-action">
+						<div class="d-flex w-100 justify-content-between">
+							<h7>Donation Label</h7>
+							<small>3 days ago</small>
+						</div>
+						<div class="d-flex w-100 justify-content-between align-items-center">
+							<div class="d-flex flex-row align-items-center">
+								<img class="charity_picture" src="./static/profile-image-placeholder.png" alt="Profile Picture" style="width: 30px; height: 30px;">
+								<h6>Charity</h6>
+							</div>
+							<label>[ Charity Contact ]</label>
+						</div>
+					</a>
+				</div>
+				<div class="donation-request">
+					<a href="#" class="list-group-item list-group-item-action">
+						<div class="d-flex w-100 justify-content-between">
+							<h7>Donation Label</h7>
+							<small>3 days ago</small>
+						</div>
+						<div class="d-flex w-100 justify-content-between align-items-center">
+							<div class="d-flex flex-row align-items-center">
+								<img class="charity_picture" src="./static/profile-image-placeholder.png" alt="Profile Picture" style="width: 30px; height: 30px;">
+								<h6>Charity</h6>
+							</div>
+							<label>[ Charity Contact ]</label>
+						</div>
+					</a>
+				</div>
+			</div>
 		  <h4><small>History</small></h4>
 			  <ul>
 		        <li>Charity E <span class="label label-danger">Rejected</span></li>
@@ -53,7 +94,7 @@
 	    </div>
 
 	    <!-- charity list -->
-	    <div class="col-sm-8 home-feed">
+	    <div class="col-sm-7 home-feed">
 			<h4>Local Donation Sites</h4>
 			<hr>
 			<div>

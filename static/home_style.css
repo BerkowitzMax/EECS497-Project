@@ -6,7 +6,6 @@
     background-color: white;
     height: 100%;
     box-shadow: 0 0 0.5rem 0 rgb(136 152 170 / 15%);
-    margin: 20px;
     padding: 30px;
 }
 
@@ -47,9 +46,10 @@
 
 /* sidenav */
 .donor_sidenav {
-    position: relative;
-    margin: 20px;
-    padding: 15px;
+    background-color: white;
+    height: 100%;
+    box-shadow: 0 0 0.5rem 0 rgb(136 152 170 / 15%);
+    padding: 50px;
 }
 
 .sidebar-profile {
