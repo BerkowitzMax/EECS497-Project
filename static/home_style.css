@@ -3,8 +3,11 @@
 
 /* Set gray background color and 100% height */
 .sidenav {
-    background-color: #f1f1f1;
+    background-color: white;
     height: 100%;
+    box-shadow: 0 0 0.5rem 0 rgb(136 152 170 / 15%);
+    margin: 20px;
+    padding: 30px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -20,6 +23,15 @@
     float: left;
 }
 
+.page {
+    margin: 0px;
+    padding: 0px;
+}
+
+.home-feed {
+    padding: 30px;
+}
+
 .charity_picture {
 	margin-right: 10px;
     width: 75px;
@@ -27,6 +39,31 @@
     object-fit: contain;
 }
 
+/* navbar header */
+.navbar {
+    margin: 0px;
+    padding: 10px;
+}
+
+/* sidenav */
 .donor_sidenav {
-    padding: 15px
+    position: relative;
+    margin: 20px;
+    padding: 15px;
+}
+
+.sidebar-profile {
+    padding: 50px 0px;
+}
+
+.sidebar-section {
+    padding-top: 10px;
+}
+
+.sidebar-subsection {
+    padding: 1px 0px;
+}
+
+.sidebar-preference {
+    padding: 10px 0px;
 }
