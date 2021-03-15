@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Profile Page</title>
+	<title>Donor Profile Page</title>
 	<meta charset="utf-8">
 	 <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -25,12 +25,72 @@
 	<div class="container-fluid"></div>
         <div class="row content">
             <!-- sidebar -->
-            <h4>Account Information</h4>
-            <img class="charity_picture" src="./static/profile-image-placeholder.png" alt="Picture of Donor"></li>
-            Name <br>
-            Email <br>
-            Primary Contact <br>
-            Address <br>
+			<div class="donor_sidenav">
+				<h4>Account Information</h4>
+				<form id="donor_profile">
+					<img class="charity_picture" src="./static/profile-image-placeholder.png" alt="Picture of Donor"><br>
+					<input type="file" name="file">
+					<br>
+					<table style="width: 50%;">
+						<colgroup>
+							<col span="1" style="width: 25%;">
+							<col span="1" style="width: 85%;">
+						 </colgroup>
+						<tr>
+							<td>
+								<label for="name">Name</label>
+							</td>
+							<td>
+								<input type="text" id="name" name="name" placeholder="Donor's name"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="descp">Description</label>
+							</td>
+							<td>
+							<input type="text" id="descp" name="descp" placeholder="Donor's description"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="email">Email</label>
+							</td>
+							<td>
+								<input type="email" id="email" name="email" placeholder="Donor@xyz.com"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="pnum">Phone Number</label>
+							</td>
+							<td>
+								<input type="tel" id="pnum" name="pnum" placeholder="0123456789"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="addr">Address</label>
+							</td>
+							<td>
+								<input type="text" id="addr" name="addr" placeholder="Donor's address"><br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="website">Website</label>
+							</td>
+							<td>
+								<input type="url" id="website" name="website" placeholder="www.abc.com"><br>
+							</td>
+						</tr>
+					</table>
+				</form>
+				<div class="btn-group">
+					<br>
+					<button type="button" class="btn btn-secondary" id="info">Save Changes</button>
+				</div>
+			</div>
         </div>
     </div>
 </body>

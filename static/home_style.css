@@ -26,3 +26,7 @@
     height: 75px;
     object-fit: contain;
 }
+
+.donor_sidenav {
+    padding: 15px
+}
