@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+    <div class="container-fluid">
+        <div class="row content">
+            <!-- sidebar -->
+          <div class="col-sm-3 sidenav">
+              <div class="sidebar-profile d-flex align-items-center flex-column">
+                  <img src="./static/profile-image-placeholder.png" alt="Profile Picture" style="width: 100px">
+                  <h5>Account Information</h5>
+                  <form id="donor_profile">
+                      <br>
+                      <table style="width: 30%;">
+                          <colgroup>
+                              <col span="1" style="width: 50%;">
+                              <col span="1" style="width: 50%;">
+                           </colgroup>
+                          <tr>
+                              <td>
+                                  <label for="category">Category</label>
+                                </td>
+                                <td>
+                                  <select name="category" id="category">
+                                    <option value="canned">canned</option>
+                                    <option value="fresh produce">fresh produce</option>
+                                    <option value="dairy">dairy</option>
+                                  </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label for="descp"><h6>Description</h6></label>
+                              </td>
+                              <td>
+                              <input type="text" id="descp" name="descp" placeholder="Donor's description"><br>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label for="email"><h6>Email</h6></label>
+                              </td>
+                              <td>
+                                  <input type="email" id="email" name="email" placeholder="Donor@xyz.com"><br>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label for="pnum"><h6>Phone Number</h6></label>
+                              </td>
+                              <td>
+                                  <input type="tel" id="pnum" name="pnum" placeholder="0123456789"><br>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label for="addr"><h6>Address</h6></label>
+                              </td>
+                              <td>
+                                  <input type="text" id="addr" name="addr" placeholder="Donor's address"><br>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label for="website"><h6>Website</h6></label>
+                              </td>
+                              <td>
+                                  <input type="url" id="website" name="website" placeholder="www.abc.com"><br>
+                              </td>
+                          </tr>
+                      </table>
+                  </form>
+              </div>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
