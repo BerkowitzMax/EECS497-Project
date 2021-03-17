@@ -1,8 +1,9 @@
-# vue-app
+# donation-app
 
 ## Project setup
 
 ```
+cd donation-app
 npm install
 ```
 
@@ -26,8 +27,9 @@ npm run lint
 
 ### Customize configuration
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Configuration Reference](https://cli.vuejs.org/config/).  
 
+---
 ### Helpful References
 
 [Vue Documentation](https://vuejs.org/v2/guide/)
@@ -35,6 +37,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [Vue Style Guide](https://vuejs.org/v2/style-guide/)
 
 [Vue Router Reference](https://router.vuejs.org/guide/)
+
+---
 
 ### Project Structure
 ```
