@@ -1,0 +1,12 @@
+.modal-body {
+    height: 538px;
+    overflow: scroll;
+}
+
+.items-list {
+    padding: 0px;
+}
+
+.item {
+    list-style-type: none;
+}

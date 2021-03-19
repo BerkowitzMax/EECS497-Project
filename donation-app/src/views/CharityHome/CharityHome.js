@@ -1,6 +1,10 @@
+import CharityRequest from "../../components/CharityRequest/index.vue";
+
 export default {
 	name: "CharityHome",
-	components: {},
+	components: {
+		CharityRequest,
+	},
 	props: {},
 	data() {
 		return {};
