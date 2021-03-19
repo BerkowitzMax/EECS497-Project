@@ -57,7 +57,7 @@ export default {
 		},
 		removeItem(itemId) {
 			this.numItems -= 1;
-			this.items.splice(itemId - 1, 1);
+			this.items.splice(this.items.map(item => item.itemId).indexOf(itemId), 1);
 		},
 		clearForm() {
 			this.numItems = 1;
