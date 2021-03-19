@@ -37,7 +37,7 @@ export default {
 		addItem() {
 			this.numItems += 1;
 			this.items.push({
-				id: this.numItems,
+				itemId: this.numItems,
 				itemName: "",
 				itemQuantity: 0,
 				itemUnits: 0,
