@@ -1,6 +1,9 @@
 <div class="col-sm-8 home-feed">
     <h4>Pending Requests</h4>
-    <div class="list-group" v-for="request in requests">
-        <CharityRequest :requestData="request"/>
+    <div class="list-group">
+        <div class="list-group-item rounded" v-for="request in pendingRequests">
+            <CharityRequest :requestData="request" @select-request="selectRequest"/>
+        </div>
     </div>
+    <CharityRequestModal :requestData="selectedRequest" @accept-request="acceptSelectedRequest" @reject-request="rejectSelectedRequest"/>
 </div>
