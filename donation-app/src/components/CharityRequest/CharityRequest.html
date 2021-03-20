@@ -1,5 +1,5 @@
 <div class="donation-request">
-    <a href="#" class="list-group-item list-group-item-action rounded">
+    <div class="list-group-item rounded">
         <div class="d-flex w-100 justify-content-between">
             <h5>{{donationLabel}}</h5>
             <timeago class="timeago" :datetime="dateCreated" :auto-update="60"></timeago>
@@ -7,14 +7,14 @@
         <div class="d-flex w-100 justify-content-between align-items-center">
             <div class="d-flex flex-row align-items-center">
                 <img class="charity_picture" src="../../assets/profile-image-placeholder.png" alt="Profile Picture" style="width: 30px; height: 30px;">
-                <h6>Donor</h6>
+                <h6>{{donorName}}</h6>
             </div>
-            <label>[ {{donorLocation}} ]</label>
-            <label>[ {{donorContact}} ]</label>
+            <label>{{donorLocation}}</label>
+            <label>{{donorContact}}</label>
             <div>  
-                <button type="button" class="btn btn-outline-success my-2 my-sm-0">Accept</button>
-                <button type="button" class="btn btn-outline-danger my-2 my-sm-0">Reject</button>
+                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#requestModal">Review Request</button>
+                <CharityRequestModal/>
             </div>
         </div>
-    </a>
+    </div>
 </div>

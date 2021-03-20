@@ -1,10 +1,10 @@
-import DonorRequest from "../../components/DonorRequest/index.vue";
-import DonationSite from "../../components/DonationSite/index.vue";
+import DonorRequestsWidget from "@/components/DonorRequestsWidget/index.vue";
+import DonationSite from "@/components/DonationSite/index.vue";
 
 export default {
 	name: "DonorHome",
 	components: {
-		DonorRequest,
+		DonorRequestsWidget,
 		DonationSite,
 	},
 	props: {},

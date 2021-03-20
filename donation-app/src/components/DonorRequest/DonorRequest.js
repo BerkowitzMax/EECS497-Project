@@ -1,19 +1,26 @@
 export default {
 	name: "DonorRequest",
 	components: {},
-	props: {},
+	props: {
+		requestData: Object,
+	},
 	data() {
 		return {
-			// Should be stored in the database eventually
-			status: "Pending",
-			dateCreated: new Date(),
-			badgeType: "badge-secondary",
-			charityName: "Charity Name",
-			charityContact: "Charity Contact",
-			donationLabel: "Donation Label",
+			status: this.requestData.status,
+			dateCreated: this.requestData.dateCreated,
+			badgeType: this.requestData.badgeType,
+			charityName: this.requestData.charityName,
+			charityContact: this.requestData.charityContact,
+			charityImage: this.requestData.charityImage,
+			donationLabel: this.requestData.donationLabel,
+			formData: this.requestData.formData
 		};
 	},
 	computed: {},
 	mounted() {},
-	methods: {},
+	methods: {
+		showDetails() {
+			// TODO
+		}
+	},
 };

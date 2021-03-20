@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavHeader from '../NavHeader/index.vue'
+import NavHeader from '@/components/NavHeader/index.vue'
 
 export default {
   name: 'DonorApp',
