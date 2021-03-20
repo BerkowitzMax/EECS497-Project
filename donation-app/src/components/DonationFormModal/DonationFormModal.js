@@ -1,4 +1,4 @@
-import DonationFormItem from "../DonationFormItem/index.vue";
+import DonationFormItem from "@/components/DonationFormItem/index.vue";
 
 export default {
 	name: "DonationFormModal",

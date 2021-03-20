@@ -1,9 +1,9 @@
-import CharityRequest from "../../components/CharityRequest/index.vue";
+import CharityRequestsWidget from "@/components/CharityRequestsWidget/index.vue";
 
 export default {
 	name: "CharityHome",
 	components: {
-		CharityRequest,
+		CharityRequestsWidget,
 	},
 	props: {},
 	data() {

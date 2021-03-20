@@ -1,8 +1,8 @@
 <div class="donation-request">
-    <a href="#" class="list-group-item list-group-item-action">
+    <a href="#" class="list-group-item list-group-item-action" @click="showDetails">
         <div class="d-flex w-100 justify-content-between">
             <div class="d-flex align-items-center">
-                <span class="badge" :class="badgeType" style="margin-right: 5px;">{{status}}</span>
+                <span class="badge" :class="status === 'Accepted' ? 'badge-success' : status === 'Rejected' ? 'badge-danger' : 'badge-secondary'" style="margin-right: 5px;">{{status}}</span>
                 <h6 class="donation-label">{{donationLabel}}</h6>
             </div>
             <timeago class="timeago" :datetime="dateCreated" :auto-update="60"></timeago>

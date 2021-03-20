@@ -1,19 +1,26 @@
+import CharityRequestModal from "@/components/CharityRequestModal/index.vue"
+
 export default {
 	name: "CharityRequest",
-	components: {},
-	props: {},
+	components: {
+		CharityRequestModal
+	},
+	props: {
+		requestData: Object,
+	},
 	data() {
 		return {
-			// Should be stored in the database eventually
-			status: "Pending",
-			dateCreated: new Date(),
-			donorName: "Donor Name",
-			donorContact: "Donor Contact",
-			donorLocation: "Donor Location",
-			donationLabel: "Donation Label",
+			status: this.requestData.status,
+			dateCreated: this.requestData.dateCreated,
+			donorName: this.requestData.donorName,
+			donorContact: this.requestData.donorContact,
+			donorLocation: this.requestData.donorLocation,
+			donationLabel: this.requestData.donationLabel,
+			formData: this.requestData.formData
 		};
 	},
 	computed: {},
 	mounted() {},
-	methods: {},
+	methods: {
+	},
 };
