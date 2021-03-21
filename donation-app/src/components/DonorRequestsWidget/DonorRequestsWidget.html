@@ -1,13 +1,13 @@
-<div class="col-sm-4 sidenav">
+<div class="col-sm-5 sidenav">
     <div class="sidebar-section">
         <h4>Pending Requests</h4>
-        <div class="list-group" v-for="request in pendingRequests">
+        <div class="accordion" id="pendingAccordion" v-for="request in pendingRequests">
             <DonorRequest :requestData="request"/>
         </div>
     </div>
     <div class="sidebar-section">
         <h4>History</h4>
-        <div class="list-group" v-for="request in resolvedRequests">
+        <div class="accordion" id="historyAccordion" v-for="request in resolvedRequests">
             <DonorRequest :requestData="request"/>
         </div>
     </div>
