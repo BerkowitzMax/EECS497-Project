@@ -1,8 +1,16 @@
-<div class="donation-site">
-    <div class="clist"><img class="charity_picture" src="../../assets/profile-image-placeholder.png" alt="Picture of charity A"> <a>{{charityName}}</a></div><br>
-    <a>{{charityContact}}</a> <br>
-    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#formModal">Donate</button>
-    <DonationFormModal/>
-    <br>
-    <hr>
+<div class="donation-site container-fluid">
+    <div class="d-flex w-100 justify-content-between align-items-center">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+            <img class="charity_picture" src="../../assets/profile-image-placeholder.png" alt="Picture of charity A">
+            <div class="charity-info">
+                <p>{{siteData.charityName}}</p>
+                <p>{{siteData.charityLocation}}</p>
+                <p>{{siteData.charityContact}}</p>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#formModal">Donate</button>
+            <DonationFormModal/>
+        </div>
+    </div>
 </div>

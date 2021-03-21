@@ -1,19 +1,17 @@
 import DonationFormModal from "@/components/DonationFormModal/index.vue";
 
 export default {
-	name: "DonationSite",
-	components: {
-		DonationFormModal,
-	},
-	props: {},
-	data() {
-		return {
-			// Should be stored in the database eventually
-			charityName: "Charity Name",
-			charityContact: "Charity Contact",
-		};
-	},
-	computed: {},
-	mounted() {},
-	methods: {},
+  name: "DonationSite",
+  components: {
+    DonationFormModal,
+  },
+  props: {
+    siteData: Object,
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  mounted() {},
+  methods: {},
 };
