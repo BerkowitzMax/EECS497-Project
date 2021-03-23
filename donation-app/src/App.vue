@@ -50,10 +50,6 @@ export default {
       padding: 0px !important;
   }
 
-  .home-feed {
-      padding: 30px 40px !important;
-  }
-
   .charity_picture {
     margin-right: 10px;
       width: 75px;

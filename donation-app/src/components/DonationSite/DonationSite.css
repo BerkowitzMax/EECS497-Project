@@ -1,7 +1,18 @@
-.timeago {
-    font-size: small;
+.donation-site {
+    padding: 0px;
 }
 
-.donation-label {
-    margin-bottom: 0px;
+.charity_picture {
+    margin-right: 10px;
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.charity-info {
+    margin-left: 8px;
+}
+
+.charity-info > p {
+    margin: 0px;
 }
