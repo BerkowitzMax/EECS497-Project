@@ -25,6 +25,12 @@ npm run build
 npm run lint
 ```
 
+### Runs unit tests
+
+```
+npm run test:unit
+```
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).  
@@ -37,6 +43,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [Vue Style Guide](https://vuejs.org/v2/style-guide/)
 
 [Vue Router Reference](https://router.vuejs.org/guide/)
+
+[Vue Test-Utils Reference](https://vue-test-utils.vuejs.org/)
 
 ---
 

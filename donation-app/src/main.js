@@ -13,15 +13,15 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueTimeago, {
-	name: "timeago",
-	locale: "en",
-	locales: {
-		"zh-CN": require("date-fns/locale/zh_cn"),
-		ja: require("date-fns/locale/ja"),
-	},
+  name: "timeago",
+  locale: "en",
+  locales: {
+    "zh-CN": require("date-fns/locale/zh_cn"),
+    ja: require("date-fns/locale/ja"),
+  },
 });
 
 new Vue({
-	render: (h) => h(App),
-	router: Router,
+  render: (h) => h(App),
+  router: Router,
 }).$mount("#app");
