@@ -1,60 +1,76 @@
-import { mount } from "@vue/test-utils";
 import NavHeader from "@/components/NavHeader/index.vue";
-import sinon from "sinon";
+import { fireEvent, render, screen } from "@testing-library/vue";
+import "@testing-library/jest-dom";
 
 describe("Navheader", () => {
-  it("should show correct navheader options when userType is donor", () => {
-    const wrapper = mount(NavHeader, {
-      propsData: { userType: "donor" },
+  it("displays correct navheader options for donors", () => {
+    const { getByText } = render(NavHeader, {
+      props: { userType: "donor" },
       stubs: ["router-link"],
     });
-    expect(wrapper.find("#home-button").exists()).toBe(true);
-    expect(wrapper.find("#profile-button").exists()).toBe(true);
-    expect(wrapper.find("#info-button").exists()).toBe(true);
+    expect(getByText("Home")).toBeVisible();
+    expect(getByText("Profile")).toBeVisible();
+    expect(getByText("Info")).toBeVisible();
   });
 
-  it("should show correct navheader options when userType is charity", () => {
-    const wrapper = mount(NavHeader, {
-      propsData: { userType: "charity" },
+  it("displays correct navheader options for charities", () => {
+    const { getByText } = render(NavHeader, {
+      props: { userType: "charity" },
       stubs: ["router-link"],
     });
-    expect(wrapper.find("#home-button").exists()).toBe(true);
-    expect(wrapper.find("#profile-button").exists()).toBe(false);
-    expect(wrapper.find("#info-button").exists()).toBe(true);
+    expect(getByText("Home")).toBeVisible();
+    expect(screen.queryByText("Profile")).toBeNull(); // getByText() throws an error when element not found
+    expect(getByText("Info")).toBeVisible();
   });
 
-  it("should call setActiveTab with correct parameter", async () => {
-    const setActiveTabspy = sinon.spy();
-
-    const wrapper = mount(NavHeader, {
-      propsData: {
-        userType: "donor",
-      },
+  it("activates home tab on click", async () => {
+    const { getByText } = render(NavHeader, {
+      props: { userType: "donor" },
       stubs: ["router-link"],
     });
 
-    await wrapper.find("#profile-button").trigger("click");
-    setActiveTabspy.calledWith("profile");
-
-    wrapper.vm.setActiveTab("profile");
-    expect(wrapper.vm.activeTab).toBe("profile");
+    await fireEvent.click(getByText("Home"));
+    expect(getByText("Home")).toHaveClass("active");
+    expect(getByText("Profile")).not.toHaveClass("active");
+    expect(getByText("Info")).not.toHaveClass("active");
   });
 
-  it("should set active tab correctly when setActiveTab called", async () => {
-    const wrapper = mount(NavHeader, {
-      propsData: {
-        userType: "donor",
-      },
+  it("activates profile tab on click", async () => {
+    const { getByText } = render(NavHeader, {
+      props: { userType: "donor" },
       stubs: ["router-link"],
     });
 
-    wrapper.vm.setActiveTab("profile");
-    expect(wrapper.vm.activeTab).toBe("profile");
+    await fireEvent.click(getByText("Profile"));
+    expect(getByText("Home")).not.toHaveClass("active");
+    expect(getByText("Profile")).toHaveClass("active");
+    expect(getByText("Info")).not.toHaveClass("active");
+  });
 
-    wrapper.vm.setActiveTab("info");
-    expect(wrapper.vm.activeTab).toBe("info");
+  it("activates info tab on click", async () => {
+    const { getByText } = render(NavHeader, {
+      props: { userType: "donor" },
+      stubs: ["router-link"],
+    });
 
-    wrapper.vm.setActiveTab("home");
-    expect(wrapper.vm.activeTab).toBe("home");
+    await fireEvent.click(getByText("Info"));
+    expect(getByText("Home")).not.toHaveClass("active");
+    expect(getByText("Profile")).not.toHaveClass("active");
+    expect(getByText("Info")).toHaveClass("active");
   });
 });
+
+// it("sets active tab to home on click", async () => {
+//   const { getByText } = render(NavHeader, {
+//     props: { userType: "donor" },
+//     routes: [
+//       { path: "/donor/home", component: DonorHome },
+//       { path: "/donor/profile", component: DonorProfile },
+//       { path: "/donor/info", component: AppInfo },
+//     ],
+//   });
+//   await fireEvent.click(getByText("Home"));
+
+//   expect(getByTestId('location-display')).toHaveTextContent('/donor/home')
+//   expect(getByText("Home")).toHaveAttribute("active");
+// });

@@ -44,7 +44,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 [Vue Router Reference](https://router.vuejs.org/guide/)
 
-[Vue Test-Utils Reference](https://vue-test-utils.vuejs.org/)
+[Vue Testing Library Documentation](https://testing-library.com/docs/vue-testing-library/intro)
+[Jest Documentation](https://jestjs.io/docs/expect)
 
 ---
 

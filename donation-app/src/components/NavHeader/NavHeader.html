@@ -6,15 +6,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <router-link to="home" class="nav-link" v-bind:class="{ active: activeTab === 'home' }"> 
-                    <span id="home-button" @click="setActiveTab('home')">Home</span>
-                </router-link>
-                <router-link to="profile" class="nav-link" v-if="userType === 'donor'" v-bind:class="{ active: activeTab === 'profile' }"> 
-                    <button id="profile-button" @click="setActiveTab('profile')">Profile</button>
-                </router-link>
-                <router-link to="info" class="nav-link" v-bind:class="{ active: activeTab === 'info' }"> 
-                    <span id="info-button" @click="setActiveTab('info')">More Info</span>
-                </router-link>
+                <div @click="setActiveTab('home')" data-testid="home-button">
+                    <router-link to="home" class="nav-link" v-bind:class="{ active: activeTab === 'home' }">Home</router-link>
+                </div>
+                <div @click="setActiveTab('profile')" v-if="userType === 'donor'">
+                    <router-link to="profile" class="nav-link" v-bind:class="{ active: activeTab === 'profile' }">Profile</router-link>
+                </div>
+                <div @click="setActiveTab('info')">
+                    <router-link to="info" class="nav-link" v-bind:class="{ active: activeTab === 'info' }">Info</router-link>
+                </div>
             </div>
         </div>
     </div>
