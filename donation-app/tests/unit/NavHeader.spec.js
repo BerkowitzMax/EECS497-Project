@@ -59,18 +59,3 @@ describe("Navheader", () => {
     expect(getByText("Info")).toHaveClass("active");
   });
 });
-
-// it("sets active tab to home on click", async () => {
-//   const { getByText } = render(NavHeader, {
-//     props: { userType: "donor" },
-//     routes: [
-//       { path: "/donor/home", component: DonorHome },
-//       { path: "/donor/profile", component: DonorProfile },
-//       { path: "/donor/info", component: AppInfo },
-//     ],
-//   });
-//   await fireEvent.click(getByText("Home"));
-
-//   expect(getByTestId('location-display')).toHaveTextContent('/donor/home')
-//   expect(getByText("Home")).toHaveAttribute("active");
-// });
