@@ -1,7 +1,7 @@
 import DonationSite from "@/components/DonationSite/index.vue";
 
 export default {
-  name: "DonationSitesWidget",
+  name: "DonationSiteWidget",
   components: {
     DonationSite,
   },

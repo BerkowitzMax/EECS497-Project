@@ -1,15 +1,15 @@
-import CharityRequestsWidget from "@/components/CharityRequestsWidget/index.vue";
+import CharityRequestWidget from "@/components/CharityRequestWidget/index.vue";
 
 export default {
-	name: "CharityHome",
-	components: {
-		CharityRequestsWidget,
-	},
-	props: {},
-	data() {
-		return {};
-	},
-	computed: {},
-	mounted() {},
-	methods: {},
+  name: "CharityHome",
+  components: {
+    CharityRequestWidget,
+  },
+  props: {},
+  data() {
+    return {};
+  },
+  computed: {},
+  mounted() {},
+  methods: {},
 };

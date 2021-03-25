@@ -2,7 +2,7 @@ import CharityRequest from "@/components/CharityRequest/index.vue";
 import CharityRequestModal from "@/components/CharityRequestModal/index.vue";
 
 export default {
-  name: "CharityRequestsWidget",
+  name: "CharityRequestWidget",
   components: {
     CharityRequest,
     CharityRequestModal,

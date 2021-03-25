@@ -1,7 +1,7 @@
 import DonorRequest from "@/components/DonorRequest/index.vue";
 
 export default {
-  name: "DonorRequestsWidget",
+  name: "DonorRequestWidget",
   components: {
     DonorRequest,
   },
