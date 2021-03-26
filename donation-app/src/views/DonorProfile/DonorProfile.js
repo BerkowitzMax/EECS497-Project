@@ -1,6 +1,10 @@
+import DonorStatsWidget from "@/components/DonorStatsWidget/index.vue";
+
 export default {
 	name: "DonorProfile",
-	components: {},
+	components: {
+		DonorStatsWidget,
+	},
 	props: {},
 	data() {
 		return {};
