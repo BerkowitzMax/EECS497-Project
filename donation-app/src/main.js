@@ -8,6 +8,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/src/jquery.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+import firebase from 'firebase'
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCp1cVjNl4d8rLISkVmEjQ2obkdbJo0KrQ",
+  authDomain: "eecs497-project.firebaseapp.com",
+  databaseURL: "https://eecs497-project-default-rtdb.firebaseio.com",
+  projectId: "eecs497-project",
+  storageBucket: "eecs497-project.appspot.com",
+  messagingSenderId: "444308462167",
+  appId: "1:444308462167:web:4ec43d4c8d7c89217be112",
+  measurementId: "G-92009WVRFH"
+};
+
 Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
@@ -24,4 +37,7 @@ Vue.use(VueTimeago, {
 new Vue({
   render: (h) => h(App),
   router: Router,
+  created() {
+    firebase.initializeApp(firebaseConfig);
+  }
 }).$mount("#app");
