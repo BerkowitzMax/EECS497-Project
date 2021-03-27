@@ -1,11 +1,15 @@
 import firebase from 'firebase';
+import { db } from '@/main';
 
 export default {
 	name: "LandingPage",
 	components: {},
 	props: {},
 	data() {
-		return {};
+		return {
+			email: null,
+			name: null,
+		};
 	},
 	computed: {},
 	mounted() {},
@@ -15,11 +19,17 @@ export default {
 			firebase.auth().signInWithPopup(provider)
 					.then(result => {
 						const user = result.user;
-						document.write(`Hello ${user.displayName}`);
-						console.log(user)
+						document.write(`Hello ${user.email}`);
+						console.log(user);
+
+						var path = user.email.split('@')[0];
+						db.collection("Donors").doc(path).set({
+							username: user.displayName,
+							email: user.email
+						});
+
 					})
 					.catch(console.log)
-
 		}
 	},
 };

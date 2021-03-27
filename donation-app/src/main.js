@@ -20,6 +20,9 @@ var firebaseConfig = {
   appId: "1:444308462167:web:4ec43d4c8d7c89217be112",
   measurementId: "G-92009WVRFH"
 };
+firebase.initializeApp(firebaseConfig);
+
+export const db = firebase.firestore();
 
 Vue.config.productionTip = false;
 
@@ -37,7 +40,4 @@ Vue.use(VueTimeago, {
 new Vue({
   render: (h) => h(App),
   router: Router,
-  created() {
-    firebase.initializeApp(firebaseConfig);
-  }
 }).$mount("#app");
