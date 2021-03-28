@@ -4,7 +4,6 @@ import { db } from '@/main';
 export default {
 	name: "LandingPage",
 	components: {},
-	props: {},
 	data() {
 		return {
 			email: null,
@@ -29,11 +28,14 @@ export default {
 						email: user.email
 					});
 
+					this.email = user.email;
+					this.name = user.displayName;
+
 					// page redirect
 					if (user_type === "Donors")
-						this.$router.push({ name: 'donor-home'});
+						this.$router.push({name: 'Donor App', params: {id: path} });
 					else
-						this.$router.push({ name: 'charity-home'});
+						this.$router.push({name: 'charity-home'});
 				})
 				.catch(console.log)
 		}
