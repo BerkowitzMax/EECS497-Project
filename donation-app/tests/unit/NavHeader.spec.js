@@ -14,12 +14,12 @@ describe("Navheader", () => {
   });
 
   it("displays correct navheader options for charities", () => {
-    const { getByText } = render(NavHeader, {
+    const { getByText, queryByText } = render(NavHeader, {
       props: { userType: "charity" },
       stubs: ["router-link"],
     });
     expect(getByText("Home")).toBeVisible();
-    expect(screen.queryByText("Profile")).toBeNull(); // getByText() throws an error when element not found
+    expect(queryByText("Profile")).toBeNull(); // getByText() throws an error when element not found
     expect(getByText("Info")).toBeVisible();
   });
 

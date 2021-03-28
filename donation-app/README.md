@@ -45,7 +45,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [Vue Router Reference](https://router.vuejs.org/guide/)
 
 [Vue Testing Library Documentation](https://testing-library.com/docs/vue-testing-library/intro)
+
 [Jest Documentation](https://jestjs.io/docs/expect)
+
+[Jest Dom Documentation](https://github.com/testing-library/jest-dom#custom-matchers)
 
 ---
 

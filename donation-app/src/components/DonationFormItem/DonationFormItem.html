@@ -122,19 +122,19 @@
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" v-model="formData.containsDairy">
-                    <label class="form-check-label" for="inlineCheckbox2">Dairy</label>
+                    <label class="form-check-label" for="inlineCheckbox3">Dairy</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3" v-model="formData.containsEggs">
-                    <label class="form-check-label" for="inlineCheckbox2">Eggs</label>
+                    <label class="form-check-label" for="inlineCheckbox4">Eggs</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" v-model="formData.containsMeat">
-                    <label class="form-check-label" for="inlineCheckbox2">Meat</label>
+                    <label class="form-check-label" for="inlineCheckbox5">Meat</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option5" v-model="formData.containsSoy">
-                    <label class="form-check-label" for="inlineCheckbox2">Soy</label>
+                    <label class="form-check-label" for="inlineCheckbox6">Soy</label>
                   </div>
             </div>
         </div>
@@ -159,5 +159,5 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-outline-danger" v-if="formData.itemId > 1" @click="removeItem">Remove Item</button>
+    <button type="button" class="btn btn-outline-danger" v-if="formData.itemId > 0" @click="removeItem">Remove Item</button>
 </form>
