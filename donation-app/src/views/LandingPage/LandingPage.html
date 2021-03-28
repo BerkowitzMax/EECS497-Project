@@ -3,8 +3,12 @@
         <div class="container">
           <h1 class="display-4">Welcome!</h1>
           <p class="lead">This is our food donation application.</p>
-          <button type="button" class="btn btn-primary">Sign Up</button>
+          <button type="button" class="btn btn-primary disabled">Sign Up</button> <!-- maybe just remove this -->
           <button type="button" class="btn btn-outline-primary" v-on:click="GoogleLogin">Login</button>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="org">
+            <label class="custom-control-label" for="org">I am an organization.</label>
+        </div>
         </div>
       </div>
     <div class="col">

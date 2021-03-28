@@ -30,7 +30,7 @@ export default new VueRouter({
 
         // Donor Routes
         {
-            path: '/donor',
+            path: '/Donors/:id',
             name: 'Donor App',
             redirect: { 'name': 'donor-home' },
             component: DonorApp,
@@ -57,7 +57,7 @@ export default new VueRouter({
 
         // Charity Routes
         {
-            path: '/charity',
+            path: '/Charities',
             name: 'Charity App',
             redirect: { 'name': 'charity-home' },
             component: CharityApp,
