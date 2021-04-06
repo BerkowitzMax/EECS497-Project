@@ -23,9 +23,16 @@ export default {
 					console.log(user);
 
 					var path = user.email.split('@')[0];
-					db.collection(user_type).doc(path).set({
-						username: user.displayName,
-						email: user.email
+
+					// if user exists in firebase already
+					var user_exists = db.collection(user_type).doc(path);
+					user_exists.get().then((doc)=> {
+						if (!doc.exists) {
+							db.collection(user_type).doc(path).set({
+								username: user.displayName,
+								email: user.email
+							});
+						}
 					});
 
 					this.email = user.email;
