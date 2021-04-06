@@ -57,7 +57,7 @@ export default new VueRouter({
 
         // Charity Routes
         {
-            path: '/Charities',
+            path: '/Charities/:id',
             name: 'Charity App',
             redirect: { 'name': 'charity-home' },
             component: CharityApp,

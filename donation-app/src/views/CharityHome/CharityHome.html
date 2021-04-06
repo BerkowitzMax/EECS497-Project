@@ -5,55 +5,71 @@
         <div class="col-sm-3 sidenav">
             <div class="sidebar-profile d-flex align-items-center flex-column">
                 <img src="../../assets/profile-image-placeholder.png" alt="Profile Picture" style="width: 100px">
-                <br>
-                <h3>Charity Name</h3>
-            </div>
-            <div class="sidebar-section">
-                <h5>Account Information</h5>
+                <pre></pre>
                 <div class="d-flex justify-content-between align-items-end">
-                    <h6>Email</h6>
-                    <label>[email]</label>
-                </div>
-            </div>
-            <br>
-            <div class="sidebar-section">
-                <h5>Charity Information</h5>
-                <div class="sidebar-subsection">
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6>Contact</h6>
-                        <button type="button" class="btn btn-link">edit</button>
-                    </div>
-                    <p>[contact]</p>
-                </div>
-                <div class="sidebar-subsection">
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6>Website Link</h6>
-                        <button type="button" class="btn btn-link">edit</button>
-                    </div>
-                    <p>[link]</p>
-                </div>
-                <div class="sidebar-subsection">
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6>Charity Description</h6>
-                        <button type="button" class="btn btn-link">edit</button>
-                    </div>
-                    <p>[description]</p>
-                </div>
+                    <h4 v-show="!name_edit_bool" class="name-text">{{name}}</h4>
+                    <input v-show="name_edit_bool" v-model="name" type="text" class="form-control">
 
-                <button type="button" class="btn btn-primary btn-sm btn-block">Add Info</button>
+                    <button v-show="!name_edit_bool" @click="edit('name')" type="button" class="btn btn-link">edit</button>
+                    <button v-show="name_edit_bool" @click="edit('name')" type="button" class="btn btn-link">save</button>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h4>Charity Information</h4>
+                <div class="sidebar-subsection">
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6>Email:</h6>
+                        <label>{{email}}</label>
+                    </div>
+                </div>
+                <div class="sidebar-subsection">
+                    <hr>
+                    <h6>Contact:</h6>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6 v-show="!contact_bool" class="name-text">{{contact}}</h6>
+                        <input v-show="contact_bool" v-model="contact" type="text" class="form-control">
+    
+                        <button v-show="!contact_bool" @click="edit('contact')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="contact_bool" @click="edit('contact')" type="button" class="btn btn-link">save</button>
+                    </div>
+                </div>
+                <div class="sidebar-subsection">
+                    <hr>
+                    <h6>Website Link:</h6>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6 v-show="!link_bool" class="name-text">{{link}}</h6>
+                        <input v-show="link_bool" v-model="link" type="text" class="form-control">
+    
+                        <button v-show="!link_bool" @click="edit('link')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="link_bool" @click="edit('link')" type="button" class="btn btn-link">save</button>
+                    </div>
+                </div>
+                <div class="sidebar-subsection">
+                    <hr>
+                    <h6>Charity Description:</h6>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6 v-show="!desc_bool" class="name-text">{{desc}}</h6>
+                        <input v-show="desc_bool" v-model="desc" type="text" class="form-control">
+    
+                        <button v-show="!desc_bool" @click="edit('desc')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="desc_bool" @click="edit('desc')" type="button" class="btn btn-link">save</button>
+                    </div>
+                </div>
+                <!-- Unsure what to add in this so leaving it out for now
+                <button type="button" class="btn btn-primary btn-sm btn-block">Add Info</button>-->
             </div>
             <br>
             <div class="sidebar-section">
-                    <h5>Preferences</h5>
+                <h5>Preferences</h5>
                 <div class="sidebar-preference">
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">Accepting Donations</label>
+                        <input @click="dono_toggle" type="checkbox" class="custom-control-input" id="donoSwitch">
+                        <label class="custom-control-label" for="donoSwitch">Accepting Donations</label>
                     </div>
                 </div>
                 <div class="sidebar-preference">
                     <label>Donation Radius</label>
-                    <select class="custom-select">
+                    <select v-model="radius" @change="radius_check" class="custom-select">
                         <option selected>None</option>
                         <option>5 miles</option>
                         <option>10 miles</option>
@@ -69,7 +85,6 @@
                 </div>
             </div>
         </div>
-        
         <!-- charity list -->
         <CharityRequestWidget/>
     </div>
