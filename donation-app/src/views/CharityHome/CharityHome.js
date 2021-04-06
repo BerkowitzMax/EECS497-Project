@@ -19,6 +19,8 @@ export default {
       link_bool: false,
       desc: "<Description of your charitable work>",
       desc_bool: false,
+      accept_dono: false,
+      radius: "None"
     };
   },
   computed: {},
@@ -54,5 +56,16 @@ export default {
 			})
       .catch(function(error){alert(error + " : This data could not be saved successfully.")});
 		},
+    dono_toggle: function() {
+      this.dono_toggle = document.getElementById("donoSwitch").checked
+      db.collection("Charities").doc(this.user_id).update({
+        dono_toggle: this.dono_toggle
+      });
+    },
+    radius_check: function() {
+      db.collection("Charities").doc(this.user_id).update({
+        radius: this.radius
+      });
+    }
   },
 };

@@ -63,13 +63,13 @@
                 <h5>Preferences</h5>
                 <div class="sidebar-preference">
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">Accepting Donations</label>
+                        <input @click="dono_toggle" type="checkbox" class="custom-control-input" id="donoSwitch">
+                        <label class="custom-control-label" for="donoSwitch">Accepting Donations</label>
                     </div>
                 </div>
                 <div class="sidebar-preference">
                     <label>Donation Radius</label>
-                    <select class="custom-select">
+                    <select v-model="radius" @change="radius_check" class="custom-select">
                         <option selected>None</option>
                         <option>5 miles</option>
                         <option>10 miles</option>
