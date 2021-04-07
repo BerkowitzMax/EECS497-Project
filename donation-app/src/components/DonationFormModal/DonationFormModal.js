@@ -1,3 +1,4 @@
+import { db } from '@/main';
 import DonationFormItem from "@/components/DonationFormItem/index.vue";
 
 export default {
@@ -92,8 +93,16 @@ export default {
       ];
     },
     saveForm() {
-      // TODO
-      
+      var document = this.$route.params.id;
+      document += '-' + this.charityName;
+      db.collection("Requests").doc(document).set({
+        status: "Pending",
+        items: this.items
+      })
+      .then(alert('Donation successful, thank you!'))
+      .catch(console.log);
+
+      this.clearForm();
     },
   },
 };
