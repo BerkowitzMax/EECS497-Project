@@ -14,6 +14,7 @@ export default {
   },
   computed: {},
   mounted() {
+    // TODO filter by preferences
     // Retrieve request data from database
     db.collection("Charities").get().then((query) => {
       query.forEach((doc) => {

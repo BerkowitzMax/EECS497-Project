@@ -9,7 +9,8 @@ export default {
     siteData: Object,
   },
   data() {
-    return {};
+    return {
+    };
   },
   computed: {},
   mounted() {},

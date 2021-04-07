@@ -5,7 +5,9 @@ export default {
   components: {
     DonationFormItem,
   },
-  props: {},
+  props: {
+    charityName: String
+  },
   data() {
     return {
       numItems: 1,
@@ -87,6 +89,7 @@ export default {
     },
     saveForm() {
       // TODO
+      
     },
   },
 };
