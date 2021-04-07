@@ -10,6 +10,7 @@ export default {
   },
   data() {
     return {
+      charity_id: "formModal",
       numItems: 1,
       items: [
         {
@@ -34,7 +35,10 @@ export default {
     };
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    var hyphen = this.charityName.split(' ').join('-');
+    this.charity_id += '-' + hyphen;
+  },
   methods: {
     addItem() {
       this.items.push({
