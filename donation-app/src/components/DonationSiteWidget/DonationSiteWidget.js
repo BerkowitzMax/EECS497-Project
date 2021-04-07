@@ -18,12 +18,12 @@ export default {
     db.collection("Charities").get().then((query) => {
       query.forEach((doc) => {
         var d = doc.data();
-        if (d.name && d.contact && d.link) {
+        if (d.name && d.contact && d.location) {
           // parse
           let site = {
             charityName: d.name,
             charityContact: d.contact,
-            charityLocation: d.link
+            charityLocation: d.location
           };
 
           this.donationSites.push(site);

@@ -13,8 +13,10 @@ export default {
 			email: null,
       name: "Set charity name",
       name_edit_bool: false,
-      contact: "<Phone number, Address, etc>",
+      contact: "<Phone number>",
       contact_bool: false,
+      loc: "<Address>",
+      loc_bool: false,
       link: "<Link your website>",
       link_bool: false,
       desc: "<Description of your charitable work>",
@@ -27,11 +29,14 @@ export default {
   mounted() {
 		// parse user profile
 		db.collection("Charities").doc(this.user_id).get().then((doc)=>{
-			this.email = doc.data().email;
-      if (doc.data().name) this.name = doc.data().name;
-      if (doc.data().contact) this.contact = doc.data().contact;
-      if (doc.data().link) this.link = doc.data().link;
-      if (doc.data().desc) this.desc = doc.data().desc;
+      var d = doc.data();
+			this.email = d.email;
+
+      if (d.name) this.name = d.name;
+      if (d.contact) this.contact = d.contact;
+      if (d.location) this.loc = d.location;
+      if (d.link) this.link = d.link;
+      if (d.desc) this.desc = d.desc;
 		}).catch((error) => {
 			console.log("Error getting document:", error);
 		});
@@ -43,6 +48,8 @@ export default {
         this.name_edit_bool = !this.name_edit_bool;
       else if (input == "contact")
         this.contact_bool = !this.contact_bool;
+      else if (input == "loc")
+        this.loc_bool = !this.loc_bool;
       else if (input == "link")
         this.link_bool = !this.link_bool;
       else if (input == "desc")
@@ -51,6 +58,7 @@ export default {
 			db.collection("Charities").doc(this.user_id).update({
         name: this.name,
         contact: this.contact,
+        location: this.loc,
         link: this.link,
         desc: this.desc
 			})
