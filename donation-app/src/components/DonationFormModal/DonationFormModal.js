@@ -7,7 +7,7 @@ export default {
     DonationFormItem,
   },
   props: {
-    charityName: String
+    charityName: Object
   },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
   },
   computed: {},
   mounted() {
-    var hyphen = this.charityName.split(' ').join('-');
+    var hyphen = this.charityName.charityName.split(' ').join('-');
     this.charity_id += '-' + hyphen;
   },
   methods: {
@@ -94,10 +94,11 @@ export default {
     },
     saveForm() {
       var document = this.$route.params.id;
-      document += '-' + this.charityName;
+      document += '-' + this.charityName.charityName;
       db.collection("Requests").doc(document).set({
         status: "Pending",
-        items: this.items
+        items: this.items,
+        charity_info: this.charityName
       })
       .then(alert('Donation successful, thank you!'))
       .catch(console.log);

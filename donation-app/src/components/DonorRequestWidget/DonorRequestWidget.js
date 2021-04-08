@@ -1,3 +1,4 @@
+import { db } from '@/main';
 import DonorRequest from "@/components/DonorRequest/index.vue";
 
 export default {
@@ -8,98 +9,46 @@ export default {
   props: {},
   data() {
     return {
-      pendingRequests: [
-        {
-          // Should come from database eventually
-          id: 0,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 0",
-          charityContact: "000-000-0000",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 1,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 1",
-          charityContact: "111-111-111",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 2,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 2",
-          charityContact: "222-222-2222",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-      ],
-      resolvedRequests: [
-        {
-          id: 3,
-          status: "Accepted",
-          dateCreated: new Date(),
-          charityName: "Test Charity 3",
-          charityContact: "333-333-3333",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 4,
-          status: "Accepted",
-          dateCreated: new Date(),
-          charityName: "Test Charity 4",
-          charityContact: "444-444-4444",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 5,
-          status: "Rejected",
-          dateCreated: new Date(),
-          charityName: "Test Charity 5",
-          charityContact: "555-555-5555",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 6,
-          status: "Rejected",
-          dateCreated: new Date(),
-          charityName: "Test Charity",
-          charityContact: "666-666-6666",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-      ],
+      user_id: this.$route.params.id,
+      id: 0,
+      pendingRequests: [],
+      resolvedRequests: [],
     };
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    // Retrieve request data from firebase
+    db.collection("Requests").get().then((query) => {
+      query.forEach((doc) => {
+        var d_title = doc.id.split(/-(.+)/)
+        var d = doc.data();
+        this.parseRequest(d.items, d_title[0], d.charity_info, d.status);
+      });
+    });
+  },
   methods: {
-    addRequest() {
-      // TODO: retrieve request data from database
-      let request = {};
+    // TODO once requests are resolved, users should have the ability to make donations to the charity again
+    parseRequest(form_data, user, charity, pstatus) {
+      // skip requests from other users
+      if (this.user_id == user){
+        var request = {
+          id: this.id,
+          status: pstatus,
+          dateCreated: new Date(),
+          charityName: charity.charityName,
+          charityContact: charity.charityContact,
+          charityLocation: charity.charityLocation,
+          donationLabel: "Donation Label",
+          charityImage: "profile-image-placeholder.png",
+          formData: form_data,
+        }  
+        this.id += 1;
 
-      this.requests.push(request);
+        if (pstatus == "Pending")
+          this.pendingRequests.push(request);
+        else
+          this.resolvedRequests.push(request);
+      }
     },
   },
 };
