@@ -38,7 +38,7 @@ export default {
           charityName: charity.charityName,
           charityContact: charity.charityContact,
           charityLocation: charity.charityLocation,
-          donationLabel: "Donation Label",
+          donationLabel: "Donation to " + charity.charityName,
           charityImage: "profile-image-placeholder.png",
           formData: form_data,
         }  
