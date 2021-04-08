@@ -1,3 +1,4 @@
+import { db } from '@/main';
 import DonationFormItem from "@/components/DonationFormItem/index.vue";
 
 export default {
@@ -5,9 +6,12 @@ export default {
   components: {
     DonationFormItem,
   },
-  props: {},
+  props: {
+    charityName: Object
+  },
   data() {
     return {
+      charity_id: "formModal",
       numItems: 1,
       items: [
         {
@@ -32,7 +36,10 @@ export default {
     };
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    var hyphen = this.charityName.charityName.split(' ').join('-');
+    this.charity_id += '-' + hyphen;
+  },
   methods: {
     addItem() {
       this.items.push({
@@ -86,7 +93,17 @@ export default {
       ];
     },
     saveForm() {
-      // TODO
+      var document = this.$route.params.id;
+      document += '-' + this.charityName.charityName;
+      db.collection("Requests").doc(document).set({
+        status: "Pending",
+        items: this.items,
+        charity_info: this.charityName
+      })
+      .then(alert('Donation successful, thank you!'))
+      .catch(console.log);
+
+      this.clearForm();
     },
   },
 };

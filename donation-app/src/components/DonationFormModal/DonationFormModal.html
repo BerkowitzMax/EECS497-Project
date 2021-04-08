@@ -1,8 +1,8 @@
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" :id="charity_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="formModalLabel">Donation Request Form</h5>
+                <h5 class="modal-title" id="formModalLabel">Donation Request Form for {{charityName.charityName}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,8 +17,8 @@
                 <button type="button" class="btn btn-outline-primary" @click="addItem">Add Item</button>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-dismiss="modal" @click="clearForm">Cancel</button>
-            <button type="button" class="btn btn-primary" @click="saveForm">Submit</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal" @click="clearForm">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveForm">Submit</button>
             </div>
         </div>
     </div>

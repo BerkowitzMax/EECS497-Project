@@ -27,10 +27,17 @@
                     <h6>Contact:</h6>
                     <div class="d-flex justify-content-between align-items-end">
                         <h6 v-show="!contact_bool" class="name-text">{{contact}}</h6>
-                        <input v-show="contact_bool" v-model="contact" type="text" class="form-control">
+                        <input v-show="contact_bool" v-model="contact" placeholder="(xxx) xxx-xxxx" type="text" class="form-control">
     
                         <button v-show="!contact_bool" @click="edit('contact')" type="button" class="btn btn-link">edit</button>
                         <button v-show="contact_bool" @click="edit('contact')" type="button" class="btn btn-link">save</button>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6 v-show="!loc_bool" class="name-text">{{loc}}</h6>
+                        <input v-show="loc_bool" v-model="loc" placeholder="Enter a location" type="text" class="form-control">
+    
+                        <button v-show="!loc_bool" @click="edit('loc')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="loc_bool" @click="edit('loc')" type="button" class="btn btn-link">save</button>
                     </div>
                 </div>
                 <div class="sidebar-subsection">
