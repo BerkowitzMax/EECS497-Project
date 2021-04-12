@@ -52,6 +52,7 @@ export default {
             donationLabel: "donation label",
             donorLocation: donor.address,
             formData: form_data,
+            picture: donor.picture
           }
           this.id += 1;
 
