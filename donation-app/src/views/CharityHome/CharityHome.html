@@ -4,7 +4,8 @@
         <!-- sidebar -->
         <div class="col-sm-3 sidenav">
             <div class="sidebar-profile d-flex align-items-center flex-column">
-                <img src="../../assets/profile-image-placeholder.png" alt="Profile Picture" style="width: 100px">
+                <img v-if="showDefault" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" style="width: 100px">
+                <img v-else :src='imageURL' alt="Profile Picture" style="width: 100px">
                 <pre></pre>
                 <div class="d-flex justify-content-between align-items-end">
                     <h4 v-show="!name_edit_bool" class="name-text">{{name}}</h4>
@@ -20,6 +21,13 @@
                     <div class="d-flex justify-content-between align-items-end">
                         <h6>Email:</h6>
                         <label>{{email}}</label>
+                    </div>
+                </div>
+                <div class="sidebar-subsection">
+                    <div class="d-flex justify-content-between align-items-end">
+                        <h6>Profile Picture:</h6>
+                        <input type="file" @change="preview" id="pfp" class="custom-file">
+                        <button @click="remove_image" type="button" class="btn btn-link">remove</button>
                     </div>
                 </div>
                 <div class="sidebar-subsection">

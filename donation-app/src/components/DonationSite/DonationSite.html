@@ -1,7 +1,8 @@
 <div class="donation-site container-fluid">
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex w-100 justify-content-start align-items-center">
-            <img class="charity_picture" src="../../assets/profile-image-placeholder.png" alt="Picture of charity A">
+            <img v-if="!siteData.picture" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" class="charity_picture">
+            <img v-else :src='siteData.picture' alt="Profile Picture" class="charity_picture">
             <div class="charity-info">
                 <p>{{siteData.charityName}}</p>
                 <div>

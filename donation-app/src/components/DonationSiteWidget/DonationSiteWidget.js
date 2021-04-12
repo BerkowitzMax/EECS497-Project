@@ -24,7 +24,8 @@ export default {
           let site = {
             charityName: d.name,
             charityContact: d.contact,
-            charityLocation: d.location
+            charityLocation: d.location,
+            picture: d.picture
           };
 
           this.donationSites.push(site);
