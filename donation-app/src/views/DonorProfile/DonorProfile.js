@@ -52,6 +52,11 @@ export default {
 			.then(()=>{alert("Saved!")})
 			.catch(function(error){alert(error + " : This data could not be saved successfully.")});
 		},
+		remove_image: function(){
+			this.imageURL = null;
+			this.showDefault = true;
+			document.getElementById("pfp").value=null;
+		},
 		preview: function(event) {
 			if (!event.target.files[0]) {
 				this.showDefault = true;

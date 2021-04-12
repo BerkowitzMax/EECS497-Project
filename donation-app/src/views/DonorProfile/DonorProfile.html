@@ -32,7 +32,8 @@
                                     <span class="input-group-text" id="basic-addon1">Profile Picture</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" @change="preview" class="custom-file">
+                                    <input type="file" @change="preview" id="pfp" class="custom-file">
+                                    <button @click="remove_image" type="button" class="btn btn-link">remove</button>
                                 </div>
                             </div>
                         </div>
