@@ -97,8 +97,7 @@ export default {
       document += '-' + this.charityName.charityName;
       db.collection("Requests").doc(document).set({
         status: "Pending",
-        items: this.items,
-        charity_info: this.charityName
+        items: this.items
       })
       .then(alert('Donation successful, thank you!'))
       .catch(console.log);

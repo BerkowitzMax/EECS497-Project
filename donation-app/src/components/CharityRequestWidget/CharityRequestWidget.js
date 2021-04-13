@@ -29,37 +29,38 @@ export default {
     db.collection("Requests").get().then((query) => {
       query.forEach((doc) => {
         var d_title = doc.id.split(/-(.+)/)
-        var d = doc.data();
-        this.parseRequest(d.items, d_title[0], d.charity_info, d.status);
+
+        // only logged in charity
+        if (d_title[1] == this.charity_id) {
+          var d = doc.data();
+          this.parseRequest(d.items, d_title[0], d.status);
+        }
       });
     });
   },
   methods: {
     // TODO once requests are resolved, users should have the ability to make donations to the charity again
-    parseRequest(form_data, user, charity, pstatus) {
-      // skip requests to other charities
-      if (this.charity_id == charity.charityName) {
-        db.collection("Donors").doc(user).get().then((doc) => {
-          var donor = doc.data();
+    parseRequest(form_data, user, pstatus) {
+      db.collection("Donors").doc(user).get().then((doc) => {
+        var donor = doc.data();
 
-          let request = {
-            fbid: (user + "-" + this.charity_id),
-            id: this.id,
-            status: pstatus,
-            dateCreated: new Date(),
-            donorName: donor.username,
-            donorContact: donor.phone,
-            donationLabel: "donation label",
-            donorLocation: donor.address,
-            formData: form_data,
-            picture: donor.picture
-          }
-          this.id += 1;
+        let request = {
+          fbid: (user + "-" + this.charity_id),
+          id: this.id,
+          status: pstatus,
+          dateCreated: new Date(),
+          donorName: donor.username,
+          donorContact: donor.phone,
+          donationLabel: "donation label",
+          donorLocation: donor.address,
+          formData: form_data,
+          picture: donor.picture
+        }
+        this.id += 1;
 
-          if (pstatus == "Pending")
-            this.pendingRequests.push(request)
-        });
-      }
+        if (pstatus == "Pending")
+          this.pendingRequests.push(request)
+      });
     },
     selectRequest(id) {
       // Set when Review Request modal is opened
