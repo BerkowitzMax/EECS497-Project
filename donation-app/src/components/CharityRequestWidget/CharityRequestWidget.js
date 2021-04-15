@@ -18,6 +18,7 @@ export default {
       resolvedRequests: [],
     };
   },
+  inject: ["mySpinner"],
   computed: {},
   mounted() {
     // fetch logged in charity name
