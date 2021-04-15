@@ -28,8 +28,11 @@ export default {
       showDefault: true
     };
   },
+  inject: ["mySpinner"],
   computed: {},
   mounted() {
+    this.mySpinner.val = true;
+
 		// parse user profile
 		db.collection("Charities").doc(this.user_id).get().then((doc)=>{
       var d = doc.data();
@@ -43,7 +46,9 @@ export default {
       if (d.picture) {this.imageURL = d.picture; this.showDefault = false;}
 		}).catch((error) => {
 			console.log("Error getting document:", error);
-		});
+		}).then(()=>{
+      this.mySpinner.val = false;
+    });
   },
   methods: {
 		edit: function(input) {

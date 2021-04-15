@@ -29,8 +29,10 @@ export default {
       resolvedRequests: [],
     };
   },
+  inject: ["mySpinner"],
   computed: {},
   mounted() {
+    this.mySpinner.val = true;
     // Retrieve request data from firebase
     db.collection("Requests").get().then((query) => {
       query.forEach((doc) => {
@@ -59,6 +61,8 @@ export default {
           });
         }
       });
+    }).then(()=> {
+      this.mySpinner.val = false;
     });
   },
   methods: {

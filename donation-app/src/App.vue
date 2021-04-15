@@ -1,26 +1,35 @@
 <template>
   <div id="app">
+    <Spinner :start="spin.val"/>
     <!-- Render pages routed to from the landing page -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Spinner from './components/Spinner.vue';
+
 export default {
   name: 'App',
   components: {
+    Spinner
   },
   data() {
-		return {};
+		return {
+      spin: {
+        val: true
+      }
+    };
 	},
+  provide() {
+    return {
+      mySpinner: this.spin
+    }
+  }
 }
 </script>
 
 <style>
-  #app {
-
-  }
-
   /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
   .row.content {
     height: 1500px;
