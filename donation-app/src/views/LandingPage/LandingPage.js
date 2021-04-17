@@ -1,48 +1,140 @@
-import firebase from 'firebase';
-import { db } from '@/main';
+import firebase from "firebase";
+import { db } from "@/main";
 
 export default {
-	name: "LandingPage",
-	components: {},
-	data() {
-		return {
-			email: null,
-			name: null,
-		};
-	},
-	computed: {},
-	mounted() {},
-	methods: {
-		GoogleLogin: function() {
-			const user_type = document.getElementById("org").checked ? "Charities" : "Donors";
+  name: "LandingPage",
+  components: {},
+  data() {
+    return {
+      email: null,
+      name: null,
+      phone: "",
+      zip: "",
+      charityName: "",
+      activeTab: "donor",
+      showSignUp: false,
+      accountAlreadyExists: false,
+      accountDoesNotExist: false,
+    };
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    setActiveTab(tab) {
+      this.activeTab = tab;
+    },
+    getStarted() {
+      this.showSignUp = true;
+    },
+    GoogleLogin: function() {
+      this.accountDoesNotExist = false;
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          this.email = user.email;
+          this.name = user.displayName;
 
-			const provider = new firebase.auth.GoogleAuthProvider();
-			firebase.auth().signInWithPopup(provider)
-				.then(result => {
-					const user = result.user;
-					this.email = user.email;
-					this.name = user.displayName;
+          var path = user.email.split("@")[0];
 
-					var path = user.email.split('@')[0];
+          // if donor exists in firebase already
+          let donor_exists = db.collection("Donors").doc(path);
+          console.log(donor_exists);
+          donor_exists.get().then((doc) => {
+            // page redirect
+            if (doc.exists) {
+              this.$router.push({ name: "donor-home", params: { id: path } });
+              return;
+            }
+          });
 
-					// if user exists in firebase already
-					var user_exists = db.collection(user_type).doc(path);
-					user_exists.get().then((doc)=> {
-						if (!doc.exists) {
-							db.collection(user_type).doc(path).set({
-								username: user.displayName,
-								email: user.email
-							})
-						}
-					}).then(()=> {
-						// page redirect
-						if (user_type === "Donors")
-							this.$router.push({name: 'Donor App', params: {id: path} });
-						else
-							this.$router.push({name: 'charity-home', params: {id: path} });
-					});
-				})
-				.catch(console.log)
-		}
-	},
+          // if charity exists in firebase already
+          let chairty_exists = db.collection("Charities").doc(path);
+          console.log(chairty_exists);
+          chairty_exists.get().then((doc) => {
+            // page redirect
+            if (doc.exists) {
+              this.$router.push({ name: "charity-home", params: { id: path } });
+              return;
+            }
+          });
+
+          throw new Error("account doesn't exist");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.accountDoesNotExist = true;
+          this.showSignUp = true;
+        });
+    },
+
+    GoogleSignUp: function() {
+      this.accountAlreadyExists = false;
+      let collection = "";
+
+      if (this.activeTab == "donor") {
+        collection = "Donors";
+      } else {
+        collection = "Charities";
+      }
+
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          this.email = user.email;
+          this.name = user.displayName;
+
+          var path = user.email.split("@")[0];
+
+          // if user exists in firebase already
+          var user_exists = db.collection(collection).doc(path);
+          user_exists
+            .get()
+            .then((doc) => {
+              if (!doc.exists && collection == "Charities") {
+                db.collection(collection)
+                  .doc(path)
+                  .set({
+                    username: user.displayName,
+                    email: user.email,
+                    name: this.charityName,
+                    phone: this.phone,
+                    zip: this.zip,
+                  });
+              } else if (!doc.exists && collection == "Donors") {
+                db.collection(collection)
+                  .doc(path)
+                  .set({
+                    username: user.displayName,
+                    email: user.email,
+                    phone: this.phone,
+                    zip: this.zip,
+                  });
+              } else {
+                throw new Error("account already exists");
+              }
+            })
+            .then(() => {
+              // page redirect
+              if (collection === "Donors")
+                this.$router.push({ name: "donor-home", params: { id: path } });
+              else
+                this.$router.push({
+                  name: "charity-home",
+                  params: { id: path },
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+              this.accountAlreadyExists = true;
+            });
+        })
+        .catch(console.log);
+    },
+  },
 };

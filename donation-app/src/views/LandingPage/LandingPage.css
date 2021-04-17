@@ -1,0 +1,107 @@
+.container {
+  height: 100%;
+  background-color: rgb(221, 247, 243);
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+}
+
+nav {
+  padding: 38px 40px 0px 50px;
+}
+.navbar-brand {
+  padding: 0px;
+  color: rgb(83, 192, 152);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.alert {
+  margin: 0px;
+}
+
+#login {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.left-col {
+  padding: 50px 150px 50px 150px !important;
+  margin: 0px !important;
+}
+
+.right-col {
+  height: 550px;
+  padding: 50px 50px;
+  border-radius: 45px !important;
+  margin: 50px 0px;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.logo {
+  height: 200px;
+  margin-left: -10px;
+  margin-top: 0px;
+}
+
+.heading {
+  padding: 50px 0px 20px;
+  font-weight: bolder;
+}
+
+.get-started {
+  margin: 10px 2px 0px 0px !important;
+  border-radius: 45px !important;
+  font-size: medium;
+}
+
+#sign-up-header {
+  margin-bottom: 20px;
+}
+
+#sign-up-details {
+  width: 100%;
+  padding: 50px 50px;
+  position: absolute;
+  top: 150px;
+  right: 0px;
+}
+#create-account {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+.sign-up {
+  margin: 20px 2px 0px 0px !important;
+  border-radius: 45px !important;
+  font-size: medium;
+}
+
+.nav-pills {
+  padding: 0px 0px 10px;
+}
+.nav-link {
+  border-radius: 45px !important;
+  color: rgb(83, 192, 152);
+}
+
+.nav-link.active {
+  background-color: rgb(83, 192, 152) !important;
+}
+
+.form-control {
+  border-radius: 45px !important;
+  margin: 20px 0px;
+}
+
+p {
+  font-size: medium;
+  line-height: 30px;
+}
+
+form span {
+  color: red;
+}
