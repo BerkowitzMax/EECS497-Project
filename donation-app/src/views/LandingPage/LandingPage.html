@@ -1,18 +1,38 @@
 <div class="container-fluid page">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-4">Welcome!</h1>
-          <p class="lead">This is our food donation application.</p>
-          <button type="button" class="btn btn-primary disabled">Sign Up</button> <!-- maybe just remove this -->
-          <button type="button" class="btn btn-outline-primary" v-on:click="GoogleLogin">Login</button>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="org">
-            <label class="custom-control-label" for="org">I am an organization.</label>
-        </div>
-        </div>
+  <img src="../../assets/background.png" class="background">
+  <nav class="navbar">
+    <a class="navbar-brand" href="#"></a>
+    <img src="../../assets/btn_google_signin_light_normal_web.png" class="float-right" type="button" v-on:click="GoogleLogin">
+  </nav>
+  <div class="row justify-content-start">
+    <div class="col-sm-6 left-col">
+      <img src="../../assets/logo-02.png" class="logo" alt="">
+      <h1 class="display-4 heading">Welcome!</h1>
+      <p class="lead">
+        Are you a restaurant or individual donor with excess food? We can help you find charities near you that are accepting donations! Are 
+        you a charitable organization that accepts food donations? We can connect you to donors who would love to help out!
+      </p>
+      <button type="button" class="btn btn-success btn-lg get-started" @click="getStarted">Get Started</button>
+    </div>
+    <transition name="fade">
+      <div class="col-sm-4 right-col" v-if="getStartedClicked">
+        <h4>Sign-Up</h4>
+        <nav class="nav nav-pills nav-fill">
+          <a class="nav-link" type="button" @click="setActiveTab('donor')" v-bind:class="{ active: activeTab === 'donor' }">I'm a Donor</a>
+          <a class="nav-link" type="button" @click="setActiveTab('charity')" v-bind:class="{ active: activeTab === 'charity' }">I'm a Charity</a>
+        </nav>
+        <form>
+          <input type="name" class="form-control" id="charityName" placeholder="Charity Name" v-model="charityName" v-if="activeTab === 'charity'">
+          <input type="phone" class="form-control" id="phoneNumber" placeholder="Phone Number" v-model="phone">
+          <input type="zipCode" class="form-control" id="zipCode" placeholder="Zip Code" v-model="zip">
+          <span v-if="accountExists">An account with that email address already exists.</span>
+          <button type="button" class="btn btn-secondary btn-lg sign-up float-right" v-on:click="GoogleSignUp">Create Account</button>
+        </form>
       </div>
-    <div class="col">
+    </transition>
+  </div>
+    <!-- <div class="col">
       <router-link to="donor" class="btn btn-outline-primary">View Donor Site</router-link>
       <router-link to="charity" class="btn btn-outline-primary">View Charity Site</router-link>
-    </div>
+    </div> -->
 </div>
