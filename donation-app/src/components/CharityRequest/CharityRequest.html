@@ -5,7 +5,8 @@
     </div>
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex flex-row align-items-center">
-            <img class="charity_picture" src="../../assets/profile-image-placeholder.png" alt="Profile Picture" style="width: 30px; height: 30px;">
+            <img v-if="!requestData.picture" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" class="charity_picture" style="width: 30px; height: 30px;">
+            <img v-else :src='requestData.picture' alt="Profile Picture" class="charity_picture" style="width: 30px; height: 30px;">
             <h6>{{requestData.donorName}}</h6>
         </div>
         <label>{{requestData.donorLocation}}</label>

@@ -30,32 +30,9 @@ export default {
 </script>
 
 <style>
-. {
-  font-family: "Robato";
-}
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {
-  height: 1500px;
-  margin: 0px;
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-  background-color: white;
-  height: 100%;
-  box-shadow: 0 0 0.5rem 0 rgb(136 152 170 / 15%);
-  padding: 30px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-  .sidenav {
-    height: auto;
-    padding: 15px;
-  }
-  .row.content {
-    height: auto;
-  }
+  height: auto;
 }
 
 .clist > * {
@@ -120,11 +97,15 @@ export default {
 }
 
 .btn-success,
-.btn-success:hover,
 .btn-success:active,
 .btn-success:visited {
   background-color: rgb(83, 192, 152) !important;
   border-color: rgb(83, 192, 152) !important;
+}
+
+.btn-success:hover {
+  background-color: rgb(43, 152, 112) !important;
+  border-color: rgb(43, 152, 112) !important;
 }
 
 .btn-outline-success,

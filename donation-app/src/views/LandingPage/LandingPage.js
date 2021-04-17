@@ -12,8 +12,9 @@ export default {
       zip: "",
       charityName: "",
       activeTab: "donor",
-      getStartedClicked: false,
-      accountExists: false,
+      showSignUp: false,
+      accountAlreadyExists: false,
+      accountDoesNotExist: false,
     };
   },
   computed: {},
@@ -23,9 +24,10 @@ export default {
       this.activeTab = tab;
     },
     getStarted() {
-      this.getStartedClicked = true;
+      this.showSignUp = true;
     },
     GoogleLogin: function() {
+      this.accountDoesNotExist = false;
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
@@ -58,12 +60,18 @@ export default {
               return;
             }
           });
+
+          throw new Error("account doesn't exist");
         })
-        .catch(console.log);
+        .catch((error) => {
+          console.log(error);
+          this.accountDoesNotExist = true;
+          this.showSignUp = true;
+        });
     },
 
     GoogleSignUp: function() {
-      this.accountExists = false;
+      this.accountAlreadyExists = false;
       let collection = "";
 
       if (this.activeTab == "donor") {
@@ -123,7 +131,7 @@ export default {
             })
             .catch((error) => {
               console.log(error);
-              this.accountExists = true;
+              this.accountAlreadyExists = true;
             });
         })
         .catch(console.log);

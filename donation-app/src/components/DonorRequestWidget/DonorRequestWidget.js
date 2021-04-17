@@ -1,3 +1,4 @@
+import { db } from '@/main';
 import DonorRequest from "@/components/DonorRequest/index.vue";
 
 export default {
@@ -8,98 +9,82 @@ export default {
   props: {},
   data() {
     return {
-      pendingRequests: [
-        {
-          // Should come from database eventually
-          id: 0,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 0",
-          charityContact: "000-000-0000",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 1,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 1",
-          charityContact: "111-111-111",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 2,
-          status: "Pending",
-          dateCreated: new Date(),
-          charityName: "Test Charity 2",
-          charityContact: "222-222-2222",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-      ],
-      resolvedRequests: [
-        {
-          id: 3,
-          status: "Accepted",
-          dateCreated: new Date(),
-          charityName: "Test Charity 3",
-          charityContact: "333-333-3333",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 4,
-          status: "Accepted",
-          dateCreated: new Date(),
-          charityName: "Test Charity 4",
-          charityContact: "444-444-4444",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 5,
-          status: "Rejected",
-          dateCreated: new Date(),
-          charityName: "Test Charity 5",
-          charityContact: "555-555-5555",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-        {
-          id: 6,
-          status: "Rejected",
-          dateCreated: new Date(),
-          charityName: "Test Charity",
-          charityContact: "666-666-6666",
-          charityLocation: "Charity Location",
-          donationLabel: "Donation Label",
-          charityImage: "profile-image-placeholder.png",
-          formData: {},
-        },
-      ],
+      user_id: this.$route.params.id,
+      // iterate through all charities to find the specified one and pull info from firebase
+      findCharityInfo: function(charity_name) {
+        db.collection("Charities").get().then((query) => {
+          query.forEach((doc) => {
+            if (doc.data().name == charity_name) {
+              return {
+                "name": doc.data().name,
+                "contact": doc.data().contact,
+                "location": doc.data().location
+              }
+            }
+          });
+        });
+      },
+      id: 0,
+      pendingRequests: [],
+      resolvedRequests: [],
     };
   },
+  inject: ["mySpinner"],
   computed: {},
-  mounted() {},
-  methods: {
-    addRequest() {
-      // TODO: retrieve request data from database
-      let request = {};
+  mounted() {
+    this.mySpinner.val = true;
+    // Retrieve request data from firebase
+    db.collection("Requests").get().then((query) => {
+      query.forEach((doc) => {
+        var d_title = doc.id.split(/-(.+)/)
 
-      this.requests.push(request);
+        // only logged in user's requests
+        if (d_title[0] == this.user_id) {
+          
+          // iterate through all charities to find the specified one and pull info from firebase
+          var charity_info = {};
+          db.collection("Charities").get().then((query) => {
+            query.forEach((doc) => {
+              if (doc.data().name == d_title[1]) {
+                charity_info = {
+                  "name": doc.data().name,
+                  "contact": doc.data().contact,
+                  "location": doc.data().location,
+                  "link": doc.data().link
+                }
+              }
+            });
+          })
+          .then(()=> {
+            var d = doc.data();
+            this.parseRequest(d.items, d_title[0], charity_info, d.status);
+          });
+        }
+      });
+    }).then(()=> {
+      this.mySpinner.val = false;
+    });
+  },
+  methods: {
+    // TODO once requests are resolved, users should have the ability to make donations to the charity again
+    parseRequest(form_data, user, charity, pstatus) {
+      // skip requests from other users
+      if (this.user_id == user){
+        var request = {
+          id: this.id,
+          status: pstatus,
+          dateCreated: new Date(),
+          charity: charity,
+          donationLabel: "Donation to " + charity.name,
+          formData: form_data, // TODO consider removing this
+        }  
+        this.id += 1;
+
+        if (pstatus == "Pending")
+          this.pendingRequests.push(request);
+        else
+          this.resolvedRequests.push(request);
+      }
     },
   },
 };

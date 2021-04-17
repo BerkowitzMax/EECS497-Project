@@ -9,9 +9,14 @@ export default {
     siteData: Object,
   },
   data() {
-    return {};
+    return {
+      id: "#formModal"
+    };
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    var hyphen = this.siteData.charityName.split(' ').join('-');
+    this.id += '-' + hyphen;
+  },
   methods: {},
 };

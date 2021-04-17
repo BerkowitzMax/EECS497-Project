@@ -1,3 +1,4 @@
+import { db } from '@/main';
 import CharityRequest from "@/components/CharityRequest/index.vue";
 import CharityRequestModal from "@/components/CharityRequestModal/index.vue";
 
@@ -10,51 +11,57 @@ export default {
   props: {},
   data() {
     return {
+      charity_id: null,
+      id: 0,
       selectedRequest: {},
-      pendingRequests: [
-        {
-          // Will come from database eventually
-          id: 0,
-          status: "Pending",
-          dateCreated: new Date(),
-          donorName: "Donor Name 1",
-          donorContact: "555-555-5555",
-          donationLabel: "Test1",
-          donorLocation: "Ann Arbor, MI",
-          formData: {},
-        },
-        {
-          id: 1,
-          status: "Pending",
-          dateCreated: new Date(),
-          donorName: "Donor Name 2",
-          donorContact: "555-555-5555",
-          donationLabel: "Test2",
-          donorLocation: "Ann Arbor, MI",
-          formData: {},
-        },
-        {
-          id: 2,
-          status: "Pending",
-          dateCreated: new Date(),
-          donorName: "Donor Name 3",
-          donorContact: "555-555-5555",
-          donationLabel: "Test3",
-          donorLocation: "Ann Arbor, MI",
-          formData: {},
-        },
-      ],
+      pendingRequests: [],
       resolvedRequests: [],
     };
   },
+  inject: ["mySpinner"],
   computed: {},
-  mounted() {},
-  methods: {
-    addPendingRequest() {
-      // TODO: retrieve request data from database
-      let request = {};
+  mounted() {
+    // fetch logged in charity name
+    db.collection("Charities").doc(this.$route.params.id).get().then((doc) => {
+      this.charity_id = doc.data().name;
+    });
 
-      this.pendingRequests.push(request);
+    // Retrieve request data from firebase
+    db.collection("Requests").get().then((query) => {
+      query.forEach((doc) => {
+        var d_title = doc.id.split(/-(.+)/)
+
+        // only logged in charity
+        if (d_title[1] == this.charity_id) {
+          var d = doc.data();
+          this.parseRequest(d.items, d_title[0], d.status);
+        }
+      });
+    });
+  },
+  methods: {
+    // TODO once requests are resolved, users should have the ability to make donations to the charity again
+    parseRequest(form_data, user, pstatus) {
+      db.collection("Donors").doc(user).get().then((doc) => {
+        var donor = doc.data();
+
+        let request = {
+          fbid: (user + "-" + this.charity_id),
+          id: this.id,
+          status: pstatus,
+          dateCreated: new Date(),
+          donorName: donor.username,
+          donorContact: donor.phone,
+          donationLabel: "donation label",
+          donorLocation: donor.address,
+          formData: form_data,
+          picture: donor.picture
+        }
+        this.id += 1;
+
+        if (pstatus == "Pending")
+          this.pendingRequests.push(request)
+      });
     },
     selectRequest(id) {
       // Set when Review Request modal is opened
@@ -66,6 +73,11 @@ export default {
         .indexOf(this.selectedRequest.id);
       this.pendingRequests[index].status = "Accepted";
       this.resolvedRequests.push(this.pendingRequests[index]);
+
+      // update firebase
+      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+        status: "Accepted"
+      });
       this.pendingRequests.splice(index, 1);
     },
     rejectSelectedRequest() {
@@ -74,6 +86,11 @@ export default {
         .indexOf(this.selectedRequest.id);
       this.pendingRequests[index].status = "Rejected";
       this.resolvedRequests.push(this.pendingRequests[index]);
+
+      // update firebase
+      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+        status: "Rejected"
+      });
       this.pendingRequests.splice(index, 1);
     },
   },

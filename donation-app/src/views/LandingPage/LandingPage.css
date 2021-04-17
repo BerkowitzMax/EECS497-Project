@@ -9,7 +9,22 @@
 }
 
 nav {
-  padding: 30px 30px 0px 0px;
+  padding: 38px 40px 0px 50px;
+}
+.navbar-brand {
+  padding: 0px;
+  color: rgb(83, 192, 152);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.alert {
+  margin: 0px;
+}
+
+#login {
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .left-col {
@@ -18,17 +33,18 @@ nav {
 }
 
 .right-col {
+  height: 550px;
   padding: 50px 50px;
   border-radius: 45px !important;
-  margin: 100px 0px;
+  margin: 50px 0px;
   background-color: #f8f9fa;
   color: #212529;
 }
 
 .logo {
-  height: 150px;
+  height: 200px;
   margin-left: -10px;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .heading {
@@ -37,11 +53,27 @@ nav {
 }
 
 .get-started {
-  margin: 20px 2px 0px 0px !important;
+  margin: 10px 2px 0px 0px !important;
   border-radius: 45px !important;
   font-size: medium;
 }
 
+#sign-up-header {
+  margin-bottom: 20px;
+}
+
+#sign-up-details {
+  width: 100%;
+  padding: 50px 50px;
+  position: absolute;
+  top: 150px;
+  right: 0px;
+}
+#create-account {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
 .sign-up {
   margin: 20px 2px 0px 0px !important;
   border-radius: 45px !important;
@@ -49,7 +81,7 @@ nav {
 }
 
 .nav-pills {
-  padding: 50px 0px 10px;
+  padding: 0px 0px 10px;
 }
 .nav-link {
   border-radius: 45px !important;
@@ -68,7 +100,6 @@ nav {
 p {
   font-size: medium;
   line-height: 30px;
-  color: gray;
 }
 
 form span {
