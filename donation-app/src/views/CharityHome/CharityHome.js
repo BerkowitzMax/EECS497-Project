@@ -80,11 +80,6 @@ export default {
         dono_toggle: this.dono_toggle
       });
     },
-    radius_check: function() {
-      db.collection("Charities").doc(this.user_id).update({
-        radius: this.radius
-      });
-    },
     remove_image: function(){
 			this.imageURL = null;
 			this.showDefault = true;

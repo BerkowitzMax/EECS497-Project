@@ -17,7 +17,7 @@ export default {
   data() {
 		return {
       spin: {
-        val: true
+        val: false
       }
     };
 	},
