@@ -48,7 +48,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgb(83, 192, 152)" class="bi bi-geo-alt-fill info-icon" viewBox="0 0 16 16">
                             <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                         </svg>
-                        <p class="name-text">{{location}}</p>
+                        <p class="name-text">{{address}}</p>
                     </div>
                     <div class="d-flex align-items-center info-item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgb(83, 192, 152)" class="bi bi-telephone-fill info-icon" viewBox="0 0 16 16">
@@ -113,15 +113,15 @@
                     </svg>                
                 </div>
 
-                <!-- Edit Location -->
+                <!-- Edit Address -->
                 <div class="input-group mb-3">
-                    <span class="input-group-text input-group-prepend" id="location-label">
+                    <span class="input-group-text input-group-prepend" id="address-label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                             <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                         </svg>
                     </span>
-                    <input type="text" class="form-control edit" :placeholder="location" v-model="editFields.location" aria-label="Input group" aria-describedby="location-input">
-                    <svg type="button" @click="editFields.location = ''" v-show="editFields.location" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
+                    <input type="text" class="form-control edit" :placeholder="address" v-model="editFields.address" aria-label="Input group" aria-describedby="address-input">
+                    <svg type="button" @click="editFields.address = ''" v-show="editFields.address" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                     </svg>  
                 </div>

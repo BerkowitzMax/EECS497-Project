@@ -15,7 +15,7 @@ export default {
       email: "",
       name: "Set charity name",
       phone: "",
-      location: "",
+      address: "",
       link: "Add a link to your website",
       description: "Add a charity description",
       editDescription: false,
@@ -25,7 +25,7 @@ export default {
       editFields: {
         acceptingDonations: false,
         name: "",
-        location: "",
+        address: "",
         phone: "",
         link: "",
       },
@@ -49,7 +49,7 @@ export default {
 
         if (d.name) this.name = d.name;
         if (d.phone) this.phone = d.phone;
-        if (d.location) this.location = d.location;
+        if (d.address) this.address = d.address;
         if (d.link) this.link = d.link;
         if (d.description) this.description = d.description;
         if (d.picture) {
@@ -71,9 +71,9 @@ export default {
         this.name = this.editFields.name;
         this.editFields.name = "";
       }
-      if (this.editFields.location) {
-        this.location = this.editFields.location;
-        this.editFields.location = "";
+      if (this.editFields.address) {
+        this.address = this.editFields.address;
+        this.editFields.address = "";
       }
       if (this.editFields.phone) {
         this.phone = this.editFields.phone;
@@ -90,7 +90,7 @@ export default {
           acceptingDonations: this.acceptingDonations,
           name: this.name,
           phone: this.phone,
-          location: this.location,
+          address: this.address,
           link: this.link,
         })
         .then(() => {

@@ -27,14 +27,12 @@ export default {
       .get()
       .then((doc) => {
         this.charity_id = doc.data().email.split("@")[0];
-        alert(this.charity_id);
       });
 
     // Retrieve request data from firebase
     db.collection("Requests")
       .get()
       .then((query) => {
-        console.log(query);
         query.forEach((doc) => {
           var d_title = doc.id.split(/-(.+)/);
 
@@ -69,6 +67,7 @@ export default {
           };
           this.id += 1;
 
+          console.log(request);
           if (pstatus == "Pending") this.pendingRequests.push(request);
         });
     },

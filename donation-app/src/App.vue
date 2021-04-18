@@ -218,4 +218,12 @@ body {
   background-color: rgb(246, 247, 249) !important;
   border-color: rgb(226, 227, 229) !important;
 }
+
+.request-pfp {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  clip-path: circle(40px at center);
+  margin-right: 15px;
+}
 </style>

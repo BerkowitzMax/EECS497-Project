@@ -10,6 +10,7 @@
 .section-head {
   text-transform: uppercase;
   font-weight: bold;
+  margin-bottom: 30px;
 }
 #counter {
   margin-left: 5px;
