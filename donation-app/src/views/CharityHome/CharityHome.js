@@ -16,8 +16,8 @@ export default {
       name_edit_bool: false,
       contact: "<Phone number>",
       contact_bool: false,
-      loc: "<Address>",
-      loc_bool: false,
+      address: "<Address>",
+      address_bool: false,
       link: "<Link your website>",
       link_bool: false,
       desc: "<Description of your charitable work>",
@@ -40,7 +40,7 @@ export default {
 
       if (d.name) this.name = d.name;
       if (d.contact) this.contact = d.contact;
-      if (d.location) this.loc = d.location;
+      if (d.address) this.address = d.address;
       if (d.link) this.link = d.link;
       if (d.desc) this.desc = d.desc;
       if (d.picture) {this.imageURL = d.picture; this.showDefault = false;}
@@ -57,8 +57,8 @@ export default {
         this.name_edit_bool = !this.name_edit_bool;
       else if (input == "contact")
         this.contact_bool = !this.contact_bool;
-      else if (input == "loc")
-        this.loc_bool = !this.loc_bool;
+      else if (input == "address")
+        this.address_bool = !this.address_bool;
       else if (input == "link")
         this.link_bool = !this.link_bool;
       else if (input == "desc")
@@ -67,7 +67,7 @@ export default {
 			db.collection("Charities").doc(this.user_id).update({
         name: this.name,
         contact: this.contact,
-        location: this.loc,
+        address: this.address,
         link: this.link,
         desc: this.desc,
         picture: this.imageURL

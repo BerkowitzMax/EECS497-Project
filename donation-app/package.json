@@ -17,11 +17,13 @@
     "compressorjs": "^1.0.7",
     "core-js": "^3.6.5",
     "firebase": "^8.3.1",
+    "google": "^2.1.0",
     "jquery": "^3.6.0",
     "jsdom": "^16.5.1",
     "popper": "^1.0.1",
     "timeago-vue": "0.0.1",
     "vue": "^2.6.11",
+    "vue-google-autocomplete": "^1.1.1",
     "vue-router": "^3.5.1",
     "vue-timeago": "^5.1.3"
   },
