@@ -14,8 +14,8 @@ export default {
 			email: null,
       name: "Set charity name",
       name_edit_bool: false,
-      contact: "<Phone number>",
-      contact_bool: false,
+      phone: "<Phone number>",
+      phone_bool: false,
       address: "<Address>",
       address_bool: false,
       link: "<Link your website>",
@@ -39,7 +39,7 @@ export default {
 			this.email = d.email;
 
       if (d.name) this.name = d.name;
-      if (d.contact) this.contact = d.contact;
+      if (d.phone) this.phone = d.phone;
       if (d.address) this.address = d.address;
       if (d.link) this.link = d.link;
       if (d.desc) this.desc = d.desc;
@@ -55,8 +55,8 @@ export default {
       // flips current state
       if (input == "name")
         this.name_edit_bool = !this.name_edit_bool;
-      else if (input == "contact")
-        this.contact_bool = !this.contact_bool;
+      else if (input == "phone")
+        this.phone_bool = !this.phone_bool;
       else if (input == "address")
         this.address_bool = !this.address_bool;
       else if (input == "link")
@@ -66,7 +66,7 @@ export default {
 
 			db.collection("Charities").doc(this.user_id).update({
         name: this.name,
-        contact: this.contact,
+        phone: this.phone,
         address: this.address,
         link: this.link,
         desc: this.desc,
