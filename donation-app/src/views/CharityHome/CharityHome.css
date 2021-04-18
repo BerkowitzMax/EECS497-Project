@@ -1,6 +1,112 @@
-.page {
-    padding: 0px;
+.widget {
+  background-color: white;
+  border-radius: 45px;
+  margin: 0px 0px 30px 0px;
+  padding: 50px;
 }
-.sidenav {
-    padding: 30px;
+#charity-info-widget {
+  padding: 40px 0px 40px 50px;
+}
+.form-control.edit {
+  border-radius: 0px 45px 45px 0px !important;
+  margin: 0px;
+}
+.form-control.info {
+  height: 90px;
+  margin-top: 10px;
+}
+.input-group-prepend {
+  border-radius: 45px 0px 0px 45px !important;
+}
+.input-group {
+  width: 100%;
+}
+.input-clear {
+  color: #ced4da;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 100;
+}
+.input-clear:hover {
+  color: gray;
+}
+.pfp-icon {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+.charity-info {
+  padding: 0px 20px;
+}
+p {
+  margin: 0px !important;
+}
+.section-head {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+#donation-toggle {
+  margin-bottom: 20px;
+}
+#save-btn {
+  margin-top: 30px;
+}
+.info-item {
+  padding: 10px;
+}
+.info-icon {
+  margin-right: 10px;
+}
+#charity-name {
+  margin-bottom: 0px;
+}
+#charity-description {
+  padding-top: 25px;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: rgb(83, 192, 152) !important;
+  border-color: rgb(83, 192, 152) !important;
+}
+#save-msg {
+  color: rgb(83, 192, 152);
+  margin-right: 10px;
+}
+#pfp-col {
+  padding: 0px !important;
+}
+#img-area {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  overflow: hidden;
+}
+#img-overlay {
+  width: 160px;
+  height: 160px;
+  opacity: 0%;
+  background-color: rgb(83, 192, 152);
+  color: white;
+}
+#img-overlay:hover {
+  opacity: 85%;
+  text-align: center;
+  padding: 30px;
+}
+.img-content {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  clip-path: circle(80px at center);
+}
+.custom-file-upload {
+  height: 30px;
+  width: 30px;
+}
+.v-divide {
+  border-left: 2px solid rgb(83, 192, 152);
+  height: 100px;
+  width: 2px !important;
 }

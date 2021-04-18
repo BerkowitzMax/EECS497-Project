@@ -9,7 +9,7 @@ export default {
       email: null,
       name: null,
       phone: "",
-      zip: "",
+      location: "",
       charityName: "",
       activeTab: "donor",
       showSignUp: false,
@@ -39,35 +39,39 @@ export default {
 
           var path = user.email.split("@")[0];
 
-          // if donor exists in firebase already
+          // check if donor exists in firebase already
           let donor_exists = db.collection("Donors").doc(path);
           console.log(donor_exists);
           donor_exists.get().then((doc) => {
             // page redirect
             if (doc.exists) {
               this.$router.push({ name: "donor-home", params: { id: path } });
-              return;
+            } else {
+              // check if charitiy exists in firebase already
+              let chairty_exists = db.collection("Charities").doc(path);
+              console.log(chairty_exists);
+              chairty_exists
+                .get()
+                .then((doc) => {
+                  // page redirect
+                  if (doc.exists) {
+                    this.$router.push({
+                      name: "charity-home",
+                      params: { id: path },
+                    });
+                  } else {
+                    // account doesn't exist
+                    throw new Error("account doesn't exist");
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                  this.accountDoesNotExist = true;
+                });
             }
           });
-
-          // if charity exists in firebase already
-          let chairty_exists = db.collection("Charities").doc(path);
-          console.log(chairty_exists);
-          chairty_exists.get().then((doc) => {
-            // page redirect
-            if (doc.exists) {
-              this.$router.push({ name: "charity-home", params: { id: path } });
-              return;
-            }
-          });
-
-          throw new Error("account doesn't exist");
         })
-        .catch((error) => {
-          console.log(error);
-          this.accountDoesNotExist = true;
-          this.showSignUp = true;
-        });
+        .catch(console.log);
     },
 
     GoogleSignUp: function() {
@@ -104,7 +108,8 @@ export default {
                     email: user.email,
                     name: this.charityName,
                     phone: this.phone,
-                    zip: this.zip,
+                    location: this.location,
+                    acceptingDonations: false,
                   });
               } else if (!doc.exists && collection == "Donors") {
                 db.collection(collection)
@@ -113,7 +118,7 @@ export default {
                     username: user.displayName,
                     email: user.email,
                     phone: this.phone,
-                    zip: this.zip,
+                    location: this.location,
                   });
               } else {
                 throw new Error("account already exists");

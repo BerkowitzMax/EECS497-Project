@@ -1,4 +1,4 @@
-import { db } from '@/main';
+import { db } from "@/main";
 import CharityRequest from "@/components/CharityRequest/index.vue";
 import CharityRequestModal from "@/components/CharityRequestModal/index.vue";
 
@@ -22,46 +22,55 @@ export default {
   computed: {},
   mounted() {
     // fetch logged in charity name
-    db.collection("Charities").doc(this.$route.params.id).get().then((doc) => {
-      this.charity_id = doc.data().name;
-    });
+    db.collection("Charities")
+      .doc(this.$route.params.id)
+      .get()
+      .then((doc) => {
+        this.charity_id = doc.data().name;
+        alert(this.charity_id);
+      });
 
     // Retrieve request data from firebase
-    db.collection("Requests").get().then((query) => {
-      query.forEach((doc) => {
-        var d_title = doc.id.split(/-(.+)/)
+    db.collection("Requests")
+      .get()
+      .then((query) => {
+        console.log(query);
+        query.forEach((doc) => {
+          var d_title = doc.id.split(/-(.+)/);
 
-        // only logged in charity
-        if (d_title[1] == this.charity_id) {
-          var d = doc.data();
-          this.parseRequest(d.items, d_title[0], d.status);
-        }
+          // only logged in charity
+          if (d_title[1] == this.charity_id) {
+            var d = doc.data();
+            this.parseRequest(d.items, d_title[0], d.status);
+          }
+        });
       });
-    });
   },
   methods: {
     // TODO once requests are resolved, users should have the ability to make donations to the charity again
     parseRequest(form_data, user, pstatus) {
-      db.collection("Donors").doc(user).get().then((doc) => {
-        var donor = doc.data();
+      db.collection("Donors")
+        .doc(user)
+        .get()
+        .then((doc) => {
+          var donor = doc.data();
 
-        let request = {
-          fbid: (user + "-" + this.charity_id),
-          id: this.id,
-          status: pstatus,
-          dateCreated: new Date(),
-          donorName: donor.username,
-          donorContact: donor.phone,
-          donationLabel: "donation label",
-          donorLocation: donor.address,
-          formData: form_data,
-          picture: donor.picture
-        }
-        this.id += 1;
+          let request = {
+            fbid: user + "-" + this.charity_id,
+            id: this.id,
+            status: pstatus,
+            dateCreated: new Date(),
+            donorName: donor.username,
+            donorContact: donor.phone,
+            donationLabel: "donation label",
+            donorLocation: donor.address,
+            formData: form_data,
+            picture: donor.picture,
+          };
+          this.id += 1;
 
-        if (pstatus == "Pending")
-          this.pendingRequests.push(request)
-      });
+          if (pstatus == "Pending") this.pendingRequests.push(request);
+        });
     },
     selectRequest(id) {
       // Set when Review Request modal is opened
@@ -75,9 +84,11 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
-        status: "Accepted"
-      });
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
+          status: "Accepted",
+        });
       this.pendingRequests.splice(index, 1);
     },
     rejectSelectedRequest() {
@@ -88,9 +99,11 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
-        status: "Rejected"
-      });
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
+          status: "Rejected",
+        });
       this.pendingRequests.splice(index, 1);
     },
   },

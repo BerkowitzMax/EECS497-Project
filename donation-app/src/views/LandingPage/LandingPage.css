@@ -1,6 +1,8 @@
+.page {
+  height: 100vh;
+}
 .container {
   height: 100%;
-  background-color: rgb(221, 247, 243);
 }
 
 .background {
@@ -8,75 +10,70 @@
   width: 100%;
 }
 
-nav {
-  padding: 38px 40px 0px 50px;
+.navbar {
+  padding: 30px 30px 20px;
+  height: 100px;
 }
 .navbar-brand {
   padding: 0px;
   color: rgb(83, 192, 152);
   font-weight: 800;
   text-transform: uppercase;
+  margin: 0px !important;
 }
 
 .alert {
   margin: 0px;
 }
 
-#login {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
 .left-col {
-  padding: 50px 150px 50px 150px !important;
+  padding: 50px 160px 50px 100px !important;
   margin: 0px !important;
 }
 
 .right-col {
-  height: 550px;
-  padding: 50px 50px;
-  border-radius: 45px !important;
   margin: 50px 0px;
-  background-color: #f8f9fa;
-  color: #212529;
 }
 
 .logo {
-  height: 200px;
+  height: 180px;
   margin-left: -10px;
   margin-top: 0px;
 }
 
 .heading {
-  padding: 50px 0px 20px;
+  padding: 50px 0px 30px;
+  margin: 0px;
   font-weight: bolder;
 }
 
 .get-started {
-  margin: 10px 2px 0px 0px !important;
-  border-radius: 45px !important;
-  font-size: medium;
+  margin: 5px 2px 0px 0px !important;
 }
 
+.sign-up {
+  padding: 50px 50px;
+  height: 550px;
+  width: 490px;
+  border-radius: 45px;
+  background-color: white;
+  color: #212529;
+}
 #sign-up-header {
   margin-bottom: 20px;
 }
-
 #sign-up-details {
   width: 100%;
-  padding: 50px 50px;
-  position: absolute;
-  top: 150px;
-  right: 0px;
+  position: relative;
+  margin-top: 20px;
 }
 #create-account {
   position: absolute;
   bottom: 50px;
   right: 50px;
 }
-.sign-up {
+#create-account {
   margin: 20px 2px 0px 0px !important;
-  border-radius: 45px !important;
   font-size: medium;
 }
 
@@ -94,14 +91,36 @@ nav {
 
 .form-control {
   border-radius: 45px !important;
+  border-color: rgb(83, 192, 152);
   margin: 20px 0px;
 }
 
 p {
   font-size: medium;
   line-height: 30px;
+  color: #383d41;
+  padding-right: 10px;
 }
 
-form span {
-  color: red;
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#sign-up-header {
+  text-transform: uppercase;
+  font-weight: bold;
 }

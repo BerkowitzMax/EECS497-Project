@@ -7,6 +7,8 @@
 }
 
 .navbar {
-  margin: 0px;
-  padding: 10px;
+  margin-bottom: 40px;
+  padding: 30px;
+  height: 100px;
+  background-color: rgb(145, 220, 196) !important;
 }

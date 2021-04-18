@@ -10,13 +10,16 @@ export default {
   },
   data() {
     return {
-      id: "#formModal"
+      id: "#formModal",
     };
   },
   computed: {},
   mounted() {
-    var hyphen = this.siteData.charityName.split(' ').join('-');
-    this.id += '-' + hyphen;
+    let hyphen = this.siteData.charityName
+      .split(" ")
+      .join("-")
+      .replace("'", "_");
+    this.id += "-" + hyphen;
   },
   methods: {},
 };

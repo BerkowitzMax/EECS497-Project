@@ -1,0 +1,16 @@
+.widget {
+  background-color: white;
+  border-radius: 45px;
+  margin: 30px 0px 30px 0px;
+  padding: 50px;
+}
+#pending-request-widget {
+  margin: 0px 20px 0px 15px;
+}
+.section-head {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#counter {
+  margin-left: 5px;
+}
