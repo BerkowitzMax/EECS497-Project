@@ -21,13 +21,13 @@ export default {
       .then((query) => {
         query.forEach((doc) => {
           var d = doc.data();
-          if (d.name && d.phone && d.location && d.acceptingDonations) {
+          if (d.name && d.phone && d.address && d.acceptingDonations) {
             // parse
             let site = {
               siteId: d.email.split("@")[0],
               charityName: d.name,
               charityContact: d.phone,
-              charityLocation: d.location,
+              charityLocation: d.address,
               picture: d.picture,
             };
 
