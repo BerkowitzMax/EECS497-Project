@@ -32,20 +32,20 @@
                 </div>
                 <div class="sidebar-subsection">
                     <hr>
-                    <h6>Contact:</h6>
+                    <h6>Phone:</h6>
                     <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!contact_bool" class="name-text">{{contact}}</h6>
-                        <input v-show="contact_bool" v-model="contact" placeholder="(xxx) xxx-xxxx" type="text" class="form-control">
+                        <h6 v-show="!phone_bool" class="name-text">{{phone}}</h6>
+                        <input v-show="phone_bool" v-model="phone" placeholder="(xxx) xxx-xxxx" type="text" class="form-control">
     
-                        <button v-show="!contact_bool" @click="edit('contact')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="contact_bool" @click="edit('contact')" type="button" class="btn btn-link">save</button>
+                        <button v-show="!phone_bool" @click="edit('phone')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="phone_bool" @click="edit('phone')" type="button" class="btn btn-link">save</button>
                     </div>
                     <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!loc_bool" class="name-text">{{loc}}</h6>
-                        <input v-show="loc_bool" v-model="loc" placeholder="Enter a location" type="text" class="form-control">
+                        <h6 v-show="!address_bool" class="name-text">{{address}}</h6>
+                        <input v-show="address_bool" v-model="address" placeholder="Enter an address" type="text" class="form-control">
     
-                        <button v-show="!loc_bool" @click="edit('loc')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="loc_bool" @click="edit('loc')" type="button" class="btn btn-link">save</button>
+                        <button v-show="!address_bool" @click="edit('address')" type="button" class="btn btn-link">edit</button>
+                        <button v-show="address_bool" @click="edit('address')" type="button" class="btn btn-link">save</button>
                     </div>
                 </div>
                 <div class="sidebar-subsection">

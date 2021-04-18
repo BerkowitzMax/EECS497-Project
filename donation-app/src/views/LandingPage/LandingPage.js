@@ -9,7 +9,7 @@ export default {
       email: null,
       name: null,
       phone: "",
-      zip: "",
+      address: "",
       charityName: "",
       activeTab: "donor",
       showSignUp: false,
@@ -18,7 +18,12 @@ export default {
     };
   },
   computed: {},
-  mounted() {},
+  /*mounted() {
+    new google.maps.places.Autocomplete(
+      document.getElementById("autoComplete"),
+    );
+    console.log("in places");
+  },*/
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
@@ -26,6 +31,27 @@ export default {
     getStarted() {
       this.showSignUp = true;
     },
+    autoComp: function(){
+      let autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById("autoComplete"),
+      );
+      autocomplete.addListener('place_changed', () => {
+        var place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          document.getElementById('autoComplete').placeholder = "Enter a Place"
+        }
+        else{
+          console.log("in places")
+          console.log(place.name);
+          console.log(this.address);
+          var addr = document.getElementById("autoComplete").value;
+          console.log(addr);
+          this.address = addr;
+        }
+      });  
+    },
+
     GoogleLogin: function() {
       this.accountDoesNotExist = false;
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -104,7 +130,8 @@ export default {
                     email: user.email,
                     name: this.charityName,
                     phone: this.phone,
-                    zip: this.zip,
+                    address: this.address,
+                    dono_toggle: true
                   });
               } else if (!doc.exists && collection == "Donors") {
                 db.collection(collection)
@@ -113,7 +140,7 @@ export default {
                     username: user.displayName,
                     email: user.email,
                     phone: this.phone,
-                    zip: this.zip,
+                    address: this.address,
                   });
               } else {
                 throw new Error("account already exists");

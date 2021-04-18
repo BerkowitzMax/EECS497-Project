@@ -39,7 +39,7 @@
         <form>
           <input type="name" class="form-control" id="charityName" placeholder="Charity Name" v-model="charityName" v-if="activeTab === 'charity'">
           <input type="phone" class="form-control" id="phoneNumber" placeholder="Phone Number" v-model="phone">
-          <input type="zipCode" class="form-control" id="zipCode" placeholder="Zip Code" v-model="zip">
+          <input type="text" class="form-control" id="autoComplete" placeholder="Enter Your Address" v-model="address" v-on:focus="autoComp">
         </form>
       </div>
       <button id="create-account" type="button" class="btn btn-secondary btn-lg sign-up float-right" v-on:click="GoogleSignUp">Create Account</button>
