@@ -7,7 +7,7 @@ export default {
     DonationFormItem,
   },
   props: {
-    charityName: Object,
+    siteData: Object,
   },
   data() {
     return {
@@ -37,11 +37,7 @@ export default {
   },
   computed: {},
   mounted() {
-    let hyphen = this.charityName.charityName
-      .split(" ")
-      .join("-")
-      .replace("'", "_");
-    this.charity_id += "-" + hyphen;
+    this.charity_id += "-" + this.siteData.siteId;
   },
   methods: {
     addItem() {
@@ -97,7 +93,7 @@ export default {
     },
     saveForm() {
       var document = this.$route.params.id;
-      document += "-" + this.charityName.charityName;
+      document += "-" + this.siteData.siteId;
       db.collection("Requests")
         .doc(document)
         .set({

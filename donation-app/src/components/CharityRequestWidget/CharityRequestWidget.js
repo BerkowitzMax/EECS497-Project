@@ -26,7 +26,7 @@ export default {
       .doc(this.$route.params.id)
       .get()
       .then((doc) => {
-        this.charity_id = doc.data().name;
+        this.charity_id = doc.data().email.split("@")[0];
         alert(this.charity_id);
       });
 

@@ -17,7 +17,7 @@ export default {
       phone: "",
       location: "",
       link: "Add a link to your website",
-      description: "",
+      description: "Add a charity description",
       editDescription: false,
       acceptingDonations: false,
       imageURL: null,

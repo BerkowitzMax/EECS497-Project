@@ -15,11 +15,7 @@ export default {
   },
   computed: {},
   mounted() {
-    let hyphen = this.siteData.charityName
-      .split(" ")
-      .join("-")
-      .replace("'", "_");
-    this.id += "-" + hyphen;
+    this.id += "-" + this.siteData.siteId;
   },
   methods: {},
 };
