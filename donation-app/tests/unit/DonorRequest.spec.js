@@ -6,7 +6,7 @@ describe("DonorRequest", () => {
   const data = {
     id: 0,
     status: "Pending",
-    dateCreated: new Date(),
+    timestamp: new Date(),
     charityName: "Test Charity",
     charityContact: "000-000-0000",
     charityLocation: "Test Location",

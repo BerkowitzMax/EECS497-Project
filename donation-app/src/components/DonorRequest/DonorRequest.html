@@ -5,7 +5,7 @@
             <h6 class="donation-label">{{requestData.donationLabel}}</h6>
         </div>
         <div class="col-sm-5 d-flex w-100 justify-content-end align-items-center">
-            <timeago class="timeago" :datetime="requestData.dateCreated" :auto-update="60"></timeago>
+            <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
             <div role="button" data-toggle="collapse" :data-target="'#collapse-' + requestData.id" aria-expanded="false" :aria-controls="'collapse-' + requestData.id" @click="toggle">
                 <!-- Icons from node_modules/bootstrap-icons -->
                 <svg v-if="collapsed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16" aria-label="expand">

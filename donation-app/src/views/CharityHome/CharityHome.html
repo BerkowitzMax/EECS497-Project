@@ -35,10 +35,10 @@
                     <span v-if="!acceptingDonations" class="badge badge-pill badge-secondary">Not Accepting Donations</span>
                     <div class="d-flex justify-content-between align-items-end">
                         <p v-show="!editDescription" type="button" @click="editDescription = true" id="charity-description" class="name-text">{{description}}</p>
-                        <textarea v-show="editDescription" v-model="description" type="text" class="form-control info" placeholder="Add a charity description"></textarea>
-                        <svg v-show="editDescription" @click="saveDescription" type="button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-                        </svg>
+                        <textarea v-show="editDescription" v-model="description" type="text" id="description-input" class="form-control info" placeholder="Add a charity description"></textarea>
+                        <svg v-show="editDescription" @click="saveDescription" type="button" xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="rgb(83, 192, 152)" class="bi bi-check" viewBox="0 0 16 16">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                          </svg>
                     </div>
                 </div>
                 

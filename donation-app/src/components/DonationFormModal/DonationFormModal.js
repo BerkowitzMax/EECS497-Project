@@ -99,8 +99,12 @@ export default {
         .set({
           status: "Pending",
           items: this.items,
+          timestamp: new Date().toString(),
         })
-        .then(alert("Donation successful, thank you!"))
+        .then(() => {
+          alert("Donation successful, thank you!");
+          alert(new Date().toString());
+        })
         .catch(console.log);
 
       this.clearForm();

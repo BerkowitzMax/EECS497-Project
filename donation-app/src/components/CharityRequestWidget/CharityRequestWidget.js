@@ -39,14 +39,14 @@ export default {
           // only logged in charity
           if (d_title[1] == this.charity_id) {
             var d = doc.data();
-            this.parseRequest(d.items, d_title[0], d.status);
+            this.parseRequest(d.items, d_title[0], d.status, d.timestamp);
           }
         });
       });
   },
   methods: {
     // TODO once requests are resolved, users should have the ability to make donations to the charity again
-    parseRequest(form_data, user, pstatus) {
+    parseRequest(form_data, user, pstatus, time) {
       db.collection("Donors")
         .doc(user)
         .get()
@@ -57,7 +57,7 @@ export default {
             fbid: user + "-" + this.charity_id,
             id: this.id,
             status: pstatus,
-            dateCreated: new Date(),
+            timestamp: time,
             donorName: donor.username,
             donorContact: donor.phone,
             donationLabel: "donation label",

@@ -4,54 +4,20 @@
   margin: 0px 0px 30px 0px;
   padding: 50px;
 }
+p {
+  margin: 0px !important;
+}
+
+/* Charity Info Widget */
 #charity-info-widget {
   padding: 40px 0px 40px 50px;
 }
-.form-control.edit {
-  border-radius: 0px 45px 45px 0px !important;
-  margin: 0px;
+.charity-info {
+  padding: 0px 40px 0px 0px !important;
 }
 .form-control.info {
   height: 90px;
   margin-top: 10px;
-}
-.input-group-prepend {
-  border-radius: 45px 0px 0px 45px !important;
-}
-.input-group {
-  width: 100%;
-}
-.input-clear {
-  color: #ced4da;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  z-index: 100;
-}
-.input-clear:hover {
-  color: gray;
-}
-.pfp-icon {
-  position: absolute;
-  right: 30px;
-  top: 10px;
-}
-.charity-info {
-  padding: 0px 20px;
-}
-p {
-  margin: 0px !important;
-}
-.section-head {
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-#donation-toggle {
-  margin-bottom: 20px;
-}
-#save-btn {
-  margin-top: 30px;
 }
 .info-item {
   padding: 10px;
@@ -65,13 +31,8 @@ p {
 #charity-description {
   padding-top: 25px;
 }
-.custom-control-input:checked ~ .custom-control-label::before {
-  background-color: rgb(83, 192, 152) !important;
-  border-color: rgb(83, 192, 152) !important;
-}
-#save-msg {
-  color: rgb(83, 192, 152);
-  margin-right: 10px;
+#description-input {
+  margin-top: 20px;
 }
 #pfp-col {
   padding: 0px !important;
@@ -105,8 +66,44 @@ p {
   height: 30px;
   width: 30px;
 }
-.v-divide {
-  border-left: 2px solid rgb(83, 192, 152);
-  height: 100px;
-  width: 2px !important;
+
+/* Charity Edit Widget */
+.section-head {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+#donation-toggle {
+  margin-bottom: 20px;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: rgb(83, 192, 152) !important;
+  border-color: rgb(83, 192, 152) !important;
+}
+.form-control.edit {
+  border-radius: 0px 45px 45px 0px !important;
+  margin: 0px;
+}
+.input-group-prepend {
+  border-radius: 45px 0px 0px 45px !important;
+}
+.input-group {
+  width: 100%;
+}
+.input-clear {
+  color: #ced4da;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 100;
+}
+.input-clear:hover {
+  color: gray;
+}
+#save-btn {
+  margin-top: 30px;
+}
+#save-msg {
+  color: rgb(83, 192, 152);
+  margin-right: 10px;
 }

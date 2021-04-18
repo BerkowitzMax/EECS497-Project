@@ -61,8 +61,14 @@ export default {
                 });
               })
               .then(() => {
-                var d = doc.data();
-                this.parseRequest(d.items, d_title[0], charity_info, d.status);
+                let d = doc.data();
+                this.parseRequest(
+                  d.items,
+                  d_title[0],
+                  charity_info,
+                  d.status,
+                  d.timestamp
+                );
               });
           }
         });
@@ -73,13 +79,13 @@ export default {
   },
   methods: {
     // TODO once requests are resolved, users should have the ability to make donations to the charity again
-    parseRequest(form_data, user, charity, pstatus) {
+    parseRequest(form_data, user, charity, pstatus, time) {
       // skip requests from other users
       if (this.user_id == user) {
-        var request = {
+        let request = {
           id: this.id,
           status: pstatus,
-          dateCreated: new Date(),
+          timestamp: time,
           charity: charity,
           donationLabel: "Donation to " + charity.name,
           formData: form_data, // TODO consider removing this
