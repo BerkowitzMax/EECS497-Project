@@ -11,7 +11,7 @@ export default {
   props: {},
   data() {
     return {
-      charity_id: null,
+      charity_id: this.$route.params.id,
       id: 0,
       selectedRequest: {},
       pendingRequests: [],
@@ -21,11 +21,6 @@ export default {
   inject: ["mySpinner"],
   computed: {},
   mounted() {
-    // fetch logged in charity name
-    db.collection("Charities").doc(this.$route.params.id).get().then((doc) => {
-        this.charity_id = doc.data().email.split("@")[0];
-      });
-
     // Retrieve request data from firebase
     db.collection("Requests").get().then((query) => {
         query.forEach((doc) => {
@@ -40,7 +35,6 @@ export default {
       });
   },
   methods: {
-    // TODO once requests are resolved, users should have the ability to make donations to the charity again
     parseRequest(form_data, user, pstatus, time) {
       db.collection("Donors").doc(user).get().then((doc) => {
           var donor = doc.data();
@@ -77,7 +71,16 @@ export default {
       // update firebase
       db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Accepted",
-        });
+      });
+
+      db.collection("History").add({
+        status: "Accepted",
+        Charity: this.charity_id,
+        Donor: this.pendingRequests[index].fbid.split("-")[0],
+        time: this.pendingRequests[index].timestamp,
+        Request: this.pendingRequests[index].formData
+      })
+
       this.pendingRequests.splice(index, 1);
     },
     rejectSelectedRequest() {
@@ -91,6 +94,15 @@ export default {
       db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Rejected",
         });
+
+      db.collection("History").add({
+        status: "Rejected",
+        Charity: this.charity_id,
+        Donor: this.pendingRequests[index].fbid.split("-")[0],
+        time: this.pendingRequests[index].timestamp,
+        Request: this.pendingRequests[index].formData
+      })
+
       this.pendingRequests.splice(index, 1);
     },
   },
