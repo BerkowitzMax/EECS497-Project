@@ -1,5 +1,27 @@
 <template>
   <div id="app">
+    <div id="popup-alert-area">
+      <transition name="bounce">
+        <div class="alert alert-light alert-dismissible popup-alert fade show" role="alert" v-if="accountNotFoundAlert">
+          <strong>Oops!</strong> We can't find an account with that email. <span type="button" class="alert-link" @click="showSignUp">Click here to Sign Up.</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-success alert-dismissible popup-alert fade show" role="alert" v-if="donationSuccessAlert">
+          Donation Successful! Thank you!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-danger alert-dismissible popup-alert fade show" role="alert" v-if="donationFailAlert">
+          Donation Failed! Please try again.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </transition>
+    </div>
     <Spinner :start="spin.val" />
     <!-- Render pages routed to from the landing page -->
     <router-view></router-view>
@@ -8,6 +30,7 @@
 
 <script>
 import Spinner from "./components/Spinner.vue";
+import EventBus from "./components/EventBus.vue";
 
 export default {
   name: "App",
@@ -19,7 +42,41 @@ export default {
       spin: {
         val: false,
       },
+      donationSuccessAlert: false,
+      donationFailAlert: false,
+      accountNotFoundAlert: false
     };
+  },
+  mounted() {
+    EventBus.$on("donation_success", () => {
+      this.showDonationSuccess();
+    }),
+    EventBus.$on("donation_fail", () => {
+      this.showDonationFail();
+    }),
+    EventBus.$on("account_not_found", () => {
+      this.showAccountNotFound();
+    })
+  },
+  methods: {
+    showDonationSuccess() {
+      this.donationSuccessAlert = true;
+      setTimeout(() => {
+        this.donationSuccessAlert = false;
+      }, 5000);
+    },
+    showDonationFail() {
+      this.donationFailAlert = true;
+      setTimeout(() => {
+        this.donationFailAlert = false;
+      }, 5000);
+    },
+    showAccountNotFound() {
+      this.accountNotFoundAlert = true;
+    },
+    showSignUp() {
+      EventBus.$emit("show_sign_up");
+    }
   },
   provide() {
     return {
@@ -149,6 +206,13 @@ body {
   font-size: medium !important;
 }
 
+.badge-danger {
+  background-color: #f53240 !important;
+  border-color: #f53240 !important;
+  border-radius: 45px !important;
+  padding: 8px 16px;
+}
+
 .btn-warning,
 .btn-warning:hover,
 .btn-warning:active,
@@ -156,6 +220,13 @@ body {
   background-color: #f9be02 !important;
   border-radius: 45px !important;
   font-size: medium !important;
+  padding: 8px 16px;
+}
+
+.badge-warning {
+  background-color: #f9be02 !important;
+  border-color: #f9be02 !important;
+  border-radius: 45px !important;
   padding: 8px 16px;
 }
 
@@ -225,5 +296,29 @@ body {
   object-fit: cover;
   clip-path: circle(40px at center);
   margin-right: 15px;
+}
+.popup-alert {
+  position: absolute !important;
+  width: 605px;
+  z-index: 100;
+  top: 20px;
+  left: 400px;
+}
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

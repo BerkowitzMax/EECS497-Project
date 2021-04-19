@@ -9,7 +9,10 @@ export default {
   },
   props: {},
   data() {
-    return {};
+    return {
+      donationSucceeded: false,
+      donationFailed: false
+    };
   },
   computed: {},
   mounted() {},

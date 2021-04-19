@@ -1,5 +1,6 @@
 import { db } from "@/main";
 import DonationFormItem from "@/components/DonationFormItem/index.vue";
+import EventBus from "@/components/EventBus.vue";
 
 export default {
   name: "DonationFormModal",
@@ -92,17 +93,19 @@ export default {
       ];
     },
     saveForm() {
-      var document = this.$route.params.id;
-      document += "-" + this.siteData.siteId;
-      db.collection("Requests").doc(document).set({
+      var doc = this.$route.params.id;
+      doc += "-" + this.siteData.siteId;
+      db.collection("Requests").doc(doc).set({
           status: "Pending",
           items: this.items,
           timestamp: new Date().toString(),
         })
         .then(() => {
-          alert("Donation successful, thank you!");
+          EventBus.$emit("donation_success")
         })
-        .catch(console.log);
+        .catch(() => {
+          EventBus.$emit("donation_fail")
+        });
 
       this.clearForm();
     },

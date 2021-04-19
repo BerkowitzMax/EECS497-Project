@@ -6,14 +6,6 @@
         <img src="../../assets/logo-01.png" width="30" height="30" alt="logo">
         Donation Site Name
       </h2>
-      <transition name="bounce">
-        <div class="alert alert-light alert-dismissible fade show" role="alert" v-if="accountDoesNotExist">
-          <strong>Oops!</strong> We can't find an account with that email. <span type="button" class="alert-link" @click="getStarted">Click here to Sign Up.</span>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </transition>
       <button id="login" type="button" class="btn btn-light btn-lg" @click="GoogleLogin">Sign In</button>
     </nav>
     <div class="row justify-content-start">

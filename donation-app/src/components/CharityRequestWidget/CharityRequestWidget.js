@@ -59,7 +59,6 @@ export default {
           };
           this.id += 1;
 
-          console.log(request);
           if (pstatus == "Pending") this.pendingRequests.push(request);
         });
     },

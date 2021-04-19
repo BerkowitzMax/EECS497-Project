@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import { db } from "@/main";
+import EventBus from "@/components/EventBus.vue"
 
 export default {
   name: "LandingPage",
@@ -15,16 +16,14 @@ export default {
       activeTab: "donor",
       showSignUp: false,
       accountAlreadyExists: false,
-      accountDoesNotExist: false,
     };
   },
   computed: {},
-  /*mounted() {
-    new google.maps.places.Autocomplete(
-      document.getElementById("autoComplete"),
-    );
-    console.log("in places");
-  },*/
+  mounted() {
+    EventBus.$on("show_sign_up", () => {
+      this.getStarted();
+    })
+  },
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
@@ -53,7 +52,6 @@ export default {
     },
 
     GoogleLogin: function() {
-      this.accountDoesNotExist = false;
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
@@ -90,7 +88,7 @@ export default {
                 })
                 .catch((error) => {
                   console.log(error);
-                  this.accountDoesNotExist = true;
+                  EventBus.$emit("account_not_found");
                 });
             }
           });

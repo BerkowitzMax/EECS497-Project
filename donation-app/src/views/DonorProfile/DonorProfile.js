@@ -46,7 +46,7 @@ export default {
 			this.phone = null;
 			this.address = null;
 		},
-		save: function() {
+		saveDetails: function() {
 			db.collection("Donors").doc(this.user_id).update({
 				bio: this.bio,
 				phone: this.phone,

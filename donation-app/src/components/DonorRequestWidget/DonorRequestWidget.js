@@ -84,7 +84,6 @@ export default {
           donationLabel: "Donation to " + charity.name,
           formData: form_data, // TODO consider removing this
         };
-        console.log(charity);
         this.id += 1;
 
         if (pstatus == "Pending") this.pendingRequests.push(request);

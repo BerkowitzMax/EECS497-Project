@@ -1,8 +1,10 @@
-<div class="donation-sites-widget col-sm-7">
-    <h4>Local Donation Sites</h4>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="site in donationSites">
-            <DonationSite :siteData="site"/>
-        </li>
-    </ul>
+<div class="donation-sites-widget col-sm-5">
+    <div id="resolved-request-widget" class="col widget">
+        <h6 class="section-head d-flex align-items-center">Donation Sites Near You</h6>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="site in donationSites">
+                <DonationSite :siteData="site"/>
+            </li>
+        </ul>
+    </div>
 </div>

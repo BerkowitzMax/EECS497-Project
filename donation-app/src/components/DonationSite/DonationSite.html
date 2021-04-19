@@ -1,8 +1,11 @@
 <div class="donation-site container-fluid">
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex w-100 justify-content-start align-items-center">
-            <img v-if="!siteData.picture" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" class="charity_picture">
-            <img v-else :src='siteData.picture' alt="Profile Picture" class="charity_picture">
+            <svg v-if="!siteData.picture" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#ced4da" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            <img v-else :src='siteData.picture' alt="Profile Picture">
             <div class="charity-info">
                 <p>{{siteData.charityName}}</p>
                 <div>
@@ -18,8 +21,8 @@
             </div>
         </div>
         <div>
-            <button class="btn btn-info btn-sm" data-toggle="modal" :data-target="id">Donate</button>
-            <DonationFormModal :siteData="siteData"></DonationFormModal>
+            <button class="btn btn-success btn-lg" data-toggle="modal" :data-target="id">Donate</button>
+            <DonationFormModal :siteData="siteData"/>
         </div>
     </div>
 </div>
