@@ -1,6 +1,6 @@
-import { db } from '@/main';
+import { db } from "@/main";
 import CharityRequestWidget from "@/components/CharityRequestWidget/index.vue";
-import Compressor from 'compressorjs';
+import Compressor from "compressorjs";
 
 export default {
   name: "CharityHome",
@@ -9,23 +9,26 @@ export default {
   },
   props: {},
   data() {
-    return {			
+    return {
       user_id: this.$route.params.id,
-			email: null,
+      username: "",
+      email: "",
       name: "Set charity name",
-      name_edit_bool: false,
-      phone: "<Phone number>",
-      phone_bool: false,
-      address: "<Address>",
-      address_bool: false,
-      link: "<Link your website>",
-      link_bool: false,
-      desc: "<Description of your charitable work>",
-      desc_bool: false,
-      accept_dono: false,
-      radius: "None",
+      phone: "",
+      address: "",
+      link: "Add a link to your website",
+      description: "Add a charity description",
+      editDescription: false,
+      acceptingDonations: false,
       imageURL: null,
-      showDefault: true
+      showSaveMsg: false,
+      editFields: {
+        acceptingDonations: false,
+        name: "",
+        address: "",
+        phone: "",
+        link: "",
+      },
     };
   },
   inject: ["mySpinner"],
@@ -33,87 +36,113 @@ export default {
   mounted() {
     this.mySpinner.val = true;
 
-		// parse user profile
-		db.collection("Charities").doc(this.user_id).get().then((doc)=>{
-      var d = doc.data();
-			this.email = d.email;
+    // parse user profile
+    db.collection("Charities").doc(this.user_id).get().then((doc) => {
+        let d = doc.data();
+        this.email = d.email;
+        this.username = d.username;
+        this.acceptingDonations = d.acceptingDonations;
+        this.editFields.acceptingDonations = d.acceptingDonations;
 
-      if (d.name) this.name = d.name;
-      if (d.phone) this.phone = d.phone;
-      if (d.address) this.address = d.address;
-      if (d.link) this.link = d.link;
-      if (d.desc) this.desc = d.desc;
-      if (d.picture) {this.imageURL = d.picture; this.showDefault = false;}
-		}).catch((error) => {
-			console.log("Error getting document:", error);
-		}).then(()=>{
-      this.mySpinner.val = false;
-    });
+        if (d.name) this.name = d.name;
+        if (d.phone) this.phone = d.phone;
+        if (d.address) this.address = d.address;
+        if (d.link) this.link = d.link;
+        if (d.description) this.description = d.description;
+        if (d.picture) {
+          this.imageURL = d.picture;
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      })
+      .then(() => {
+        this.mySpinner.val = false;
+      });
   },
   methods: {
-		edit: function(input) {
-      // flips current state
-      if (input == "name")
-        this.name_edit_bool = !this.name_edit_bool;
-      else if (input == "phone")
-        this.phone_bool = !this.phone_bool;
-      else if (input == "address")
-        this.address_bool = !this.address_bool;
-      else if (input == "link")
-        this.link_bool = !this.link_bool;
-      else if (input == "desc")
-        this.desc_bool = !this.desc_bool;
+    saveDetails() {
+      this.acceptingDonations = this.editFields.acceptingDonations;
 
-			db.collection("Charities").doc(this.user_id).update({
-        name: this.name,
-        phone: this.phone,
-        address: this.address,
-        link: this.link,
-        desc: this.desc,
-        picture: this.imageURL
-			})
-      .catch(function(error){alert(error + " : This data could not be saved successfully.")});
-		},
-    dono_toggle: function() {
-      this.dono_toggle = document.getElementById("donoSwitch").checked
+      if (this.editFields.name) {
+        this.name = this.editFields.name;
+        this.editFields.name = "";
+      }
+      if (this.editFields.address) {
+        this.address = this.editFields.address;
+        this.editFields.address = "";
+      }
+      if (this.editFields.phone) {
+        this.phone = this.editFields.phone;
+        this.editFields.phone = "";
+      }
+      if (this.editFields.link) {
+        this.link = this.editFields.link;
+        this.editFields.link = "";
+      }
+
       db.collection("Charities").doc(this.user_id).update({
-        dono_toggle: this.dono_toggle
+          acceptingDonations: this.acceptingDonations,
+          name: this.name,
+          phone: this.phone,
+          address: this.address,
+          link: this.link,
+        })
+        .then(() => {
+          this.showSaveMsg = true;
+          setTimeout(() => {
+            document.getElementById("save-msg").style.display = "none";
+            this.showSaveMsg = false;
+          }, 5000);
+        })
+        .catch(function(error) {
+          alert(error + " : This data could not be saved successfully.");
+        });
+    },
+    updateToggle() {
+      db.collection("Charities").doc(this.user_id).update({
+          acceptingDonations: this.acceptingDonations,
+        });
+    },
+    removeImage() {
+      this.imageURL = null;
+
+      db.collection("Charities").doc(this.user_id).update({
+          imageURL: this.imageURL,
+        })
+        .catch(function(error) {
+          alert(error + " : This data could not be saved successfully.");
+        });
+    },
+    saveImage(event) {
+      if (!event.target.files[0]) {
+        this.imageURL = null;
+        return;
+      }
+
+      let picture = event.target.files[0];
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        this.imageURL = reader.result;
+      });
+
+      new Compressor(picture, {
+        quality: 1,
+        maxHeight: 160,
+        maxWidth: 160,
+        success(compressed) {
+          reader.readAsDataURL(compressed);
+        },
+        error(err) {
+          console.log(err.message);
+        },
       });
     },
-    remove_image: function(){
-			this.imageURL = null;
-			this.showDefault = true;
-			document.getElementById("pfp").value=null;
-      this.edit("remove picture");
-		},
-		preview: function(event) {
-			if (!event.target.files[0]) {
-				this.showDefault = true;
-				this.imageURL = null;
-				return;
-			}
-			else {
-				this.showDefault = false;
-			}
-
-			let picture = event.target.files[0];
-			const reader = new FileReader();
-			reader.addEventListener('load', () => {
-				this.imageURL = reader.result
-        this.edit("save picture");
-			});
-
-			new Compressor(picture, {
-				quality: 0.2,
-				maxHeight: 150,
-				maxWidth: 150,
-				success(compressed) {
-					reader.readAsDataURL(compressed);
-				},
-				error(err){
-					console.log(err.message);
-				}
-			});
-		}
+    saveDescription() {
+      this.editDescription = false;
+      db.collection("Charities").doc(this.user_id).update({
+          description: this.description,
+        });
+    },
   },
 };

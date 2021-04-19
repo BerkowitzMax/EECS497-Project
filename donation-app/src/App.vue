@@ -39,9 +39,13 @@ export default {
   float: left;
 }
 
+body {
+  background-color: rgb(221, 247, 243) !important;
+}
+
 .page {
   margin: 0px;
-  padding: 0px !important;
+  padding: 0px 40px !important;
 }
 
 .charity_picture {
@@ -94,6 +98,9 @@ export default {
 .btn-primary:active,
 .btn-primary:visited {
   background-color: #7cdbd5 !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding: 8px 16px;
 }
 
 .btn-success,
@@ -101,11 +108,24 @@ export default {
 .btn-success:visited {
   background-color: rgb(83, 192, 152) !important;
   border-color: rgb(83, 192, 152) !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding: 8px 16px;
 }
 
 .btn-success:hover {
   background-color: rgb(43, 152, 112) !important;
   border-color: rgb(43, 152, 112) !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding: 8px 16px;
+}
+
+.badge-success {
+  background-color: rgb(83, 192, 152) !important;
+  border-color: rgb(83, 192, 152) !important;
+  border-radius: 45px !important;
+  padding: 8px 16px;
 }
 
 .btn-outline-success,
@@ -115,6 +135,9 @@ export default {
   background-color: rgb(221, 247, 243) !important;
   border-color: rgb(83, 192, 152) !important;
   color: rgb(83, 192, 152) !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding: 8px 16px;
 }
 
 .btn-danger,
@@ -122,6 +145,8 @@ export default {
 .btn-danger:active,
 .btn-danger:visited {
   background-color: #f53240 !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
 }
 
 .btn-warning,
@@ -129,19 +154,53 @@ export default {
 .btn-warning:active,
 .btn-warning:visited {
   background-color: #f9be02 !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding: 8px 16px;
 }
 
 .btn-secondary,
 .btn-secondary:active,
 .btn-secondary:visited {
-  color: #212529 !important;
-  background-color: rgb(219, 224, 228) !important;
-  border-color: rgb(219, 224, 228) !important;
+  color: rgb(83, 192, 152) !important;
+  background-color: rgb(221, 247, 243) !important;
+  border-color: rgb(221, 247, 243) !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .btn-secondary:hover {
-  background-color: rgb(221, 247, 243) !important;
-  border-color: rgb(221, 247, 243) !important;
+  background-color: rgb(83, 192, 152) !important;
+  border-color: rgb(83, 192, 152) !important;
+  color: white !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+.btn-light,
+.btn-light:active,
+.btn-light:visited {
+  color: rgb(83, 192, 152) !important;
+  background-color: white !important;
+  border-color: white !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+.btn-light:hover {
+  background-color: rgb(83, 192, 152) !important;
+  border-color: rgb(83, 192, 152) !important;
+  color: white !important;
+  border-radius: 45px !important;
+  font-size: medium !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .btn-link,
@@ -149,5 +208,22 @@ export default {
 .btn-link:active,
 .btn-link:visited {
   color: rgb(83, 192, 152) !important;
+  border-radius: 45px !important;
+}
+
+.alert-secondary,
+.alert-secondary:hover,
+.alert-secondary:active,
+.alert-secondary:visited {
+  background-color: rgb(246, 247, 249) !important;
+  border-color: rgb(226, 227, 229) !important;
+}
+
+.request-pfp {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  clip-path: circle(40px at center);
+  margin-right: 15px;
 }
 </style>

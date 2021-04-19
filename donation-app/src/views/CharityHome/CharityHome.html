@@ -1,97 +1,165 @@
 <div class="container-fluid page">
     <div class="row content">
+        <div class="col-sm-12">
+            <div id="charity-info-widget" class="row widget">
 
-        <!-- sidebar -->
-        <div class="col-sm-3 sidenav">
-            <div class="sidebar-profile d-flex align-items-center flex-column">
-                <img v-if="showDefault" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" style="width: 100px">
-                <img v-else :src='imageURL' alt="Profile Picture" style="width: 100px">
-                <pre></pre>
-                <div class="d-flex justify-content-between align-items-end">
-                    <h4 v-show="!name_edit_bool" class="name-text">{{name}}</h4>
-                    <input v-show="name_edit_bool" v-model="name" type="text" class="form-control">
+                <!-- Profile Picture -->
+                <div id="pfp-col" class="col-sm-2">
+                    <div id="img-area">
+                        <input type="file" style="display: none" @change="saveImage" id="pfp" class="custom-file"/>
+                        <img v-if="imageURL" class="img-content" :src='imageURL' alt="Profile Picture">
+                        <svg v-else xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="#ced4da" class="bi bi-person-circle img-content" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        <div id="img-overlay" class="container d-flex flex-column justify-content-around align-items-center">
+                            <label type="button" for="pfp" class="custom-file-upload row">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                                  </svg>
+                            </label>
+                            <svg @click="removeImage" v-if="imageURL" type="button" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-x-circle-fill row" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-                    <button v-show="!name_edit_bool" @click="edit('name')" type="button" class="btn btn-link">edit</button>
-                    <button v-show="name_edit_bool" @click="edit('name')" type="button" class="btn btn-link">save</button>
-                </div>
-            </div>
-            <div class="sidebar-section">
-                <h4>Charity Information</h4>
-                <div class="sidebar-subsection">
+                <!-- Charity Description -->
+                <div class="col-sm-7 charity-info">
                     <div class="d-flex justify-content-between align-items-end">
-                        <h6>Email:</h6>
-                        <label>{{email}}</label>
+                        <h4 id="charity-name" class="name-text">{{name}}</h4>
                     </div>
-                </div>
-                <div class="sidebar-subsection">
+                    <span v-if="acceptingDonations" class="badge badge-pill badge-success"><p>Currently Accepting Donations</p></span>
+                    <span v-if="!acceptingDonations" class="badge badge-pill badge-secondary">Not Accepting Donations</span>
                     <div class="d-flex justify-content-between align-items-end">
-                        <h6>Profile Picture:</h6>
-                        <input type="file" @change="preview" id="pfp" class="custom-file">
-                        <button @click="remove_image" type="button" class="btn btn-link">remove</button>
+                        <p v-show="!editDescription" type="button" @click="editDescription = true" id="charity-description" class="name-text">{{description}}</p>
+                        <textarea v-show="editDescription" v-model="description" type="text" id="description-input" class="form-control info" placeholder="Add a charity description"></textarea>
+                        <svg v-show="editDescription" @click="saveDescription" type="button" xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="rgb(83, 192, 152)" class="bi bi-check" viewBox="0 0 16 16">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                          </svg>
                     </div>
                 </div>
-                <div class="sidebar-subsection">
-                    <hr>
-                    <h6>Phone:</h6>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!phone_bool" class="name-text">{{phone}}</h6>
-                        <input v-show="phone_bool" v-model="phone" placeholder="(xxx) xxx-xxxx" type="text" class="form-control">
-    
-                        <button v-show="!phone_bool" @click="edit('phone')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="phone_bool" @click="edit('phone')" type="button" class="btn btn-link">save</button>
+                
+                <!-- Charity Info -->
+                <div class="col-sm-3">
+                    <div class="d-flex align-items-center info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgb(83, 192, 152)" class="bi bi-geo-alt-fill info-icon" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        <p class="name-text">{{address}}</p>
                     </div>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!address_bool" class="name-text">{{address}}</h6>
-                        <input v-show="address_bool" v-model="address" placeholder="Enter an address" type="text" class="form-control">
-    
-                        <button v-show="!address_bool" @click="edit('address')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="address_bool" @click="edit('address')" type="button" class="btn btn-link">save</button>
+                    <div class="d-flex align-items-center info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgb(83, 192, 152)" class="bi bi-telephone-fill info-icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                        <p class="name-text">{{phone}}</p>
                     </div>
-                </div>
-                <div class="sidebar-subsection">
-                    <hr>
-                    <h6>Website Link:</h6>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!link_bool" class="name-text">{{link}}</h6>
-                        <input v-show="link_bool" v-model="link" type="text" class="form-control">
-    
-                        <button v-show="!link_bool" @click="edit('link')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="link_bool" @click="edit('link')" type="button" class="btn btn-link">save</button>
+                    <div class="d-flex align-items-center info-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgb(83, 192, 152)" class="bi bi-link-45deg info-icon" viewBox="0 0 16 16">
+                            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"></path>
+                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"></path>
+                        </svg>
+                        <p type="button" class="name-text btn-link">{{link}}</p>
                     </div>
-                </div>
-                <div class="sidebar-subsection">
-                    <hr>
-                    <h6>Charity Description:</h6>
-                    <div class="d-flex justify-content-between align-items-end">
-                        <h6 v-show="!desc_bool" class="name-text">{{desc}}</h6>
-                        <input v-show="desc_bool" v-model="desc" type="text" class="form-control">
-    
-                        <button v-show="!desc_bool" @click="edit('desc')" type="button" class="btn btn-link">edit</button>
-                        <button v-show="desc_bool" @click="edit('desc')" type="button" class="btn btn-link">save</button>
-                    </div>
-                </div>
-                <!-- Unsure what to add in this so leaving it out for now
-                <button type="button" class="btn btn-primary btn-sm btn-block">Add Info</button>-->
-            </div>
-            <br>
-            <div class="sidebar-section">
-                <h5>Preferences</h5>
-                <div class="sidebar-preference">
-                    <div class="custom-control custom-switch">
-                        <input @click="dono_toggle" type="checkbox" class="custom-control-input" id="donoSwitch">
-                        <label class="custom-control-label" for="donoSwitch">Accepting Donations</label>
-                    </div>
-                </div>
-                <div class="sidebar-preference">
-                    <label>Donation Restrictions</label>
-                    <select class="custom-select">
-                        <option selected>None</option>
-                        <option>...</option>
-                    </select>
                 </div>
             </div>
         </div>
-        <!-- charity list -->
+    </div>
+    <div class="row content">
+        <div class="col-sm-4">
+            <div id="charity-edit-widget" class="widget">
+                <h6 class="section-head">Edit Account Details</h6>
+
+                <!-- Donation Toggle -->
+                <div id="donation-toggle" class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="donoSwitch" v-model="editFields.acceptingDonations">
+                    <label class="custom-control-label" for="donoSwitch">Accepting Donations</label>
+                </div>
+    
+                <!-- Username [read-only] -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="username-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </span>
+                    <input type="name" class="form-control edit" id="username" :placeholder="username" readonly>
+                </div>
+                
+                <!-- Email [read-only] -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="email-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                        </svg>
+                    </span>
+                    <input type="email" class="form-control edit" id="email" :placeholder="email" readonly>
+                </div>
+                
+                <!-- Edit Charity Name -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="charity-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control edit" :placeholder="name" v-model="editFields.name" aria-label="Input group" aria-describedby="username-input">
+                    <svg type="button" @click="editFields.name = ''" v-show="editFields.name" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>                
+                </div>
+
+                <!-- Edit Address -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="address-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control edit" :placeholder="address" v-model="editFields.address" aria-label="Input group" aria-describedby="address-input">
+                    <svg type="button" @click="editFields.address = ''" v-show="editFields.address" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>  
+                </div>
+    
+                <!-- Edit Phone # -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="phone-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control edit" :placeholder="phone" v-model="editFields.phone" aria-label="Input group" aria-describedby="phone-input">
+                    <svg type="button" @click="editFields.phone = ''" v-show="editFields.phone" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>  
+                </div>
+    
+                <!-- Edit Link -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text input-group-prepend" id="link-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"></path>
+                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"></path>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control edit" :placeholder="link" v-model="editFields.link" aria-label="Input group" aria-describedby="link-input">
+                    <svg type="button" @click="editFields.link = ''" v-show="editFields.link" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill input-clear" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>  
+                </div>
+
+                <!-- Save Button -->
+                <div id="save-btn" class="d-flex justify-content-end align-items-center">
+                    <span v-show="showSaveMsg" id="save-msg">Saved!</span>
+                    <button type="button" class="btn btn-success btn-lg" @click="saveDetails">Save</button>
+                </div>
+            </div>
+        </div>
         <CharityRequestWidget/>
     </div>
 </div>

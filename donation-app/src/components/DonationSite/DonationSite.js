@@ -10,13 +10,12 @@ export default {
   },
   data() {
     return {
-      id: "#formModal"
+      id: "#formModal",
     };
   },
   computed: {},
   mounted() {
-    var hyphen = this.siteData.charityName.split(' ').join('-');
-    this.id += '-' + hyphen;
+    this.id += "-" + this.siteData.siteId;
   },
   methods: {},
 };

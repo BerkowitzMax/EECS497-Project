@@ -1,52 +1,59 @@
-<div class="container-fluid page">
+<div>
   <img src="../../assets/background.png" class="background">
-  <nav class="navbar">
-    <h2 class="navbar-brand text-light" href="#">Donation Site Name</h2>
-    <div class="alert alert-light alert-dismissible fade show" role="alert" v-if="accountDoesNotExist">
-      <strong>Oops!</strong> We can't find an account with that email.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <button id="login" type="button" class="btn btn-light btn-lg get-started" @click="GoogleLogin">Login</button>
-  </nav>
-  <div class="row justify-content-start">
-    <div class="col-sm-6 left-col">
-      <img src="../../assets/logo-02.png" class="logo" alt="">
-      <h1 class="display-4 heading">Welcome!</h1>
-      <p class="lead text-muted">
-        Are you a restaurant or individual donor with excess food? We can help you find charities near you that are accepting donations! Are 
-        you a charitable organization that accepts food donations? We can connect you to donors who would love to help out!
-      </p>
-      <button type="button" class="btn btn-success btn-lg get-started" @click="getStarted">Get Started</button>
-    </div>
-    <div class="col-sm-4 right-col" v-if="showSignUp">
-      <h4 id="sign-up-header">Sign-Up</h4>
-      <div class="alert alert-secondary" role="alert" v-if="!accountAlreadyExists">
-        Tell us a few things about you and we'll create a profile linked to your Google Account.
+  <div class="container-fluid page">
+    <nav class="navbar">
+      <h2 class="navbar-brand text-light" href="#">
+        <img src="../../assets/logo-01.png" width="30" height="30" alt="logo">
+        Donation Site Name
+      </h2>
+      <transition name="bounce">
+        <div class="alert alert-light alert-dismissible fade show" role="alert" v-if="accountDoesNotExist">
+          <strong>Oops!</strong> We can't find an account with that email. <span type="button" class="alert-link" @click="getStarted">Click here to Sign Up.</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </transition>
+      <button id="login" type="button" class="btn btn-light btn-lg" @click="GoogleLogin">Sign In</button>
+    </nav>
+    <div class="row justify-content-start">
+      <div class="col-sm-6 left-col">
+        <img src="../../assets/logo-02.png" class="logo" alt="">
+        <h1 class="display-4 heading">Welcome!</h1>
+        <p class="text-dark">
+          [Application Name] helps bridge the gap between businesses and individuals with excess food and local charities accepting food donations.
+          Together we can reduce food waste and help those in need!
+        </p>
+        <button type="button" class="btn btn-success btn-lg get-started" @click="getStarted">Get Started</button>
       </div>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="accountAlreadyExists">
-        <strong>Oops!</strong> An account with that email address already exists.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="accountAlreadyExists = false">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="sign-up-details">
-        <nav class="nav nav-pills nav-fill">
-          <a class="nav-link" type="button" @click="setActiveTab('donor')" v-bind:class="{ active: activeTab === 'donor' }">I'm a Donor</a>
-          <a class="nav-link" type="button" @click="setActiveTab('charity')" v-bind:class="{ active: activeTab === 'charity' }">I'm a Charity</a>
-        </nav>
-        <form>
-          <input type="name" class="form-control" id="charityName" placeholder="Charity Name" v-model="charityName" v-if="activeTab === 'charity'">
-          <input type="phone" class="form-control" id="phoneNumber" placeholder="Phone Number" v-model="phone">
-          <input type="text" class="form-control" id="autoComplete" placeholder="Enter Your Address" v-model="address" v-on:focus="autoComp">
-        </form>
-      </div>
-      <button id="create-account" type="button" class="btn btn-secondary btn-lg sign-up float-right" v-on:click="GoogleSignUp">Create Account</button>
+      <transition name="bounce">
+        <div class="col-sm-4 right-col" v-show="showSignUp" transition="bounce">
+          <div class="sign-up">
+            <h6 id="sign-up-header">Sign Up</h6>
+            <div class="alert alert-secondary" role="alert" v-if="!accountAlreadyExists">
+              Tell us a few things about you and we'll create a profile linked to your Google Account.
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="accountAlreadyExists">
+              <strong>Oops!</strong> An account with that email address already exists.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="accountAlreadyExists = false">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div id="sign-up-details">
+              <nav class="nav nav-pills nav-fill">
+                <a class="nav-link" type="button" @click="setActiveTab('donor')" v-bind:class="{ active: activeTab === 'donor' }">I'm a Donor</a>
+                <a class="nav-link" type="button" @click="setActiveTab('charity')" v-bind:class="{ active: activeTab === 'charity' }">I'm a Charity</a>
+              </nav>
+              <form>
+                <input type="name" class="form-control" id="charityName" placeholder="Charity Name" v-model="charityName" v-if="activeTab === 'charity'">
+                <input type="phone" class="form-control" id="phoneNumber" placeholder="Phone Number" v-model="phone">
+                <input type="text" class="form-control" id="autoComplete" placeholder="Enter Your Address" v-model="address" v-on:focus="autoComp">
+              </form>
+            </div>
+            <button id="create-account" type="button" class="btn btn-secondary btn-lg float-right" v-on:click="GoogleSignUp">Create Account</button>
+          </div>
+        </div>
+      </transition>
     </div>
   </div>
-    <!-- <div class="col">
-      <router-link to="donor" class="btn btn-outline-primary">View Donor Site</router-link>
-      <router-link to="charity" class="btn btn-outline-primary">View Charity Site</router-link>
-    </div> -->
 </div>

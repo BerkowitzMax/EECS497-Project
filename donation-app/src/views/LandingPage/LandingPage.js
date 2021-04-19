@@ -31,25 +31,24 @@ export default {
     getStarted() {
       this.showSignUp = true;
     },
-    autoComp: function(){
+    autoComp: function() {
       let autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById("autoComplete"),
+        document.getElementById("autoComplete")
       );
-      autocomplete.addListener('place_changed', () => {
+      autocomplete.addListener("place_changed", () => {
         var place = autocomplete.getPlace();
 
         if (!place.geometry) {
-          document.getElementById('autoComplete').placeholder = "Enter a Place"
-        }
-        else{
-          console.log("in places")
+          document.getElementById("autoComplete").placeholder = "Enter a Place";
+        } else {
+          console.log("in places");
           console.log(place.name);
           console.log(this.address);
           var addr = document.getElementById("autoComplete").value;
           console.log(addr);
           this.address = addr;
         }
-      });  
+      });
     },
 
     GoogleLogin: function() {
@@ -65,35 +64,39 @@ export default {
 
           var path = user.email.split("@")[0];
 
-          // if donor exists in firebase already
+          // check if donor exists in firebase already
           let donor_exists = db.collection("Donors").doc(path);
           console.log(donor_exists);
           donor_exists.get().then((doc) => {
             // page redirect
             if (doc.exists) {
               this.$router.push({ name: "donor-home", params: { id: path } });
-              return;
+            } else {
+              // check if charitiy exists in firebase already
+              let chairty_exists = db.collection("Charities").doc(path);
+              console.log(chairty_exists);
+              chairty_exists
+                .get()
+                .then((doc) => {
+                  // page redirect
+                  if (doc.exists) {
+                    this.$router.push({
+                      name: "charity-home",
+                      params: { id: path },
+                    });
+                  } else {
+                    // account doesn't exist
+                    throw new Error("account doesn't exist");
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                  this.accountDoesNotExist = true;
+                });
             }
           });
-
-          // if charity exists in firebase already
-          let chairty_exists = db.collection("Charities").doc(path);
-          console.log(chairty_exists);
-          chairty_exists.get().then((doc) => {
-            // page redirect
-            if (doc.exists) {
-              this.$router.push({ name: "charity-home", params: { id: path } });
-              return;
-            }
-          });
-
-          throw new Error("account doesn't exist");
         })
-        .catch((error) => {
-          console.log(error);
-          this.accountDoesNotExist = true;
-          this.showSignUp = true;
-        });
+        .catch(console.log);
     },
 
     GoogleSignUp: function() {
@@ -107,8 +110,7 @@ export default {
       }
 
       const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
+      firebase.auth()
         .signInWithPopup(provider)
         .then((result) => {
           const user = result.user;
@@ -123,20 +125,16 @@ export default {
             .get()
             .then((doc) => {
               if (!doc.exists && collection == "Charities") {
-                db.collection(collection)
-                  .doc(path)
-                  .set({
+                db.collection(collection).doc(path).set({
                     username: user.displayName,
                     email: user.email,
                     name: this.charityName,
                     phone: this.phone,
                     address: this.address,
-                    dono_toggle: true
+                    acceptingDonations: true,
                   });
               } else if (!doc.exists && collection == "Donors") {
-                db.collection(collection)
-                  .doc(path)
-                  .set({
+                db.collection(collection).doc(path).set({
                     username: user.displayName,
                     email: user.email,
                     phone: this.phone,
