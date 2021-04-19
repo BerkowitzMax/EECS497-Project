@@ -44,7 +44,7 @@ export default {
             var charity_info = {};
             db.collection("Charities").get().then((query) => {
                 query.forEach((doc) => {
-                  if (doc.data().name == d_title[1]) {
+                  if (doc.data().email.split("@")[0] == d_title[1]) {
                     charity_info = {
                       name: doc.data().name,
                       phone: doc.data().phone,

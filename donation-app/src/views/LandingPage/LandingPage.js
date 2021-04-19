@@ -76,9 +76,7 @@ export default {
               // check if charitiy exists in firebase already
               let chairty_exists = db.collection("Charities").doc(path);
               console.log(chairty_exists);
-              chairty_exists
-                .get()
-                .then((doc) => {
+              chairty_exists.get().then((doc) => {
                   // page redirect
                   if (doc.exists) {
                     this.$router.push({

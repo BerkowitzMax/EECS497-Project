@@ -25,7 +25,7 @@ export default {
               siteId: d.email.split("@")[0],
               charityName: d.name,
               charityPhone: d.phone,
-              charityLocation: d.address,
+              charityAddress: d.address,
               picture: d.picture,
             };
 
