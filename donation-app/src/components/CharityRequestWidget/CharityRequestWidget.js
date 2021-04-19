@@ -35,7 +35,6 @@ export default {
       });
   },
   methods: {
-    // TODO once requests are resolved, users should have the ability to make donations to the charity again
     parseRequest(form_data, user, pstatus, time) {
       db.collection("Donors").doc(user).get().then((doc) => {
           var donor = doc.data();
@@ -72,7 +71,16 @@ export default {
       // update firebase
       db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Accepted",
-        });
+      });
+
+      db.collection("History").add({
+        status: "Accepted",
+        Charity: this.charity_id,
+        Donor: this.pendingRequests[index].fbid.split("-")[0],
+        time: this.pendingRequests[index].timestamp,
+        Request: this.pendingRequests[index].formData
+      })
+
       this.pendingRequests.splice(index, 1);
     },
     rejectSelectedRequest() {
@@ -86,6 +94,15 @@ export default {
       db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Rejected",
         });
+
+      db.collection("History").add({
+        status: "Rejected",
+        Charity: this.charity_id,
+        Donor: this.pendingRequests[index].fbid.split("-")[0],
+        time: this.pendingRequests[index].timestamp,
+        Request: this.pendingRequests[index].formData
+      })
+
       this.pendingRequests.splice(index, 1);
     },
   },

@@ -72,7 +72,6 @@ export default {
       });
   },
   methods: {
-    // TODO once requests are resolved, users should have the ability to make donations to the charity again
     parseRequest(form_data, user, charity, pstatus, time) {
       // skip requests from other users
       if (this.user_id == user) {
@@ -88,8 +87,43 @@ export default {
         this.id += 1;
 
         if (pstatus == "Pending") this.pendingRequests.push(request);
-        else this.resolvedRequests.push(request);
+        else this.parseHistory();
       }
     },
+    parseHistory(){
+      this.user_id
+      db.collection("History").get().then((query) => {
+        query.forEach((doc) => {
+          let d = doc.data();
+        
+          // logged in user requests
+          if (d.Donor == this.user_id) {
+            // fetch charity name
+            let charity_info = {};
+
+            db.collection("Charities").doc(d.Charity).get().then((doc) => {
+              charity_info = {
+                name: doc.data().name,
+                phone: doc.data().phone,
+                address: doc.data().address,
+                link: doc.data().link,
+              };
+            }).then(() => {
+              let request = {
+                id: this.id,
+                status: d.status,
+                timestamp: d.time,
+                charity: charity_info,
+                donationLabel: "Donation to " + charity_info.name,
+                formData: d.Request
+              }
+              this.id += 1;
+              this.resolvedRequests.push(request)
+            });
+
+          }
+        });
+      })
+    }
   },
 };
