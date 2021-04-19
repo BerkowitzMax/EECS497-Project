@@ -16,9 +16,7 @@ export default {
   mounted() {
     // TODO filter by preferences
     // Retrieve request data from database
-    db.collection("Charities")
-      .get()
-      .then((query) => {
+    db.collection("Charities").get().then((query) => {
         query.forEach((doc) => {
           var d = doc.data();
           if (d.name && d.phone && d.address && d.acceptingDonations) {

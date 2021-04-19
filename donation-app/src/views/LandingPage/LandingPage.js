@@ -110,8 +110,7 @@ export default {
       }
 
       const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
+      firebase.auth()
         .signInWithPopup(provider)
         .then((result) => {
           const user = result.user;
@@ -126,9 +125,7 @@ export default {
             .get()
             .then((doc) => {
               if (!doc.exists && collection == "Charities") {
-                db.collection(collection)
-                  .doc(path)
-                  .set({
+                db.collection(collection).doc(path).set({
                     username: user.displayName,
                     email: user.email,
                     name: this.charityName,
@@ -137,9 +134,7 @@ export default {
                     acceptingDonations: true,
                   });
               } else if (!doc.exists && collection == "Donors") {
-                db.collection(collection)
-                  .doc(path)
-                  .set({
+                db.collection(collection).doc(path).set({
                     username: user.displayName,
                     email: user.email,
                     phone: this.phone,

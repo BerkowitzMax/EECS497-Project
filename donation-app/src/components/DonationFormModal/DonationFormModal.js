@@ -94,16 +94,13 @@ export default {
     saveForm() {
       var document = this.$route.params.id;
       document += "-" + this.siteData.siteId;
-      db.collection("Requests")
-        .doc(document)
-        .set({
+      db.collection("Requests").doc(document).set({
           status: "Pending",
           items: this.items,
           timestamp: new Date().toString(),
         })
         .then(() => {
           alert("Donation successful, thank you!");
-          alert(new Date().toString());
         })
         .catch(console.log);
 

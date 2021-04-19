@@ -12,9 +12,7 @@ export default {
       user_id: this.$route.params.id,
       // iterate through all charities to find the specified one and pull info from firebase
       findCharityInfo: function(charity_email) {
-        db.collection("Charities")
-          .get()
-          .then((query) => {
+        db.collection("Charities").get().then((query) => {
             query.forEach((doc) => {
               if (doc.data().email == charity_email) {
                 return {
@@ -36,9 +34,7 @@ export default {
   mounted() {
     this.mySpinner.val = true;
     // Retrieve request data from firebase
-    db.collection("Requests")
-      .get()
-      .then((query) => {
+    db.collection("Requests").get().then((query) => {
         query.forEach((doc) => {
           var d_title = doc.id.split(/-(.+)/);
 
@@ -46,9 +42,7 @@ export default {
           if (d_title[0] == this.user_id) {
             // iterate through all charities to find the specified one and pull info from firebase
             var charity_info = {};
-            db.collection("Charities")
-              .get()
-              .then((query) => {
+            db.collection("Charities").get().then((query) => {
                 query.forEach((doc) => {
                   if (doc.data().name == d_title[1]) {
                     charity_info = {

@@ -22,17 +22,12 @@ export default {
   computed: {},
   mounted() {
     // fetch logged in charity name
-    db.collection("Charities")
-      .doc(this.$route.params.id)
-      .get()
-      .then((doc) => {
+    db.collection("Charities").doc(this.$route.params.id).get().then((doc) => {
         this.charity_id = doc.data().email.split("@")[0];
       });
 
     // Retrieve request data from firebase
-    db.collection("Requests")
-      .get()
-      .then((query) => {
+    db.collection("Requests").get().then((query) => {
         query.forEach((doc) => {
           var d_title = doc.id.split(/-(.+)/);
 
@@ -47,10 +42,7 @@ export default {
   methods: {
     // TODO once requests are resolved, users should have the ability to make donations to the charity again
     parseRequest(form_data, user, pstatus, time) {
-      db.collection("Donors")
-        .doc(user)
-        .get()
-        .then((doc) => {
+      db.collection("Donors").doc(user).get().then((doc) => {
           var donor = doc.data();
 
           let request = {
@@ -83,9 +75,7 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests")
-        .doc(this.pendingRequests[index].fbid)
-        .update({
+      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Accepted",
         });
       this.pendingRequests.splice(index, 1);
@@ -98,9 +88,7 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests")
-        .doc(this.pendingRequests[index].fbid)
-        .update({
+      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
           status: "Rejected",
         });
       this.pendingRequests.splice(index, 1);
