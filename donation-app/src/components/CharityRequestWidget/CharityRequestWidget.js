@@ -11,7 +11,7 @@ export default {
   props: {},
   data() {
     return {
-      charity_id: null,
+      charity_id: this.$route.params.id,
       id: 0,
       selectedRequest: {},
       pendingRequests: [],
@@ -21,11 +21,6 @@ export default {
   inject: ["mySpinner"],
   computed: {},
   mounted() {
-    // fetch logged in charity name
-    db.collection("Charities").doc(this.$route.params.id).get().then((doc) => {
-        this.charity_id = doc.data().email.split("@")[0];
-      });
-
     // Retrieve request data from firebase
     db.collection("Requests").get().then((query) => {
         query.forEach((doc) => {
