@@ -2,21 +2,51 @@
   <div id="app">
     <div id="popup-alert-area">
       <transition name="bounce">
-        <div class="alert alert-light alert-dismissible popup-alert fade show" role="alert" v-if="accountNotFoundAlert">
-          <strong>Oops!</strong> We can't find an account with that email. <span type="button" class="alert-link" @click="showSignUp">Click here to Sign Up.</span>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <div
+          class="alert alert-light alert-dismissible popup-alert fade show"
+          role="alert"
+          v-if="accountNotFoundAlert"
+        >
+          <strong>Oops!</strong> We can't find an account with that email.
+          <span type="button" class="alert-link" @click="showSignUp"
+            >Click here to Sign Up.</span
+          >
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="alert alert-success alert-dismissible popup-alert fade show" role="alert" v-if="donationSuccessAlert">
+        <div
+          class="alert alert-success alert-dismissible popup-alert fade show"
+          role="alert"
+          v-if="donationSuccessAlert"
+        >
           Donation Successful! Thank you!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="alert alert-danger alert-dismissible popup-alert fade show" role="alert" v-if="donationFailAlert">
+        <div
+          class="alert alert-danger alert-dismissible popup-alert fade show"
+          role="alert"
+          v-if="donationFailAlert"
+        >
           Donation Failed! Please try again.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -44,19 +74,19 @@ export default {
       },
       donationSuccessAlert: false,
       donationFailAlert: false,
-      accountNotFoundAlert: false
+      accountNotFoundAlert: false,
     };
   },
   mounted() {
     EventBus.$on("donation_success", () => {
       this.showDonationSuccess();
     }),
-    EventBus.$on("donation_fail", () => {
-      this.showDonationFail();
-    }),
-    EventBus.$on("account_not_found", () => {
-      this.showAccountNotFound();
-    })
+      EventBus.$on("donation_fail", () => {
+        this.showDonationFail();
+      }),
+      EventBus.$on("account_not_found", () => {
+        this.showAccountNotFound();
+      });
   },
   methods: {
     showDonationSuccess() {
@@ -73,10 +103,13 @@ export default {
     },
     showAccountNotFound() {
       this.accountNotFoundAlert = true;
+      setTimeout(() => {
+        this.accountNotFoundAlert = false;
+      }, 10000);
     },
     showSignUp() {
       EventBus.$emit("show_sign_up");
-    }
+    },
   },
   provide() {
     return {

@@ -12,3 +12,17 @@
   height: 100px;
   background-color: rgb(145, 220, 196) !important;
 }
+
+.nav-pills .nav-link {
+  background-color: rgb(145, 220, 196) !important;
+  border-radius: 25px !important;
+  padding: 10px 20px !important;
+  margin-right: 8px;
+}
+.nav-pills .nav-link.active {
+  background-color: white !important;
+  color: rgb(83, 192, 152) !important;
+  border-radius: 25px !important;
+  padding: 10px 20px !important;
+  margin-right: 8px;
+}

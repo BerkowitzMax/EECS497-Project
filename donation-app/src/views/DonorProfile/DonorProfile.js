@@ -1,93 +1,142 @@
-import { db } from '@/main';
+import { db } from "@/main";
 import DonorStatsWidget from "@/components/DonorStatsWidget/index.vue";
-import Compressor from 'compressorjs';
+import Compressor from "compressorjs";
 
 export default {
-	name: "DonorProfile",
-	components: {
-		DonorStatsWidget
-	},
-	props: {},
-	data() {
-		return {
-			user_id: this.$route.params.id,
-			username: null,
-			email: null,
-			bio: null,
-			phone: null,
-			address: null,
-			imageURL: null,
-			showDefault: true
-		}
-	},
-	inject: ["mySpinner"],
-	computed: {},
-	// load profile information
-	mounted() {
-		this.mySpinner.val = true;
-		// parse user profile
-		db.collection("Donors").doc(this.user_id).get().then((doc)=>{
-			var d = doc.data()
-			this.username = d.username;
-			this.email = d.email;
-			if (d.bio) {this.bio = d.bio;}
-			if (d.phone) {this.phone = d.phone;}
-			if (d.address) {this.address = d.address;}
-			if (d.picture) {this.imageURL = d.picture; this.showDefault = false;}
-		}).catch((error) => {
-			console.log("Error getting document:", error);
-		}).then(()=>{
-			this.mySpinner.val = false;
-		});		
-	},
-	methods: {
-		clear: function() {
-			this.bio = null;
-			this.phone = null;
-			this.address = null;
-		},
-		saveDetails: function() {
-			db.collection("Donors").doc(this.user_id).update({
-				bio: this.bio,
-				phone: this.phone,
-				address: this.address,
-				picture: this.imageURL
-			})
-			.then(()=>{alert("Saved!")})
-			.catch(function(error){alert(error + " : This data could not be saved successfully.")});
-		},
-		remove_image: function(){
-			this.imageURL = null;
-			this.showDefault = true;
-			document.getElementById("pfp").value=null;
-		},
-		preview: function(event) {
-			if (!event.target.files[0]) {
-				this.showDefault = true;
-				this.imageURL = null;
-				return;
-			}
-			else {
-				this.showDefault = false;
-			}
+  name: "DonorProfile",
+  components: {
+    DonorStatsWidget,
+  },
+  props: {},
+  data() {
+    return {
+      user_id: this.$route.params.id,
+      username: null,
+      email: null,
+      bio: "Add a bio",
+      phone: null,
+      address: null,
+      imageURL: null,
+      editDescription: false,
+      showSaveMsg: false,
+      editFields: {
+        username: "",
+        address: "",
+        phone: "",
+      },
+    };
+  },
+  inject: ["mySpinner"],
+  computed: {},
+  // load profile information
+  mounted() {
+    this.mySpinner.val = true;
+    // parse user profile
+    db.collection("Donors")
+      .doc(this.user_id)
+      .get()
+      .then((doc) => {
+        var d = doc.data();
+        this.username = d.username;
+        this.email = d.email;
+        if (d.bio) {
+          this.bio = d.bio;
+        }
+        if (d.phone) {
+          this.phone = d.phone;
+        }
+        if (d.address) {
+          this.address = d.address;
+        }
+        if (d.picture) {
+          this.imageURL = d.picture;
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      })
+      .then(() => {
+        this.mySpinner.val = false;
+      });
+  },
+  methods: {
+    saveDetails() {
+      this.acceptingDonations = this.editFields.acceptingDonations;
 
-			let picture = event.target.files[0];
-			const reader = new FileReader();
-			reader.addEventListener('load', () => {
-				this.imageURL = reader.result
-			});
+      if (this.editFields.name) {
+        this.username = this.editFields.username;
+        this.editFields.username = "";
+      }
+      if (this.editFields.address) {
+        this.address = this.editFields.address;
+        this.editFields.address = "";
+      }
+      if (this.editFields.phone) {
+        this.phone = this.editFields.phone;
+        this.editFields.phone = "";
+      }
 
-			new Compressor(picture, {
-				quality: 0.2,
-				maxHeight: 150,
-				maxWidth: 150,
-				success(compressed) {
-					reader.readAsDataURL(compressed);
-				},
-				error(err){
-					console.log(err.message);
-				}
-			});
-		}
-	}
+      db.collection("Donors")
+        .doc(this.user_id)
+        .update({
+          username: this.username,
+          phone: this.phone,
+          address: this.address,
+        })
+        .then(() => {
+          this.showSaveMsg = true;
+          setTimeout(() => {
+            document.getElementById("save-msg").style.display = "none";
+            this.showSaveMsg = false;
+          }, 5000);
+        })
+        .catch(function(error) {
+          alert(error + " : This data could not be saved successfully.");
+        });
+    },
+    removeImage() {
+      this.imageURL = null;
+
+      db.collection("Donors")
+        .doc(this.user_id)
+        .update({
+          imageURL: this.imageURL,
+        })
+        .catch(function(error) {
+          alert(error + " : This data could not be saved successfully.");
+        });
+    },
+    saveImage(event) {
+      if (!event.target.files[0]) {
+        this.imageURL = null;
+        return;
+      }
+
+      let picture = event.target.files[0];
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        this.imageURL = reader.result;
+      });
+
+      new Compressor(picture, {
+        quality: 1,
+        maxHeight: 160,
+        maxWidth: 160,
+        success(compressed) {
+          reader.readAsDataURL(compressed);
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
+    },
+    saveDescription() {
+      this.editDescription = false;
+      db.collection("Donors")
+        .doc(this.user_id)
+        .update({
+          bio: this.bio,
+        });
+    },
+  },
 };
