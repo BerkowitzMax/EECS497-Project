@@ -10,20 +10,6 @@ export default {
   data() {
     return {
       user_id: this.$route.params.id,
-      // iterate through all charities to find the specified one and pull info from firebase
-      findCharityInfo: function(charity_email) {
-        db.collection("Charities").get().then((query) => {
-            query.forEach((doc) => {
-              if (doc.data().email == charity_email) {
-                return {
-                  name: doc.data().name,
-                  phone: doc.data().phone,
-                  address: doc.data().address,
-                };
-              }
-            });
-          });
-      },
       id: 0,
       pendingRequests: [],
       resolvedRequests: [],
