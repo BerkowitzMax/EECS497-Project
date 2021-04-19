@@ -59,9 +59,9 @@ export default {
             status: pstatus,
             timestamp: time,
             donorName: donor.username,
-            donorContact: donor.phone,
+            donorPhone: donor.phone,
             donationLabel: "donation label",
-            donorLocation: donor.address,
+            donorAddress: donor.address,
             formData: form_data,
             picture: donor.picture,
           };

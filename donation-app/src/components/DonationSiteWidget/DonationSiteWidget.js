@@ -26,7 +26,7 @@ export default {
             let site = {
               siteId: d.email.split("@")[0],
               charityName: d.name,
-              charityContact: d.phone,
+              charityPhone: d.phone,
               charityLocation: d.address,
               picture: d.picture,
             };

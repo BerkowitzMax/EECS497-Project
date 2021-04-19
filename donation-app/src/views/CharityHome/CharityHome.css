@@ -19,6 +19,10 @@ p {
   height: 90px;
   margin-top: 10px;
 }
+.badge-pill {
+  font-size: 14px;
+  line-height: 12px;
+}
 .info-item {
   padding: 10px;
 }

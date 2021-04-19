@@ -31,7 +31,7 @@
                     <div class="d-flex justify-content-between align-items-end">
                         <h4 id="charity-name" class="name-text">{{name}}</h4>
                     </div>
-                    <span v-if="acceptingDonations" class="badge badge-pill badge-success">Currently Accepting Donations</span>
+                    <span v-if="acceptingDonations" class="badge badge-pill badge-success"><p>Currently Accepting Donations</p></span>
                     <span v-if="!acceptingDonations" class="badge badge-pill badge-secondary">Not Accepting Donations</span>
                     <div class="d-flex justify-content-between align-items-end">
                         <p v-show="!editDescription" type="button" @click="editDescription = true" id="charity-description" class="name-text">{{description}}</p>

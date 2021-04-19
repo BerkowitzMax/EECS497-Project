@@ -19,8 +19,8 @@ export default {
               if (doc.data().email == charity_email) {
                 return {
                   name: doc.data().name,
-                  contact: doc.data().contact,
-                  location: doc.data().location,
+                  phone: doc.data().phone,
+                  address: doc.data().address,
                 };
               }
             });
@@ -53,8 +53,8 @@ export default {
                   if (doc.data().name == d_title[1]) {
                     charity_info = {
                       name: doc.data().name,
-                      contact: doc.data().contact,
-                      location: doc.data().location,
+                      phone: doc.data().phone,
+                      address: doc.data().address,
                       link: doc.data().link,
                     };
                   }
