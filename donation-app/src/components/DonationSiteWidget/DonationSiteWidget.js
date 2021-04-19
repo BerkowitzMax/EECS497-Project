@@ -19,7 +19,7 @@ export default {
     db.collection("Charities").get().then((query) => {
       query.forEach((doc) => {
         var d = doc.data();
-        if (d.name && d.phone && d.address && d.dono_toggle) {
+        if (d.name && d.phone && d.address && d.acceptingDonations) {
           // parse
           let site = {
             charityName: d.name,

@@ -77,7 +77,7 @@ export default {
     dono_toggle: function() {
       this.dono_toggle = document.getElementById("donoSwitch").checked
       db.collection("Charities").doc(this.user_id).update({
-        dono_toggle: this.dono_toggle
+        acceptingDonations: this.acceptingDonations
       });
     },
     remove_image: function(){

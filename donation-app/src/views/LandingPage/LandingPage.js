@@ -131,7 +131,7 @@ export default {
                     name: this.charityName,
                     phone: this.phone,
                     address: this.address,
-                    dono_toggle: true
+                    acceptingDonations: true
                   });
               } else if (!doc.exists && collection == "Donors") {
                 db.collection(collection)
