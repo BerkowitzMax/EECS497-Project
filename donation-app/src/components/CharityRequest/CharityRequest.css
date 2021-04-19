@@ -1,3 +1,7 @@
 .timeago {
-    font-size: small !important;
+  font-size: small !important;
+}
+
+.request-label {
+  font-weight: bold !important;
 }

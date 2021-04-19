@@ -22,7 +22,9 @@ export default {
   computed: {},
   mounted() {
     // Retrieve request data from firebase
-    db.collection("Requests").get().then((query) => {
+    db.collection("Requests")
+      .get()
+      .then((query) => {
         query.forEach((doc) => {
           var d_title = doc.id.split(/-(.+)/);
 
@@ -36,8 +38,17 @@ export default {
   },
   methods: {
     parseRequest(form_data, user, pstatus, time) {
-      db.collection("Donors").doc(user).get().then((doc) => {
+      db.collection("Donors")
+        .doc(user)
+        .get()
+        .then((doc) => {
           var donor = doc.data();
+
+          let item = {};
+          let items = [];
+          for (item in form_data) {
+            items.push(form_data[item].itemName);
+          }
 
           let request = {
             fbid: user + "-" + this.charity_id,
@@ -46,7 +57,7 @@ export default {
             timestamp: time,
             donorName: donor.username,
             donorPhone: donor.phone,
-            donationLabel: "donation label",
+            donationLabel: items.toString().replace(",", ", "),
             donorAddress: donor.address,
             formData: form_data,
             picture: donor.picture,
@@ -68,17 +79,19 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
           status: "Accepted",
-      });
+        });
 
       db.collection("History").add({
         status: "Accepted",
         Charity: this.charity_id,
         Donor: this.pendingRequests[index].fbid.split("-")[0],
         time: this.pendingRequests[index].timestamp,
-        Request: this.pendingRequests[index].formData
-      })
+        Request: this.pendingRequests[index].formData,
+      });
 
       this.pendingRequests.splice(index, 1);
     },
@@ -90,7 +103,9 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
           status: "Rejected",
         });
 
@@ -99,8 +114,8 @@ export default {
         Charity: this.charity_id,
         Donor: this.pendingRequests[index].fbid.split("-")[0],
         time: this.pendingRequests[index].timestamp,
-        Request: this.pendingRequests[index].formData
-      })
+        Request: this.pendingRequests[index].formData,
+      });
 
       this.pendingRequests.splice(index, 1);
     },
