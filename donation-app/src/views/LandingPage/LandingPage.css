@@ -32,7 +32,7 @@
 }
 
 .right-col {
-  margin: 50px 0px;
+  margin: 30px 0px;
 }
 
 .logo {
@@ -53,7 +53,7 @@
 
 .sign-up {
   padding: 50px 50px;
-  height: 550px;
+  height: 600px;
   width: 490px;
   border-radius: 45px;
   background-color: white;
@@ -70,11 +70,7 @@
 #create-account {
   position: absolute;
   bottom: 50px;
-  right: 50px;
-}
-#create-account {
-  margin: 20px 2px 0px 0px !important;
-  font-size: medium;
+  right: 0px;
 }
 
 .nav-pills {
@@ -101,24 +97,6 @@ p {
   color: #383d41;
   padding-right: 10px;
 }
-
-/* .bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */
 
 #sign-up-header {
   text-transform: uppercase;
