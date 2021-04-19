@@ -46,6 +46,7 @@
               </nav>
               <form>
                 <input type="name" class="form-control" id="charityName" placeholder="Charity Name" v-model="charityName" v-if="activeTab === 'charity'">
+                <input type="url" class="form-control" id="link" placeholder="Web or Social Media Page Link" v-model="link" v-if="activeTab === 'charity'">
                 <input type="phone" class="form-control" id="phoneNumber" placeholder="Phone Number" v-model="phone">
                 <input type="text" class="form-control" id="autoComplete" placeholder="Enter Your Address" v-model="address" v-on:focus="autoComp">
               </form>

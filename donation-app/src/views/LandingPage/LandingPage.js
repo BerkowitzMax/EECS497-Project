@@ -11,6 +11,7 @@ export default {
       phone: "",
       address: "",
       charityName: "",
+      link: "",
       activeTab: "donor",
       showSignUp: false,
       accountAlreadyExists: false,
@@ -131,6 +132,7 @@ export default {
                     name: this.charityName,
                     phone: this.phone,
                     address: this.address,
+                    link: this.link,
                     acceptingDonations: true,
                   });
               } else if (!doc.exists && collection == "Donors") {
