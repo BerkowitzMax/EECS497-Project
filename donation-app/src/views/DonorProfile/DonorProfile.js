@@ -32,10 +32,7 @@ export default {
   mounted() {
     this.mySpinner.val = true;
     // parse user profile
-    db.collection("Donors")
-      .doc(this.user_id)
-      .get()
-      .then((doc) => {
+    db.collection("Donors").doc(this.user_id).get().then((doc) => {
         var d = doc.data();
         this.username = d.username;
         this.email = d.email;

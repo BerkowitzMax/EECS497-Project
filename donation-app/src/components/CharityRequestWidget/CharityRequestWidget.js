@@ -22,9 +22,7 @@ export default {
   computed: {},
   mounted() {
     // Retrieve request data from firebase
-    db.collection("Requests")
-      .get()
-      .then((query) => {
+    db.collection("Requests").get().then((query) => {
         query.forEach((doc) => {
           var d_title = doc.id.split(/-(.+)/);
 
@@ -38,10 +36,7 @@ export default {
   },
   methods: {
     parseRequest(form_data, user, pstatus, time) {
-      db.collection("Donors")
-        .doc(user)
-        .get()
-        .then((doc) => {
+      db.collection("Donors").doc(user).get().then((doc) => {
           var donor = doc.data();
 
           let item = {};

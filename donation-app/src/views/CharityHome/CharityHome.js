@@ -37,10 +37,7 @@ export default {
     this.mySpinner.val = true;
 
     // parse user profile
-    db.collection("Charities")
-      .doc(this.user_id)
-      .get()
-      .then((doc) => {
+    db.collection("Charities").doc(this.user_id).get().then((doc) => {
         let d = doc.data();
         this.email = d.email;
         this.username = d.username;
