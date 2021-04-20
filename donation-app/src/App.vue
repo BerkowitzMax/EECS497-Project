@@ -145,8 +145,9 @@ body {
   object-fit: contain;
 }
 
-.popup-alert-area {
-  position: sticky;
+#popup-alert-area {
+  position: fixed !important;
+  z-index: 100;
 }
 
 /* sidenav */
@@ -192,18 +193,16 @@ body {
 .btn-primary:active,
 .btn-primary:visited {
   background-color: rgb(83, 192, 152) !important;
+  color: white !important;
   border-color: rgb(83, 192, 152) !important;
   border-radius: 45px !important;
   font-size: medium !important;
-  padding: 8px 16px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .btn-primary:hover {
   background-color: rgb(43, 152, 112) !important;
-  border-color: rgb(43, 152, 112) !important;
-  border-radius: 45px !important;
-  font-size: medium !important;
-  padding: 8px 16px;
 }
 
 .btn-success,
@@ -244,6 +243,8 @@ body {
   border-color: rgb(240, 192, 193) !important;
   border-radius: 45px !important;
   font-size: medium !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .btn-danger:hover {

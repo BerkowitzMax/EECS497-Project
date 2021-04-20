@@ -1,6 +1,7 @@
 import { db } from "@/main";
 import DonorRequest from "@/components/DonorRequest/index.vue";
 import DonorRequestModal from "@/components/DonorRequestModal/index.vue";
+import EventBus from "@/components/EventBus.vue";
 
 export default {
   name: "DonorRequestWidget",
@@ -22,49 +23,56 @@ export default {
   computed: {},
   mounted() {
     this.mySpinner.val = true;
-    // Retrieve request data from firebase
-    db.collection("Requests")
-      .get()
-      .then((query) => {
-        query.forEach((doc) => {
-          var d_title = doc.id.split(/-(.+)/);
+    this.getRequests();
 
-          // only logged in user's requests
-          if (d_title[0] == this.user_id) {
-            // iterate through all charities to find the specified one and pull info from firebase
-            var charity_info = {};
-            db.collection("Charities")
-              .get()
-              .then((query) => {
-                query.forEach((doc) => {
-                  if (doc.data().email.split("@")[0] == d_title[1]) {
-                    charity_info = {
-                      name: doc.data().name,
-                      phone: doc.data().phone,
-                      address: doc.data().address,
-                      link: doc.data().link,
-                    };
-                  }
-                });
-              })
-              .then(() => {
-                let d = doc.data();
-                this.parseRequest(
-                  d.items,
-                  d_title[0],
-                  charity_info,
-                  d.status,
-                  d.timestamp
-                );
-              });
-          }
-        });
-      })
-      .then(() => {
-        this.mySpinner.val = false;
-      });
+    EventBus.$on("donation_success", () => {
+      this.getRequests();
+    });
   },
   methods: {
+    getRequests() {
+      // Retrieve request data from firebase
+      db.collection("Requests")
+        .get()
+        .then((query) => {
+          query.forEach((doc) => {
+            var d_title = doc.id.split(/-(.+)/);
+
+            // only logged in user's requests
+            if (d_title[0] == this.user_id) {
+              // iterate through all charities to find the specified one and pull info from firebase
+              var charity_info = {};
+              db.collection("Charities")
+                .get()
+                .then((query) => {
+                  query.forEach((doc) => {
+                    if (doc.data().email.split("@")[0] == d_title[1]) {
+                      charity_info = {
+                        name: doc.data().name,
+                        phone: doc.data().phone,
+                        address: doc.data().address,
+                        link: doc.data().link,
+                      };
+                    }
+                  });
+                })
+                .then(() => {
+                  let d = doc.data();
+                  this.parseRequest(
+                    d.items,
+                    d_title[0],
+                    charity_info,
+                    d.status,
+                    d.timestamp
+                  );
+                });
+            }
+          });
+        })
+        .then(() => {
+          this.mySpinner.val = false;
+        });
+    },
     parseRequest(form_data, user, charity, pstatus, time) {
       // skip requests from other users
 
@@ -74,14 +82,14 @@ export default {
         items.push(form_data[item].itemName);
       }
 
-      if (this.user_id == user) {
+      if (this.user_id == user && !this.requestInPending(charity, time)) {
         let request = {
           id: this.id,
           status: pstatus,
           timestamp: time,
           charity: charity,
           donationLabel: charity.name,
-          formItems: items.toString().replace(",", ", "), // TODO consider removing this
+          formItems: items.toString().replace(",", ", "),
         };
         this.id += 1;
 
@@ -129,6 +137,24 @@ export default {
             }
           });
         });
+    },
+    requestInPending(charity, time) {
+      console.log(charity, time);
+      for (var key in this.pendingRequests) {
+        console.log(
+          this.pendingRequests[key].timestamp,
+          this.pendingRequests[key].charity.name
+        );
+        if (
+          this.pendingRequests[key].timestamp == time &&
+          this.pendingRequests[key].charity.name == charity.name
+        ) {
+          console.log(true);
+          return true;
+        }
+      }
+      console.log(false);
+      return false;
     },
     selectRequest(id) {
       // Set when Review Request modal is opened

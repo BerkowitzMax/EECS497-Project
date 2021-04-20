@@ -3,8 +3,8 @@
         <div id="head-col" class="col d-flex w-100 justify-content-start align-items-start">
             <span class="badge badge-pill" :class="requestData.status === 'Accepted' ? 'badge-success' : requestData.status === 'Rejected' ? 'badge-danger' : 'badge-warning'" style="margin-right: 5px;">{{requestData.status}}</span>
             <div id="head-col" class="col">
-                <h6 class="request-label">{{requestData.donationLabel}}</h6>
-                <h6 class="donor-name">{{requestData.formItems}}</h6>
+                <h6 class="request-label">{{requestData.formItems}}</h6>
+                <h6 class="charity-name">{{requestData.donationLabel}}</h6>
             </div>
         </div>
         <div>

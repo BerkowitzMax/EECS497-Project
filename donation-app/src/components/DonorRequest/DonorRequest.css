@@ -1,6 +1,6 @@
 .timeago {
   font-size: small !important;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 .badge-pill {
   margin-right: 10px !important;
@@ -11,7 +11,7 @@
 .request-label {
   font-weight: bold !important;
 }
-.donor-name {
+.charity-name {
   color: rgba(0, 0, 0, 0.5) !important;
 }
 #head-col {
