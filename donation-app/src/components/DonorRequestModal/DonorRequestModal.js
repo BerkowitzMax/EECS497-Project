@@ -1,6 +1,10 @@
+import RequestSingular from "@/components/RequestSingular/index.vue";
+
 export default {
   name: "DonorRequest",
-  components: {},
+  components: {
+    RequestSingular,
+  },
   props: {
     requestData: Object,
   },
@@ -8,6 +12,13 @@ export default {
     return {};
   },
   computed: {},
-  mounted() {},
-  methods: {},
+  mounted() {
+  },
+  methods: {
+    processFormdata() {
+      let a = this.requestData.formData;
+      return a;
+    },
+  },
 };
+
