@@ -81,7 +81,7 @@ export default {
           itemName: "",
           itemQuantity: 0,
           itemUnits: 0,
-          itemCategory: 0,
+          itemCategory: "",
           bestBeforeMonth: 0,
           bestBeforeDay: 0,
           bestBeforeYear: 0,
