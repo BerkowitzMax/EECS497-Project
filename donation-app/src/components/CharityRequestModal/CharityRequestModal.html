@@ -8,11 +8,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- TODO: display donor info and form data -->
-                {{requestData.donorName}} 
-                {{requestData.donorPhone}}
-                {{requestData.donorAddress}}
-                {{requestData.formData}}
+                <div class="container-fluid">
+                    <!-- display donor info -->
+                    <div class="row">
+                        <div class="col">
+                            <h6><strong><u>Donor's Information:</u></strong></h6>
+                        </div>
+                    </div>                    
+                    <div class="row">
+                    <div class="col">
+                        <strong>Name: </strong>{{requestData.donorName}} 
+                    </div>
+                    <div class="col">
+                        <strong>Phone: </strong>{{requestData.donorPhone}}
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <strong>Address: </strong>{{requestData.donorAddress}}
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item rounded" v-for="single_request in requestData.formData">
+                            <RequestSingular :singleRequest="single_request"/>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>

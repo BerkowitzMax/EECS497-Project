@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "cross-env NODE_ENV=development vue-cli-service serve --open --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
