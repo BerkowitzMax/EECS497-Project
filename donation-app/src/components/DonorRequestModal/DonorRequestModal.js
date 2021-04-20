@@ -5,15 +5,9 @@ export default {
     requestData: Object,
   },
   data() {
-    return {
-      collapsed: true,
-    };
+    return {};
   },
   computed: {},
   mounted() {},
-  methods: {
-    selectRequest() {
-      this.$emit("select-request", this.requestData.id);
-    },
-  },
+  methods: {},
 };

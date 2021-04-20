@@ -5,3 +5,10 @@
 .request-label {
   font-weight: bold !important;
 }
+#head-col {
+  padding: 0px !important;
+  margin-left: 20px;
+}
+#view-request {
+  min-width: 165px;
+}

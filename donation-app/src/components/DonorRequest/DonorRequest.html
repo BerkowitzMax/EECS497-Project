@@ -1,45 +1,14 @@
-<div class="donation-request card">
-    <div class="card-header row" id="headingTwo">
-        <div class="col-sm-7 d-flex w-100 justify-content-start align-items-center">
-            <span class="badge badge-pill" :class="requestData.status === 'Accepted' ? 'badge-success' : requestData.status === 'Rejected' ? 'badge-danger' : 'badge-secondary'" style="margin-right: 5px;">{{requestData.status}}</span>
-            <h6 class="donation-label">{{requestData.donationLabel}}</h6>
+<div class="donation-request" :id="requestData.id">
+    <div class="d-flex w-100 justify-content-between">
+        <div id="head-col" class="col d-flex w-100 justify-content-start align-items-center">
+            <span class="badge badge-pill" :class="requestData.status === 'Accepted' ? 'badge-success' : requestData.status === 'Rejected' ? 'badge-danger' : 'badge-warning'" style="margin-right: 5px;">{{requestData.status}}</span>
+            <h6 class="request-label">{{requestData.donationLabel}}</h6>
         </div>
-        <div class="col-sm-5 d-flex w-100 justify-content-end align-items-center">
+        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+            <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">View Request</button>
+        </div>
+        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
             <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
-            <div role="button" data-toggle="collapse" :data-target="'#collapse-' + requestData.id" aria-expanded="false" :aria-controls="'collapse-' + requestData.id" @click="toggle">
-                <!-- Icons from node_modules/bootstrap-icons -->
-                <svg v-if="collapsed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16" aria-label="expand">
-                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-                </svg>
-                <svg v-if="!collapsed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16" aria-label="collapse">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
-            </div>
         </div>
-      </div>
-      <div :id="'collapse-' + requestData.id" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        <div class="card-body container-fluid">
-            <div class="row">
-                <div class="col-sm-5">
-                    <h6>Charity Information</h6>
-                    <div>
-                        {{requestData.charity.link}}
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                        </svg>{{requestData.charity.phone}}
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>{{requestData.charity.name}}
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <h6>Donation Form Data</h6>
-                </div>
-            </div>
-        </div>
-      </div>
+    </div>
 </div>

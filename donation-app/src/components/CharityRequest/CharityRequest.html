@@ -1,19 +1,23 @@
-<div class="donation-request" :id="requestData.id">
-    <div class="d-flex w-100 justify-content-between">
-        <h6 class="request-label">{{requestData.donationLabel}}</h6>
-        <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
-    </div>
+<div class="donation-site container-fluid">
     <div class="d-flex w-100 justify-content-between align-items-center">
-        <div class="d-flex flex-row align-items-center">
-            <svg v-if="!requestData.picture" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#ced4da" class="bi bi-person-circle request-pfp" viewBox="0 0 16 16">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+            <svg v-if="!requestData.picture" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#ced4da" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            <img v-else :src='requestData.picture' alt="Profile Picture" class="request-pfp">
-            <h6>{{requestData.donorName}}</h6>
+            <img v-else :src='requestData.picture' alt="Profile Picture">
+            <div id="head-col" class="col">
+                <h6 class="request-label">{{requestData.donationLabel}}</h6>
+                <div>
+                    <h6>{{requestData.donorName}}</h6>
+                </div>
+            </div>
         </div>
-        <label>{{requestData.donorAddress}}</label>
-        <label>{{requestData.donorPhone}}</label>
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">Review Request</button>
+        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+            <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">View Request</button>
+        </div>
+        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+            <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
+        </div>
     </div>
 </div>

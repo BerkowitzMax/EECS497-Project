@@ -1,7 +1,7 @@
 <div id="pending-request-widget" class="col widget">
     <h6 class="section-head d-flex align-items-center">Pending Requests<span id="counter" class="badge badge-dark">{{pendingRequests.length}}</span></h6>
-    <div class="list-group">
-        <div class="list-group-item rounded" v-for="request in pendingRequests">
+    <div class="list-group list-group-flush">
+        <div class="list-group-item" v-for="request in pendingRequests">
             <CharityRequest :requestData="request" @select-request="selectRequest"/>
         </div>
     </div>
