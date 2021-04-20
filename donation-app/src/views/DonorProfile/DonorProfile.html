@@ -53,7 +53,7 @@
                 <!-- Save Button -->
                 <div id="save-btn" class="d-flex justify-content-end align-items-center">
                     <span v-show="showSaveMsg" id="save-msg">Saved!</span>
-                    <button type="button" class="btn btn-success btn-lg" @click="saveDetails">Save</button>
+                    <button type="button" class="btn btn-primary btn-lg" @click="saveDetails">Save</button>
                 </div>
             </div>
         </div>
@@ -114,100 +114,5 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-sm-4 sidenav">
-            <div class="sidebar-profile d-flex align-items-center flex-column">
-                <img v-if="showDefault" src='@/assets/profile-image-placeholder.png' alt="Profile Picture" style="width: 100px">
-                <img v-else :src='imageURL' alt="Profile Picture" style="width: 100px">
-                <br>
-                <h3>{{username}}</h3>
-            </div>
-            <div class="sidebar-section">
-                <h5>Edit Account Information</h5>
-                <form>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Profile Picture</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" @change="preview">
-                                    <input type="file" @change="preview" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Profile Picture</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" @change="preview" id="pfp" class="custom-file">
-                                    <button @click="remove_image" type="button" class="btn btn-link">remove</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Name</span>
-                                </div>
-                                <input type="text" class="form-control" v-bind:placeholder="username" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Email</span>
-                                </div>
-                                <input class="form-control" type="text" v-bind:placeholder="email" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Bio</span>
-                                </div>
-                                <input v-model="bio" type="text" class="form-control" placeholder="Enter a bio" aria-label="Donor Bio" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Phone Number</span>
-                                </div>
-                                <input v-model="phone" type="text" class="form-control" placeholder="Enter a phone number" aria-label="Donor Phone Number" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Address</span>
-                                </div>
-                                <input v-model="address" type="text" class="form-control" placeholder="Enter an address" aria-label="Donor Address" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div>
-                    <button v-on:click="clear" type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-                    <button v-on:click="save" type="button" class="btn btn-primary">Save Changes</button>
-                </div>
-            </div>
-        </div>
-    -->
     </div>
 </div>

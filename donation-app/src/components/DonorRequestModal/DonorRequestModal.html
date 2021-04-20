@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="requestModalLabel">Review Request</h5>
+                <h5 class="modal-title" id="requestModalLabel">Review Request for {{requestData.charity.name}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,33 +12,31 @@
                     <!-- display donor info -->
                     <div class="row">
                         <div class="col">
-                            <h6><strong><u>Donor's Information:</u></strong></h6>
+                            <h6><strong><u>Charity's Information:</u></strong></h6>
                         </div>
                     </div>                    
                     <div class="row">
                     <div class="col">
-                        <strong>Name: </strong>{{requestData.donorName}} 
+                        <strong>Name: </strong>{{requestData.charity.name}} 
                     </div>
                     <div class="col">
-                        <strong>Phone: </strong>{{requestData.donorPhone}}
+                        <strong>Phone: </strong>{{requestData.charity.phone}}
                     </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <strong>Address: </strong>{{requestData.donorAddress}}
+                            <strong>Address: </strong>{{requestData.charity.address}}
                         </div>
                     </div>
                     <div class="list-group">
-                        <div class="list-group-item rounded" v-for="(single_request, index) in requestData.formData">
-                            <RequestSingular :singleRequest="single_request" :requestIter="index + 1" :numRequests="requestData.formData.length"/>
+                        <div class="list-group-item rounded" v-for="single_request in requestData.formData">
+                            <RequestSingular :singleRequest="single_request"/>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" @click="acceptRequest">Accept</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" @click="rejectRequest">Reject</button>
             </div>
         </div>
     </div>

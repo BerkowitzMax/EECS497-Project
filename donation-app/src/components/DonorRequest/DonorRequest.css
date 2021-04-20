@@ -1,22 +1,25 @@
 .timeago {
-    font-size: small;
-    margin: 10px;
+  font-size: small !important;
+  margin: 10px 0px;
 }
-
-.donation-label {
-    margin: 0px 10px;
+.badge-pill {
+  margin-right: 10px !important;
 }
-
-.bi {
-    margin: 5px;
+.request {
+  padding: 0px !important;
 }
-
-/* .card {
-    border: none;
-} */
-.card-header {
-    background-color: white;
+.request-label {
+  font-weight: bold !important;
 }
-.card-body {
-    background-color: #f8f9fa;
+.charity-name {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+#head-col {
+  padding: 0px !important;
+}
+#button-col {
+  padding-right: 5px !important;
+}
+#view-request {
+  min-width: 165px;
 }

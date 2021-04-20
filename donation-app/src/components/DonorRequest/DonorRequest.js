@@ -12,8 +12,8 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-    toggle() {
-      this.collapsed = !this.collapsed;
+    selectRequest() {
+      this.$emit("select-request", this.requestData.id, this.requestData.status);
     },
   },
 };

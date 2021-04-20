@@ -32,10 +32,7 @@ export default {
   mounted() {
     this.mySpinner.val = true;
     // parse user profile
-    db.collection("Donors")
-      .doc(this.user_id)
-      .get()
-      .then((doc) => {
+    db.collection("Donors").doc(this.user_id).get().then((doc) => {
         var d = doc.data();
         this.username = d.username;
         this.email = d.email;
@@ -53,7 +50,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log("Error getting document:", error);
+        console.error("Error getting document:", error);
       })
       .then(() => {
         this.mySpinner.val = false;
@@ -126,7 +123,7 @@ export default {
           reader.readAsDataURL(compressed);
         },
         error(err) {
-          console.log(err.message);
+          console.error(err.message);
         },
       });
     },

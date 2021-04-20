@@ -37,10 +37,7 @@ export default {
     this.mySpinner.val = true;
 
     // parse user profile
-    db.collection("Charities")
-      .doc(this.user_id)
-      .get()
-      .then((doc) => {
+    db.collection("Charities").doc(this.user_id).get().then((doc) => {
         let d = doc.data();
         this.email = d.email;
         this.username = d.username;
@@ -57,7 +54,7 @@ export default {
         }
       })
       .catch((error) => {
-        console.log("Error getting document:", error);
+        console.error("Error getting document:", error);
       })
       .then(() => {
         this.mySpinner.val = false;
@@ -143,7 +140,7 @@ export default {
           reader.readAsDataURL(compressed);
         },
         error(err) {
-          console.log(err.message);
+          console.error(err.message);
         },
       });
     },

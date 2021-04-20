@@ -39,6 +39,12 @@ export default {
       db.collection("Donors").doc(user).get().then((doc) => {
           var donor = doc.data();
 
+          let item = {};
+          let items = [];
+          for (item in form_data) {
+            items.push(form_data[item].itemName);
+          }
+
           let request = {
             fbid: user + "-" + this.charity_id,
             id: this.id,
@@ -46,7 +52,7 @@ export default {
             timestamp: time,
             donorName: donor.username,
             donorPhone: donor.phone,
-            donationLabel: "donation label",
+            donationLabel: items.toString().replace(",", ", "),
             donorAddress: donor.address,
             formData: form_data,
             picture: donor.picture,
@@ -68,17 +74,19 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
           status: "Accepted",
-      });
+        });
 
       db.collection("History").add({
         status: "Accepted",
         Charity: this.charity_id,
         Donor: this.pendingRequests[index].fbid.split("-")[0],
         time: this.pendingRequests[index].timestamp,
-        Request: this.pendingRequests[index].formData
-      })
+        Request: this.pendingRequests[index].formData,
+      });
 
       this.pendingRequests.splice(index, 1);
     },
@@ -90,7 +98,9 @@ export default {
       this.resolvedRequests.push(this.pendingRequests[index]);
 
       // update firebase
-      db.collection("Requests").doc(this.pendingRequests[index].fbid).update({
+      db.collection("Requests")
+        .doc(this.pendingRequests[index].fbid)
+        .update({
           status: "Rejected",
         });
 
@@ -99,8 +109,8 @@ export default {
         Charity: this.charity_id,
         Donor: this.pendingRequests[index].fbid.split("-")[0],
         time: this.pendingRequests[index].timestamp,
-        Request: this.pendingRequests[index].formData
-      })
+        Request: this.pendingRequests[index].formData,
+      });
 
       this.pendingRequests.splice(index, 1);
     },

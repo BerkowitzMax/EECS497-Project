@@ -1,28 +1,32 @@
 <div class="donation-site container-fluid">
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="d-flex w-100 justify-content-start align-items-center">
-            <svg v-if="!siteData.picture" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#ced4da" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-            </svg>
-            <img v-else :src='siteData.picture' alt="Profile Picture">
-            <div class="charity-info">
-                <p>{{siteData.charityName}}</p>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+            <div id="pic-col" class="col-sm-2">
+                <svg v-if="!siteData.picture" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#ced4da" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+                <img v-else :src='siteData.picture' alt="Profile Picture">
+            </div>
+            <div id="head-col" class="col">
+                <h6 class="site-label">{{siteData.charityName}}</h6>
+                <div class="d-flex align-items-center info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(83, 192, 152)" class="bi bi-telephone-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                    </svg> {{siteData.charityPhone}}
+                    </svg>
+                    <h6 class="site-info">{{siteData.charityPhone}}</h6>
                 </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <div class="d-flex align-items-center info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(83, 192, 152)" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                    </svg> {{siteData.charityAddress}}
+                    </svg>
+                    <h6 class="site-info">{{siteData.charityAddress}}</h6>
                 </div>
             </div>
-        </div>
-        <div>
-            <button class="btn btn-success btn-lg" data-toggle="modal" :data-target="id">Donate</button>
-            <DonationFormModal :siteData="siteData"/>
+            <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+                <button class="btn btn-primary btn-lg" data-toggle="modal" :data-target="id">Donate</button>
+                <DonationFormModal :siteData="siteData"/>
+            </div>
         </div>
     </div>
 </div>

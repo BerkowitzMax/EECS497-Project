@@ -31,8 +31,8 @@
                     <div class="d-flex justify-content-between align-items-end">
                         <h4 id="charity-name" class="name-text">{{name}}</h4>
                     </div>
-                    <span v-if="acceptingDonations" class="badge badge-pill badge-success"><p>Currently Accepting Donations</p></span>
-                    <span v-if="!acceptingDonations" class="badge badge-pill badge-secondary">Not Accepting Donations</span>
+                    <span v-if="acceptingDonations" id="accepting-donations" class="badge badge-pill badge-success">Accepting Donations</span>
+                    <span v-if="!acceptingDonations" id="accepting-donations" class="badge badge-pill badge-secondary">Not Accepting Donations</span>
                     <div class="d-flex justify-content-between align-items-end">
                         <p v-show="!editDescription" type="button" @click="editDescription = true" id="charity-description" class="name-text">{{description}}</p>
                         <textarea v-show="editDescription" v-model="description" type="text" id="description-input" class="form-control info" placeholder="Add a charity description"></textarea>
@@ -156,7 +156,7 @@
                 <!-- Save Button -->
                 <div id="save-btn" class="d-flex justify-content-end align-items-center">
                     <span v-show="showSaveMsg" id="save-msg">Saved!</span>
-                    <button type="button" class="btn btn-success btn-lg" @click="saveDetails">Save</button>
+                    <button type="button" class="btn btn-primary btn-lg" @click="saveDetails">Save</button>
                 </div>
             </div>
         </div>
