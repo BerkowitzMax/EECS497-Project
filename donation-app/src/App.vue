@@ -420,4 +420,8 @@ p {
   text-transform: uppercase;
   font-size: 11px !important;
 }
+
+.list-group-item {
+  padding-left: 5px !important;
+}
 </style>

@@ -14,10 +14,13 @@
                 <input type="text" class="form-control" id="basic-url" v-model="formData.itemQuantity" aria-describedby="basic-addon3">
                 <select class="custom-select" id="inputGroupSelect01" v-model="formData.itemUnits">
                     <option selected>cans</option>
-                    <option value="1">oz</option>
-                    <option value="2">g</option>
-                    <option value="3">ml</option>
-                    <option value="4">lb</option>
+                    <option value="oz">oz</option>
+                    <option value="nos.">nos.</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="ml">ml</option>
+                    <option value="ltr">ltr</option>
+                    <option value="lb">lb</option>
                 </select>
             </div>
         </div>
@@ -30,12 +33,14 @@
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" v-model="formData.itemCategory">
                   <option selected>None Selected</option>
-                  <option value="2">Canned Goods</option>
-                  <option value="1">Fresh Produce</option>
-                  <option value="2">Dairy Products</option>
-                  <option value="2">Grains</option>
-                  <option value="2">Dried Foods</option>
-                  <option value="2">Nuts and Seeds</option>
+                  <option value="Canned Goods">Canned Goods</option>
+                  <option value="Fresh Produce">Fresh Produce</option>
+                  <option value="Dairy Products">Dairy Products</option>
+                  <option value="Grains">Grains</option>
+                  <option value="Dried Foods">Dried Foods</option>
+                  <option value="Nuts and Seeds">Nuts and Seeds</option>
+                  <option value="Cooked Meals">Cooked Meals</option>
+                  <option value="Spices">Spices</option>
                 </select>
             </div>
         </div>
@@ -45,64 +50,64 @@
                   <span class="input-group-text">Best Before</span>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" v-model="formData.bestBeforeMonth">
-                    <option value="0" selected>Month</option>
-                    <option value="1">Jan</option>
-                    <option value="2">Feb</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">Aug</option>
-                    <option value="9">Sept</option>
-                    <option value="10">Oct</option>
-                    <option value="11">Nov</option>
-                    <option value="12">Dec</option>
-                    <option value="13">None</option>
+                    <option value="Month" selected>Month</option>
+                    <option value="Jan">Jan</option>
+                    <option value="Feb">Feb</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="Aug">Aug</option>
+                    <option value="Sept">Sept</option>
+                    <option value="Oct">Oct</option>
+                    <option value="Nov">Nov</option>
+                    <option value="Dec">Dec</option>
+                    <option value="None">None</option>
                 </select>
                 <select class="custom-select" id="inputGroupSelect01" v-model="formData.bestBeforeDay">
-                    <option value="0" selected>Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                    <option value="32">None</option>
+                    <option value="Day" selected>Day</option>
+                    <option value="1st">1</option>
+                    <option value="2nd">2</option>
+                    <option value="3rd">3</option>
+                    <option value="4th">4</option>
+                    <option value="5th">5</option>
+                    <option value="6th">6</option>
+                    <option value="7th">7</option>
+                    <option value="8th">8</option>
+                    <option value="9th">9</option>
+                    <option value="10th">10</option>
+                    <option value="11th">11</option>
+                    <option value="12th">12</option>
+                    <option value="13th">13</option>
+                    <option value="14th">14</option>
+                    <option value="15th">15</option>
+                    <option value="16th">16</option>
+                    <option value="17th">17</option>
+                    <option value="18th">18</option>
+                    <option value="19th">19</option>
+                    <option value="20th">20</option>
+                    <option value="21th">21</option>
+                    <option value="22th">22</option>
+                    <option value="23th">23</option>
+                    <option value="24th">24</option>
+                    <option value="25th">25</option>
+                    <option value="26th">26</option>
+                    <option value="27th">27</option>
+                    <option value="28th">28</option>
+                    <option value="29th">29</option>
+                    <option value="30th">30</option>
+                    <option value="31th">31</option>
+                    <option value="None">None</option>
                 </select>
                 <select class="custom-select" id="inputGroupSelect01" v-model="formData.bestBeforeYear">
-                    <option value="0" selected>Year</option>
-                    <option value="1">2021</option>
-                    <option value="2">2022</option>
-                    <option value="3">2023</option>
-                    <option value="4">2024</option>
-                    <option value="5">2025</option>
-                    <option value="6">None</option>
+                    <option value="Year" selected>Year</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="None">None</option>
                 </select>
             </div>
         </div>
@@ -113,27 +118,27 @@
             <h6>Item Contains</h6>
             <div class="input-group mb-3 justify-content-around">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="formData.allergens.containsPeanuts">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="formData.allergens.Peanuts">
                     <label class="form-check-label" for="inlineCheckbox1">Peanuts</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="formData.allergens.containsTreeNuts">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="formData.allergens.TreeNuts">
                     <label class="form-check-label" for="inlineCheckbox2">Tree Nuts</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" v-model="formData.allergens.containsDairy">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" v-model="formData.allergens.Dairy">
                     <label class="form-check-label" for="inlineCheckbox3">Dairy</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3" v-model="formData.allergens.containsEggs">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3" v-model="formData.allergens.Eggs">
                     <label class="form-check-label" for="inlineCheckbox4">Eggs</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" v-model="formData.allergens.containsMeat">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" v-model="formData.allergens.Meat">
                     <label class="form-check-label" for="inlineCheckbox5">Meat</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option5" v-model="formData.allergens.containsSoy">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option5" v-model="formData.allergens.Soy">
                     <label class="form-check-label" for="inlineCheckbox6">Soy</label>
                   </div>
             </div>

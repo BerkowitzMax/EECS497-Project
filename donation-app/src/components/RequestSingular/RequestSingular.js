@@ -3,6 +3,8 @@ export default {
     components: {},
     props: {
       singleRequest: Object,
+      requestIter: Number,
+      numRequests: Number,
     },
     data() {
       return {};

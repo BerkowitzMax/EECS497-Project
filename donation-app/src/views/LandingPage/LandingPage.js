@@ -41,11 +41,7 @@ export default {
         if (!place.geometry) {
           document.getElementById("autoComplete").placeholder = "Enter a Place";
         } else {
-          console.log("in places");
-          console.log(place.name);
-          console.log(this.address);
           var addr = document.getElementById("autoComplete").value;
-          console.log(addr);
           this.address = addr;
         }
       });
@@ -65,7 +61,6 @@ export default {
 
           // check if donor exists in firebase already
           let donor_exists = db.collection("Donors").doc(path);
-          console.log(donor_exists);
           donor_exists.get().then((doc) => {
             // page redirect
             if (doc.exists) {
@@ -73,7 +68,6 @@ export default {
             } else {
               // check if charitiy exists in firebase already
               let chairty_exists = db.collection("Charities").doc(path);
-              console.log(chairty_exists);
               chairty_exists.get().then((doc) => {
                   // page redirect
                   if (doc.exists) {
@@ -87,13 +81,13 @@ export default {
                   }
                 })
                 .catch((error) => {
-                  console.log(error);
+                  console.error(error);
                   EventBus.$emit("account_not_found");
                 });
             }
           });
         })
-        .catch(console.log);
+        .catch(console.error);
     },
 
     GoogleSignUp: function() {
@@ -153,11 +147,11 @@ export default {
                 });
             })
             .catch((error) => {
-              console.log(error);
+              console.error(error);
               this.accountAlreadyExists = true;
             });
         })
-        .catch(console.log);
+        .catch(console.error);
     },
   },
 };

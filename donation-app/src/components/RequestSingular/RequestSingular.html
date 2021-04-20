@@ -1,3 +1,33 @@
-<div class="row">
-    {{singleRequest}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h6><strong><u>Donation item {{requestIter}} of {{numRequests}}</u></strong></h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <strong>Item Name: </strong>{{singleRequest.itemName}}<br>
+            <strong>Item Category: </strong>{{singleRequest.itemCategory}}<br>
+            <strong>Item Qty: </strong>{{singleRequest.itemQuantity}} {{singleRequest.itemUnits}}<br>
+            <strong>Best before: </strong>{{singleRequest.bestBeforeMonth}} {{singleRequest.bestBeforeDay}}, {{singleRequest.bestBeforeYear}}<br>
+        </div>
+        <div class="col">
+            <img src='singleRequest.itemPhoto' onerror="this.onerror=null;this.src='donation-app/src/assets/food-image-placeholder.jpg';" alt="Donation Picture" style="width: 100px"></img>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <strong>Allergens:</strong>
+                <div class="comma-seperated" v-for="(value, key) in singleRequest.allergens">
+                        <div class="comma-seperated" v-if="value">
+                            <div class="comma-seperated">{{key}}</div>
+                        </div>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div clas="col">
+            <strong>Additional Information:</strong> {{singleRequest.itemDescription}}
+        </div>
+    </div>
 </div>

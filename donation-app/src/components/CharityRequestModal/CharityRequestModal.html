@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="requestModalLabel">Review Request {{requestData.donationLabel}}</h5>
+                <h5 class="modal-title" id="requestModalLabel">Review Request</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,8 +29,8 @@
                         </div>
                     </div>
                     <div class="list-group">
-                        <div class="list-group-item rounded" v-for="single_request in requestData.formData">
-                            <RequestSingular :singleRequest="single_request"/>
+                        <div class="list-group-item rounded" v-for="(single_request, index) in requestData.formData">
+                            <RequestSingular :singleRequest="single_request" :requestIter="index + 1" :numRequests="requestData.formData.length"/>
                         </div>
                     </div>
                 </div>

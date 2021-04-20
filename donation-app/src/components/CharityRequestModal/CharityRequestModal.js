@@ -16,9 +16,8 @@ export default {
     //console.log(this.requestData.formData);
   },
   methods: {
-    processFormdata() {
-      let a = this.requestData.formData;
-      return a;
+    getNumRequests() {
+      return this.requestData.formData.length;
     },
     acceptRequest() {
       this.$emit("accept-request");

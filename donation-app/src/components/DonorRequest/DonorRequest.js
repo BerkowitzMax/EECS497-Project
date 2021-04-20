@@ -13,7 +13,7 @@ export default {
   mounted() {},
   methods: {
     selectRequest() {
-      this.$emit("select-request", this.requestData.id);
+      this.$emit("select-request", this.requestData.id, this.requestData.status);
     },
   },
 };

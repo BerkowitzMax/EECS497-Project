@@ -70,7 +70,6 @@ export default {
         status: pstatus,
         timestamp: time,
         charity: charity,
-        donationLabel: charity.name,
         formItems: items.toString().replace(",", ", "),
         formData: form_data
       };
@@ -96,12 +95,17 @@ export default {
                 link: doc.data().link,
               };
             }).then(() => {
+              let items = [];
+              for (var item in d.Request) {
+                items.push(d.Request[item].itemName);
+              }
+
               let request = {
                 id: this.id,
                 status: d.status,
                 timestamp: d.time,
                 charity: charity_info,
-                donationLabel: charity_info.name,
+                formItems: items.toString().replace(",", ", "),
                 formData: d.Request
               }
               this.id += 1;
@@ -112,9 +116,26 @@ export default {
         });
       })
     },
-    selectRequest(id) {
+    selectRequest(id, status) {
       // Set when Review Request modal is opened
-      this.selectedRequest = this.pendingRequests[id];
+
+      if (status == "Pending") {
+        for (var pkey in this.pendingRequests) {
+          if (this.pendingRequests[pkey].id == id) {
+            this.selectedRequest = this.pendingRequests[pkey];
+            return;
+          }
+        }
+      }
+      else {
+        for (var rkey in this.resolvedRequests) {
+          if (this.resolvedRequests[rkey].id == id) {
+            this.selectedRequest = this.resolvedRequests[rkey];
+            return;
+          }
+        }
+      }
+      console.error("unable to find request");
     },
   },
 };
