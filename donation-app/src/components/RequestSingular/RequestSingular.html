@@ -12,7 +12,7 @@
             <strong>Best before: </strong>{{singleRequest.bestBeforeMonth}} {{singleRequest.bestBeforeDay}}, {{singleRequest.bestBeforeYear}}<br>
         </div>
         <div class="col">
-            <img src='singleRequest.itemPhoto' alt="Donation Picture" style="width: 100px"></img>
+            <img src='singleRequest.itemPhoto' onerror="this.onerror=null;this.src='donation-app/src/assets/food-image-placeholder.jpg';" alt="Donation Picture" style="width: 100px"></img>
         </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div clas="col">
-            <strong>Additional Description:</strong> {{singleRequest.itemDescription}}
+            <strong>Additional Information:</strong> {{singleRequest.itemDescription}}
         </div>
     </div>
 </div>

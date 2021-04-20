@@ -11,10 +11,5 @@ export default {
     },
     computed: {},
     mounted() {},
-    methods: {
-      getAllergens() {
-        let allergens = this.singleRequest.allergens;
-        return Object.keys(allergens);
-      },
-    },
+    methods: {},
   };
