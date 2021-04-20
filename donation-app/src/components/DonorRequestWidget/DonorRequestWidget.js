@@ -68,6 +68,12 @@ export default {
     parseRequest(form_data, user, charity, pstatus, time) {
       // skip requests from other users
 
+      let item = {};
+      let items = [];
+      for (item in form_data) {
+        items.push(form_data[item].itemName);
+      }
+
       if (this.user_id == user) {
         let request = {
           id: this.id,
@@ -75,7 +81,7 @@ export default {
           timestamp: time,
           charity: charity,
           donationLabel: charity.name,
-          formData: form_data, // TODO consider removing this
+          formItems: items.toString().replace(",", ", "), // TODO consider removing this
         };
         this.id += 1;
 

@@ -1,13 +1,20 @@
 .timeago {
   font-size: small !important;
+  margin-bottom: 10px;
 }
 
 .request-label {
   font-weight: bold !important;
 }
+.donor-name {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
 #head-col {
   padding: 0px !important;
   margin-left: 20px;
+}
+#button-col {
+  padding-right: 5px !important;
 }
 #view-request {
   min-width: 165px;

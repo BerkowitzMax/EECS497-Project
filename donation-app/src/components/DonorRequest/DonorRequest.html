@@ -1,14 +1,19 @@
-<div class="donation-request" :id="requestData.id">
-    <div class="d-flex w-100 justify-content-between">
-        <div id="head-col" class="col d-flex w-100 justify-content-start align-items-center">
+<div class="request container-fluid">
+    <div class="d-flex w-100 justify-content-between align-items-center">
+        <div id="head-col" class="col d-flex w-100 justify-content-start align-items-start">
             <span class="badge badge-pill" :class="requestData.status === 'Accepted' ? 'badge-success' : requestData.status === 'Rejected' ? 'badge-danger' : 'badge-warning'" style="margin-right: 5px;">{{requestData.status}}</span>
-            <h6 class="request-label">{{requestData.donationLabel}}</h6>
+            <div id="head-col" class="col">
+                <h6 class="request-label">{{requestData.donationLabel}}</h6>
+                <h6 class="donor-name">{{requestData.formItems}}</h6>
+            </div>
         </div>
-        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
-            <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">View Request</button>
-        </div>
-        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
-            <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
+        <div>
+            <div id="time-col" class="col d-flex w-100 justify-content-end align-items-center">
+                <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
+            </div>
+            <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+                <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">View Request</button>
+            </div>
         </div>
     </div>
 </div>

@@ -145,6 +145,10 @@ body {
   object-fit: contain;
 }
 
+.popup-alert-area {
+  position: sticky;
+}
+
 /* sidenav */
 .donor_sidenav {
   background-color: white;
@@ -233,12 +237,18 @@ body {
 }
 
 .btn-danger,
-.btn-danger:hover,
 .btn-danger:active,
 .btn-danger:visited {
   background-color: rgb(240, 192, 193) !important;
+  color: rgb(245, 50, 64) !important;
+  border-color: rgb(240, 192, 193) !important;
   border-radius: 45px !important;
   font-size: medium !important;
+}
+
+.btn-danger:hover {
+  background-color: rgb(245, 50, 64) !important;
+  color: white !important;
 }
 
 .badge-danger {

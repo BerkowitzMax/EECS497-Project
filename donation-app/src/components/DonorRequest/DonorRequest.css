@@ -1,21 +1,25 @@
 .timeago {
-  font-size: small;
-  margin: 10px;
+  font-size: small !important;
+  margin-bottom: 10px;
 }
-
+.badge-pill {
+  margin-right: 10px !important;
+}
+.request {
+  padding: 0px !important;
+}
 .request-label {
-  margin: 0px 10px !important;
+  font-weight: bold !important;
 }
-
+.donor-name {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
 #head-col {
   padding: 0px !important;
-  min-width: 300px;
 }
-
 #button-col {
-  padding: 0px !important;
+  padding-right: 5px !important;
 }
-
 #view-request {
   min-width: 165px;
 }

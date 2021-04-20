@@ -8,16 +8,17 @@
             <img v-else :src='requestData.picture' alt="Profile Picture">
             <div id="head-col" class="col">
                 <h6 class="request-label">{{requestData.donationLabel}}</h6>
-                <div>
-                    <h6>{{requestData.donorName}}</h6>
+                <h6 class="donor-name">{{requestData.donorName}}</h6>
+            </div>
+            <div>
+                <div id="time-col" class="col d-flex w-100 justify-content-end align-items-center">
+                    <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
+                </div>
+                <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
+                    <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">Review Request</button>
                 </div>
             </div>
         </div>
-        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
-            <button id="view-request" class="btn btn-secondary" data-toggle="modal" data-target="#requestModal" @click="selectRequest">View Request</button>
-        </div>
-        <div id="button-col" class="col d-flex w-100 justify-content-end align-items-center">
-            <timeago class="timeago" :datetime="requestData.timestamp" :auto-update="60"></timeago>
-        </div>
+        
     </div>
 </div>
