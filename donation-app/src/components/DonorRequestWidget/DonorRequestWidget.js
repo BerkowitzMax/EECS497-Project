@@ -1,6 +1,7 @@
 import { db } from "@/main";
 import DonorRequest from "@/components/DonorRequest/index.vue";
 import DonorRequestModal from "@/components/DonorRequestModal/index.vue";
+import EventBus from "@/components/EventBus.vue";
 
 export default {
   name: "DonorRequestWidget",
@@ -22,43 +23,51 @@ export default {
   computed: {},
   mounted() {
     this.mySpinner.val = true;
-
-    db.collection("Requests").get().then((query) => {
-      query.forEach((doc) => {
-        let d_user = doc.id.split(/-(.+)/)[0];
-        let d_charity = doc.id.split(/-(.+)/)[1];
-
-        // only logged in user's requests
-        if (d_user == this.user_id) {
-          let charity_info = {};
-          db.collection("Charities").doc(d_charity).get().then((doc) => {
-            charity_info = {
-              name: doc.data().name,
-              phone: doc.data().phone,
-              address: doc.data().address,
-              link: doc.data().link,
-            };
-          })
-          .then(() => {
-            let d = doc.data();
-            this.parseRequest(
-              d.items,
-              charity_info,
-              d.status,
-              d.timestamp
-            );
-          });
-        }
-
-      });
-    })
-    .then(() => {
-      this.mySpinner.val = false;
-    });
+    this.getRequests();
 
     this.parseHistory();
+
+    EventBus.$on("donation_success", () => {
+      this.pendingRequests = [];
+      this.getRequests();
+    });
   },
   methods: {
+    getRequests() {
+      db.collection("Requests").get().then((query) => {
+        query.forEach((doc) => {
+          let d_user = doc.id.split(/-(.+)/)[0];
+          let d_charity = doc.id.split(/-(.+)/)[1];
+  
+          // only logged in user's requests
+          if (d_user == this.user_id) {
+            let charity_info = {};
+            db.collection("Charities").doc(d_charity).get().then((doc) => {
+              charity_info = {
+                name: doc.data().name,
+                phone: doc.data().phone,
+                address: doc.data().address,
+                link: doc.data().link,
+              };
+            })
+            .then(() => {
+              let d = doc.data();
+              let request = this.parseRequest(
+                d.items,
+                charity_info,
+                d.status,
+                d.timestamp
+              );
+  
+              if (request) this.pendingRequests.push(request);
+            });
+          }
+        });
+      })
+      .then(() => {
+        this.mySpinner.val = false;
+      });
+    },
     parseRequest(form_data, charity, pstatus, time) {
       let items = [];
       for (var item in form_data) {
@@ -75,7 +84,12 @@ export default {
       };
       this.id += 1;
 
-      if (pstatus == "Pending") this.pendingRequests.push(request);
+      if (pstatus == "Pending") {
+        return request;
+      }
+      else {
+        return null
+      }
     },
     parseHistory(){
       db.collection("History").get().then((query) => {
@@ -116,8 +130,40 @@ export default {
         });
       })
     },
+    updatePending() {
+      db.collection("Requests").get().then((query) => {
+        query.forEach((doc) => {
+          let d_user = doc.id.split(/-(.+)/)[0];
+          let d_charity = doc.id.split(/-(.+)/)[1];
+  
+          // only logged in user's requests
+          if (d_user == this.user_id) {
+            let charity_info = {};
+            db.collection("Charities").doc(d_charity).get().then((doc) => {
+              charity_info = {
+                name: doc.data().name,
+                phone: doc.data().phone,
+                address: doc.data().address,
+                link: doc.data().link,
+              };
+            })
+            .then(() => {
+              let d = doc.data();
+              let request = this.parseRequest(
+                d.items,
+                charity_info,
+                d.status,
+                d.timestamp
+              );
+  
+              if (request) this.pendingRequests.push(request);
+            });
+          }
+        });
+      });
+    },
     selectRequest(id, status) {
-      // Set when Review Request modal is opened
+      // Set when View Request modal is opened
 
       if (status == "Pending") {
         for (var pkey in this.pendingRequests) {
