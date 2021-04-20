@@ -1,6 +1,10 @@
+import RequestSingular from "@/components/RequestSingular/index.vue";
+
 export default {
   name: "CharityRequest",
-  components: {},
+  components: {
+    RequestSingular,
+  },
   props: {
     requestData: Object,
   },
@@ -8,8 +12,14 @@ export default {
     return {};
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    //console.log(this.requestData.formData);
+  },
   methods: {
+    processFormdata() {
+      let a = this.requestData.formData;
+      return a;
+    },
     acceptRequest() {
       this.$emit("accept-request");
     },
