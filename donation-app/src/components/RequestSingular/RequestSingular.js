@@ -3,11 +3,18 @@ export default {
     components: {},
     props: {
       singleRequest: Object,
+      requestIter: Number,
+      numRequests: Number,
     },
     data() {
       return {};
     },
     computed: {},
     mounted() {},
-    methods: {},
+    methods: {
+      getAllergens() {
+        let allergens = this.singleRequest.allergens;
+        return Object.keys(allergens);
+      },
+    },
   };
