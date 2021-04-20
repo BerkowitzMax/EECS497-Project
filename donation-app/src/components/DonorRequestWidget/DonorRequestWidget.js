@@ -130,38 +130,6 @@ export default {
         });
       })
     },
-    updatePending() {
-      db.collection("Requests").get().then((query) => {
-        query.forEach((doc) => {
-          let d_user = doc.id.split(/-(.+)/)[0];
-          let d_charity = doc.id.split(/-(.+)/)[1];
-  
-          // only logged in user's requests
-          if (d_user == this.user_id) {
-            let charity_info = {};
-            db.collection("Charities").doc(d_charity).get().then((doc) => {
-              charity_info = {
-                name: doc.data().name,
-                phone: doc.data().phone,
-                address: doc.data().address,
-                link: doc.data().link,
-              };
-            })
-            .then(() => {
-              let d = doc.data();
-              let request = this.parseRequest(
-                d.items,
-                charity_info,
-                d.status,
-                d.timestamp
-              );
-  
-              if (request) this.pendingRequests.push(request);
-            });
-          }
-        });
-      });
-    },
     selectRequest(id, status) {
       // Set when View Request modal is opened
 
