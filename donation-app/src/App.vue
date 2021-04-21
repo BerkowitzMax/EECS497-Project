@@ -238,9 +238,9 @@ body {
 .btn-danger,
 .btn-danger:active,
 .btn-danger:visited {
-  background-color: rgb(240, 192, 193) !important;
+  background-color: rgb(244, 222, 227) !important;
   color: rgb(245, 50, 64) !important;
-  border-color: rgb(240, 192, 193) !important;
+  border-color: rgb(244, 222, 227) !important;
   border-radius: 45px !important;
   font-size: medium !important;
   padding-left: 30px !important;
@@ -249,11 +249,12 @@ body {
 
 .btn-danger:hover {
   background-color: rgb(245, 50, 64) !important;
+  border-color: rgb(245, 50, 64) !important;
   color: white !important;
 }
 
 .badge-danger {
-  background-color: rgb(240, 192, 193) !important;
+  background-color: rgb(244, 222, 227) !important;
   color: rgb(245, 50, 64) !important;
   border-radius: 45px !important;
   padding: 8px 16px;
@@ -423,5 +424,13 @@ p {
 
 .list-group-item {
   padding-left: 5px !important;
+}
+
+.modal-content {
+  border-radius: 25px !important;
+  border-color: white !important;
+}
+.modal-header {
+  padding: 30px !important;
 }
 </style>

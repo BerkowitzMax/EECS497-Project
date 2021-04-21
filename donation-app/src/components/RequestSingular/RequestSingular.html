@@ -5,29 +5,20 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <strong>Item Name: </strong>{{singleRequest.itemName}}<br>
-            <strong>Item Category: </strong>{{singleRequest.itemCategory}}<br>
-            <strong>Item Qty: </strong>{{singleRequest.itemQuantity}} {{singleRequest.itemUnits}}<br>
-            <strong>Best before: </strong>{{singleRequest.bestBeforeMonth}} {{singleRequest.bestBeforeDay}}, {{singleRequest.bestBeforeYear}}<br>
+        <div class="col-sm-8">
+            <p><strong>Item Name: </strong><span v-if="singleRequest.itemName">{{singleRequest.itemName}}</span></p>
+            <p><strong>Item Category: </strong><span v-if="singleRequest.itemCategory">{{singleRequest.itemCategory}}</span></p>
+            <p><strong>Item Qty: </strong><span v-if="singleRequest.itemQuantity">{{singleRequest.itemQuantity}} {{singleRequest.itemUnits}}</span></p>
+            <p><strong>Best before: </strong><span v-if="singleRequest.bestBeforeYear">{{singleRequest.bestBeforeMonth}} {{singleRequest.bestBeforeDay}}, {{singleRequest.bestBeforeYear}}</span></p>
+            <p><strong>Allergens:</strong><span> {{parseAllergens().toString().replace(",", ", ")}}</span></p>
+            <p><strong>Additional Information:</strong> {{singleRequest.itemDescription}}</p>
         </div>
         <div class="col">
-            <img src='singleRequest.itemPhoto' onerror="this.onerror=null;this.src='donation-app/src/assets/food-image-placeholder.jpg';" alt="Donation Picture" style="width: 100px"></img>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <strong>Allergens:</strong>
-                <div class="comma-seperated" v-for="(value, key) in singleRequest.allergens">
-                        <div class="comma-seperated" v-if="value">
-                            <div class="comma-seperated">{{key}}</div>
-                        </div>
-                </div>
-        </div>
-    </div>
-    <div class="row">
-        <div clas="col">
-            <strong>Additional Information:</strong> {{singleRequest.itemDescription}}
+            <img v-if="singleRequest.itemPhoto" class="img-content" :src='imageURL' alt="Profile Picture">
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="#ced4da" class="bi bi-card-image" viewBox="0 0 16 16">
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54A.505.505 0 0 1 1 12.5v-9a.5.5 0 0 1 .5-.5h13z"/>
+            </svg>
         </div>
     </div>
 </div>

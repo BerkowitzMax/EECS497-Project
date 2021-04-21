@@ -2,7 +2,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="requestModalLabel">Review Request for {{requestData.charity.name}}</h5>
+                <h5 class="modal-title d-flex w-100 align-items-center" id="requestModalLabel">
+                    <span>{{requestData.formItems}}</span>
+                    <span class="badge badge-pill" :class="requestData.status === 'Accepted' ? 'badge-success' : requestData.status === 'Rejected' ? 'badge-danger' : 'badge-warning'" style="margin-right: 5px;">{{requestData.status}}</span>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,9 +14,10 @@
                 <div class="container-fluid">
                     <!-- display donor info -->
                     <div class="row">
-                        <div class="col">
+                        <div class="col-sm-10">
                             <h6><strong><u>Charity's Information:</u></strong></h6>
                         </div>
+                        <div class="col">{{formatDate()}}</div>
                     </div>                    
                     <div class="row">
                     <div class="col">
@@ -28,9 +32,10 @@
                             <strong>Address: </strong>{{requestData.charity.address}}
                         </div>
                     </div>
-                    <div class="list-group">
-                        <div class="list-group-item rounded" v-for="single_request in requestData.formData">
-                            <RequestSingular :singleRequest="single_request"/>
+                    <br>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item" v-for="single_request, index in requestData.formData">
+                            <RequestSingular :singleRequest="single_request" :requestIter="index + 1" :numRequests="requestData.formData.length"/>
                         </div>
                     </div>
                 </div>

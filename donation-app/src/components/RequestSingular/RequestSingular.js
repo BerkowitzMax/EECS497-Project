@@ -11,5 +11,15 @@ export default {
     },
     computed: {},
     mounted() {},
-    methods: {},
+    methods: {
+      parseAllergens() {
+        let allergens = [];
+        for (var key in this.singleRequest.allergens) {
+          if (this.singleRequest.allergens[key]) {
+            allergens.push(key);
+          }
+        }
+        return allergens;
+      }
+    },
   };
