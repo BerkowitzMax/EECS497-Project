@@ -433,4 +433,17 @@ p {
 .modal-header {
   padding: 30px !important;
 }
+.profile-pic {
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+.pfp-content {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  clip-path: circle(30px at center);
+}
 </style>
