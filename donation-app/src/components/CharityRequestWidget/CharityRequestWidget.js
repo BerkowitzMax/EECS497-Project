@@ -55,7 +55,7 @@ export default {
             donationLabel: items.toString().replace(",", ", "),
             donorAddress: donor.address,
             formData: form_data,
-            picture: donor.picture,
+            picture: donor.imageURL,
           };
           this.id += 1;
 
