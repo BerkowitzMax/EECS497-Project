@@ -49,8 +49,8 @@ export default {
         if (d.address) this.address = d.address;
         if (d.link) this.link = d.link;
         if (d.description) this.description = d.description;
-        if (d.picture) {
-          this.imageURL = d.picture;
+        if (d.imageURL) {
+          this.imageURL = d.imageURL;
         }
       })
       .catch((error) => {
@@ -89,6 +89,7 @@ export default {
           phone: this.phone,
           address: this.address,
           link: this.link,
+          imageURL: this.imageURL
         })
         .then(() => {
           this.showSaveMsg = true;

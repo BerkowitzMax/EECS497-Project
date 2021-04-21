@@ -26,7 +26,7 @@ export default {
               charityName: d.name,
               charityPhone: d.phone,
               charityAddress: d.address,
-              picture: d.picture,
+              picture: d.imageURL,
             };
 
             this.donationSites.push(site);
