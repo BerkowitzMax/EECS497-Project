@@ -32,7 +32,7 @@ export default {
             Meat: false,
             Soy: false,
           },
-          itemPhoto: "",
+          picture: "",
           itemDescription: "",
         },
       ],
@@ -61,7 +61,7 @@ export default {
           Meat: false,
           Soy: false,
         },
-        itemPhoto: "",
+        picture: "",
         itemDescription: "",
       });
       this.numItems += 1;
@@ -93,7 +93,7 @@ export default {
             Meat: false,
             Soy: false,
           },
-          itemPhoto: "",
+          picture: "",
           itemDescription: "",
         },
       ];
