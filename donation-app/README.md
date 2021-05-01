@@ -1,5 +1,7 @@
 # donation-app
 
+This application allows users ('donors') to donate food to various charitable organizations. [Click here for a video walkthrough](https://www.youtube.com/watch?v=EYbItua5mzQ)
+
 ## Project setup
 
 ```
