@@ -1,5 +1,5 @@
 # EECS497-Project
-###Developed by:
+### Developed by:
 @karinape
 @BerkowitzMax
 @pgogri
