@@ -3,3 +3,5 @@
 @karinape
 @BerkowitzMax
 @pgogri
+
+Please reference the donation-app directory.
